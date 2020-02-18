@@ -5,26 +5,30 @@ import SelectorButton from "UI/buttons/SelectorButton"
 
 const Header = ({monthly, toggleMonthly}) => {
     return (
-        <Container>
-            <Left>
+        <HeaderWrapper>
+            <Title>
                 <h1>
-                    Lifetime Spending
+                    Spending
                 </h1>
-            </Left>
-            <Right>
-                <CatagorySelection>
-                    <SelectorButton visible={monthly} onClick={() => toggleMonthly(!monthly)} />
-                    <Catagories>
-                        <Catagory display={monthly} onClick={() => toggleMonthly(!monthly)}>
-                            <h2>Monthly</h2>
-                        </Catagory>
-                        <Catagory display={!monthly} onClick={() => toggleMonthly(!monthly)}>
-                            <h2>Annually</h2>
-                        </Catagory>
-                    </Catagories>
-                </CatagorySelection>
-            </Right>
-        </Container>
+            </Title>
+            <CatagorySelection>
+                <SelectorButton visible={monthly} onClick={() => toggleMonthly(!monthly)} />
+                  <Catagories>
+                      <Catagory display={monthly} onClick={() => toggleMonthly(!monthly)}>
+                          <h2>Fixed</h2>
+                          <span>
+                            22 k
+                          </span>
+                      </Catagory>
+                      <Catagory display={!monthly} onClick={() => toggleMonthly(!monthly)}>
+                          <h2>Variable</h2>
+                          <span>
+                            18 k - 27 k
+                          </span>
+                      </Catagory>
+                  </Catagories>
+            </CatagorySelection>
+        </HeaderWrapper>
     )
 }
 
@@ -33,19 +37,26 @@ export default Header
 
 //-----------------------------------------------style-----------------------------------------------//
 
-const Left = styled.div`
-    padding: 2rem;
-    width: 60%;
-
-`
-const Right = styled.div`
-    padding-top: 2rem;
-    width: 40%;
-
-`
-const Container = styled.div`
-    grid-area: a;
+const HeaderWrapper = styled.div`
+    grid-area: a;                                                                                             {/*Grid-area set in Income, "a" positions it at the top */}
     display: flex;
+    flex-direction: row;
+    color: ${props => props.theme.color.slate};
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+`
+
+const Title = styled.div`
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    width: 30rem;
+    & span {
+        position: absolute;
+        right: 1rem;
+        font-size: 3rem;
+    }
 `
 
 const Catagory = styled.div`
