@@ -1,11 +1,16 @@
 import React from "react"
 import styled from "styled-components"
+//import ItemDisplayBox from "pages/spending/components/ItemDisplayBox"
 
 
 const ControlPanel = () => {
     return (
         <Wrapper>
-            control Panel
+            <Sections>
+              <Section>
+                control panel
+              </Section>
+            </Sections>
         </Wrapper>
     )
 }
