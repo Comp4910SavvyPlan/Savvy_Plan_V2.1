@@ -4,9 +4,11 @@ import Header from "pages/spending/components/Header";
 import ControlPanel from "pages/spending/components/ControlPanel";
 import { connect } from "react-redux";
 import ButtonLight from "UI/buttons/ButtonLight";
+import { spendingWizard_data } from "pages/spending/data/spending_data";
+import WelcomePage from "pages/spending/components/WelcomePage";
 
 const Spending = () => {
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState(0);
 
   const renderAddForm = data => {
     return data.map(d =>
@@ -27,10 +29,10 @@ const Spending = () => {
             <AddForm
               category={d.category}
               subCategory={d.subCategory}
-              bookValueLabel={d.bookValueLabel}
               currentValueLabel={d.currentValueLabel}
-              interestRateLabel={d.interestRateLabel}
-              accountTypeArray={d.accountTypeArray}
+              ageLabel={d.ageLabel}
+              expenseTypeArray={d.expenseTypeArray}
+              durationTypeArray={d.durationTypeArray}
               setAddFormSubCategory={() => null}
             />{" "}
             {}

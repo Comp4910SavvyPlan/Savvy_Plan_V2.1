@@ -1,5 +1,7 @@
 export const spendingWizard_data = [
   {
+    //category: fixed or variable
+    //subCategory: housingCosts or transportationCosts or etc
     count: 1,
     category: "expense ",
     subCategory: "housingCosts",
