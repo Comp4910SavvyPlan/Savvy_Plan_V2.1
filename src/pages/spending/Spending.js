@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Header from "pages/spending/components/Header";
 import ControlPanel from "pages/spending/components/ControlPanel";
-import Wizard from "pages/spending/wizard/Wizard";
 import { connect } from "react-redux";
 
 const Spending = () => {
@@ -21,8 +20,6 @@ const Spending = () => {
   return (
     <Page>
       <ChartWrapper></ChartWrapper>
-
-      <Wizard />
     </Page>
   );
 };
@@ -37,9 +34,9 @@ const Page = styled.div`
   ${props => props.theme.pageBaseStyles}
   grid-template-rows: minmax(12rem, 14rem)  minmax(24rem, 28rem);
   grid-template-areas:
-    "a a a a "
-    "b b b b "
-    "c c c c ";
+    "a a a a a a a a a a a a"
+    "b b b b b b b b b b b b"
+    "c c c c c c c c c c c c";
 `;
 
 const ChartWrapper = styled.div`
