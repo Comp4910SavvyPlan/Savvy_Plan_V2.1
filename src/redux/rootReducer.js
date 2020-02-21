@@ -11,37 +11,34 @@ import savings_reducer from "./savings/savings_reducer"
 import assumptions_reducer from "./assumptions/assumptions_reducer"
 import auth_reducer from "./auth/auth_reducer"
 import lifeEvents_reducer from "./lifeEvents/lifeEvents_reducer"
-import spending_reducer from "./spending/spending_reducer"
 
 import { firebaseReducer } from 'react-redux-firebase'
 import { firestoreReducer } from 'redux-firestore'
 
 const persistConfig = {
     key: "root",
-    storage,
-    whitelist: ["netWorth_reducer",
+    storage, 
+    whitelist: ["netWorth_reducer", 
     "tax_reducer",
     "income_reducer",
     "user_reducer",
     "pensionStartAges_reducer",
     "savings_reducer",
-    "lifeEvents_reducer",
-    "spending_reducer"
+    "lifeEvents_reducer"
 ]
 }
 
 const rootReducer = combineReducers({
        auth: auth_reducer,
-       assumptions_reducer,
+       assumptions_reducer, 
        netWorth_reducer,
        tax_reducer,
        income_reducer,
        user_reducer,
        pensionStartAges_reducer,
-       savings_reducer,
+       savings_reducer,     
        lifeEvents_reducer,
-       spending_reducer,
-       firebase: firebaseReducer,
+       firebase: firebaseReducer, 
        firestore: firestoreReducer
    })
 
