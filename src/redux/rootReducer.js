@@ -24,12 +24,7 @@ const persistConfig = {
     "user_reducer",
     "pensionStartAges_reducer",
     "savings_reducer",
-<<<<<<< HEAD
     "lifeEvents_reducer"
-=======
-    "lifeEvents_reducer",
-    "spending_reducer"
->>>>>>> parent of e29486f... Merge branch 'master' of https://github.com/Comp4910SavvyPlan/Savvy_Plan_V2.1 into shoheiBranch
 ]
 }
 
@@ -41,11 +36,7 @@ const rootReducer = combineReducers({
        income_reducer,
        user_reducer,
        pensionStartAges_reducer,
-<<<<<<< HEAD
        savings_reducer,     
-=======
-       savings_reducer,
->>>>>>> parent of e29486f... Merge branch 'master' of https://github.com/Comp4910SavvyPlan/Savvy_Plan_V2.1 into shoheiBranch
        lifeEvents_reducer,
        firebase: firebaseReducer, 
        firestore: firestoreReducer
