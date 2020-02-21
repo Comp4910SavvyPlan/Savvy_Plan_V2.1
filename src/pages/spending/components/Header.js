@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import SelectorButton from "UI/buttons/SelectorButton"
+import SelectorButtonVertical from "UI/buttons/SelectorButtonVertical"
 
 
 const Header = ({monthly, toggleMonthly}) => {
