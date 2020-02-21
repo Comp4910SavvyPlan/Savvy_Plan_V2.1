@@ -3,7 +3,7 @@ import * as d3 from "d3"
 import "./ChartStyles.css"
 import _ from "lodash"
 import styled from "styled-components"
-import {stackedKeysBarChart, stackedBarData, stackedBarData2, } from "redux/savings/savings_selectors"
+import {stackedKeysBarChart, stackedBarData, stackedBarData2} from "redux/savings/savings_selectors"
 import {connect} from "react-redux"
 import {createStructuredSelector} from "reselect"
 
@@ -18,6 +18,7 @@ const drawChart = (props, width, height) => {
     d3.select(".tooltip").remove()
 
     const data = props.stackedBarData2
+    console.log(data);
 
     const svg = d3.select('.canvasSavingsStackedBarChart').append("svg").attr("viewBox", `0 0 ${width} ${height}`)
 
@@ -210,6 +211,7 @@ componentWillUnmount() {
    
     render() {
         window.addEventListener('resize', this.updateSize)
+ 
         return (
             <Canvas className="canvasSavingsStackedBarChart" ref={canvasSavingsStackedBarChart => this.divRef = canvasSavingsStackedBarChart}>
                 
@@ -223,7 +225,6 @@ const mapStateToProps = createStructuredSelector({
     stackedKeysBarChart,
     stackedBarData2,
     stackedBarData,
-    
 })
 
 export default connect(mapStateToProps)(StackedBarChartSavings )

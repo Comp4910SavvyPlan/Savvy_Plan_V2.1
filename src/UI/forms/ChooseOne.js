@@ -2,7 +2,7 @@ import React, {useState} from "react"
 import styled from "styled-components"
 import _ from "lodash"
 
-const ChooseOne = ({value, setValue, array, subCategory}) => {
+const ChooseOne = ({value, setValue, array}) => {
 
     const [selected, select] = useState(value)
     const handleSelect = (value) => {
@@ -17,11 +17,7 @@ const ChooseOne = ({value, setValue, array, subCategory}) => {
             </Label>
             <SelectWrapper>
                 {
-                    array.map(d =>  <SelectValue 
-                            key={d}
-                            selected={selected === d} 
-                            subCategory={subCategory}
-                            onClick={() => handleSelect(d)}>
+                    array.map(d =>  <SelectValue selected={selected === d} onClick={() => handleSelect(d)}>
                         {d === "tfsa" || d === "rrsp" ? d.toUpperCase()
                         : _.startCase(d) 
                     }
@@ -40,15 +36,19 @@ export default ChooseOne
 
 const Container = styled.div`
     width: 25rem;
-    height: 28rem;
+    height: 25rem;
+    background: white;
     font-size: 1.4rem;
+    overflow: scroll;
     display: flex;
     flex-direction: column;
-    margin-top: -1.6rem;
+    margin-top: -2rem;
+
 
 `
 const SelectWrapper = styled.div`
-    height: 18rem;
+    min-height: 20rem;
+    max-height: 23rem;
     background: white;
     font-size: 1.4rem;
     overflow: scroll;
@@ -57,14 +57,15 @@ const SelectWrapper = styled.div`
     border: .7px solid ${props => props.theme.color.lightGrey};
     display: flex;
     flex-direction: column;
+    align-items:center;
+    justify-content: center;
 
 `
 const Label = styled.label`
     font-size: 1.6rem;
     font-weight: normal;
-    color: ${props => props.theme.color.darkGrey};
+    color: ${props => props.theme.color.lightGrey};
     width: 25rem;
-    height: 4rem;
     padding: 1rem;
     font-weight: 700;
     text-align: left;
@@ -72,27 +73,14 @@ const Label = styled.label`
 
 const SelectValue = styled.div`
     padding: 2rem;
-    height: 10rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
+    hieght: 3rem;
+    width: 98%;
     color: ${props => props.selected ? "white" :  props.theme.color.slate}
     font-size: 1.6rem;
-    background: ${props => props.selected ? (
-        props => props.subCategory === "investmentAssets" ? props.theme.color.steelBlue : 
-        props => props.subCategory === "propertyAssets" ? props.theme.color.green : 
-        props => props.subCategory === "unsecuredDebt" ? props.theme.color.salmon : 
-        props => props.subCategory === "securedDebt" ? props.theme.color.darkSalmon : 
-        props.theme.color.blue ) : "white"}
+    background: ${props => props.selected ? props.theme.color.blue : "white"}
     text-align: center;
     &:hover {
-        background: ${props => props.selected ? (
-                                                props => props.subCategory === "investmentAssets" ? props.theme.color.steelBlue : 
-                                                props => props.subCategory === "propertyAssets" ? props.theme.color.green : 
-                                                props => props.subCategory === "unsecuredDebt" ? props.theme.color.salmon : 
-                                                props => props.subCategory === "securedDebt" ? props.theme.color.darkSalmon : 
-                                                props.theme.color.blue ) : props.theme.color.ice}
+        background: ${props => props.selected ? props.theme.color.blue : props.theme.color.ice}
         color: ${props => props.selected ? "white" :  props.theme.color.slate}
         cursor: pointer;
     }

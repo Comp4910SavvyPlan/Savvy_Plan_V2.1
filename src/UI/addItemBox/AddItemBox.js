@@ -10,7 +10,7 @@ import Checkbox from "UI/buttons/Checkbox"
 class AddItemBox extends Component {
 
     state = {
-        addContainerOpen: false,
+        addContainerOpen: true,
         isChecked: false,
         name: "name", 
         label: "", 

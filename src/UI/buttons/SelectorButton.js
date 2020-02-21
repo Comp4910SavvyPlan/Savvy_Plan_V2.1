@@ -2,7 +2,7 @@ import React from 'react'
 import styled from "styled-components"
 
 
-const SelectorButtonHorizontal = ({visible, onClick, text}) => {
+const SelectorButton = ({visible, onClick, text}) => {
     return (
         <SelectorButtonWrapper onClick={onClick}>
             {
@@ -23,19 +23,19 @@ const SelectorButtonHorizontal = ({visible, onClick, text}) => {
 
 }
 
-export default SelectorButtonHorizontal
+export default SelectorButton
 
 
 const SelectorButtonWrapper = styled.div`
     display: flex;
-    width: 20rem;
+    width: 10rem;
     justify-content: space-around;
     align-items: center;
     cursor: pointer;
 `
 const SelectorFat = styled.div`
-    width: 8rem;
-    height: .8rem;
+    width: .4rem;
+    height: 4rem;
     border-radius: 5px;
     background: ${props => props.theme.color.onyx};
 
@@ -46,8 +46,8 @@ const Title = styled.div`
 
 `
 const SelectorSkinny = styled.div`
-    width: 8rem;
-    height: .1rem;
+    width: .1rem;
+    height: 4rem;
     border-radius: 5px;
     background: ${props => props.theme.color.onyx};
 
@@ -55,9 +55,9 @@ const SelectorSkinny = styled.div`
 
 const Selector = styled.div`
     display: flex;
-    flex-direction: row;
-    width: 20rem;
-    height: 2rem;
+    flex-direction: column;
+    width: 3rem;
+    height: 10rem;
     align-content: center;
     align-items: center;
     justify-content: space-around;

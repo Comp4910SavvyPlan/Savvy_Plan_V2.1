@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import SelectorButtonVertical from "UI/buttons/SelectorButtonVertical"
+import SelectorButton from "UI/buttons/SelectorButton"
 
 
 const Header = ({monthly, toggleMonthly}) => {
@@ -13,7 +13,7 @@ const Header = ({monthly, toggleMonthly}) => {
             </Left>
             <Right>
                 <CatagorySelection>
-                    <SelectorButtonVertical visible={monthly} onClick={() => toggleMonthly(!monthly)} />
+                    <SelectorButton visible={monthly} onClick={() => toggleMonthly(!monthly)} />
                     <Catagories>
                         <Catagory display={monthly} onClick={() => toggleMonthly(!monthly)}>
                             <h2>Monthly</h2>
