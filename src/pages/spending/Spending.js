@@ -6,6 +6,12 @@ import { connect } from "react-redux";
 import ButtonLight from "UI/buttons/ButtonLight";
 import { spendingWizard_data } from "pages/spending/data/spending_data";
 import WelcomePage from "pages/spending/components/WelcomePage";
+<<<<<<< HEAD
+=======
+import Main from "pages/spending/components/Main";
+import AddForm from "pages/spending/components/AddForm";
+import ItemDisplayBox from "pages/spending/components/ItemDisplayBox";
+>>>>>>> 706f60e2de47d21131276589b0f7fd5803e1f7d9
 
 const Spending = () => {
   const [count, setCount] = useState(0);
@@ -46,11 +52,21 @@ const Spending = () => {
     <Page>
       {count === 0 ? (
         <WelcomePage />
+<<<<<<< HEAD
       ) : count < 6 ? (
         <>
           {renderAddForm(spendingWizard_data)} {}
         </>
       ) : null}
+=======
+      ) : count < 5 ? (
+        <>
+          {renderAddForm(spendingWizard_data)} {}
+        </>
+      ) : (
+        <Main />
+      )}
+>>>>>>> 706f60e2de47d21131276589b0f7fd5803e1f7d9
       <Buttons>
         {" "}
         {/* Fixed plan buttons enabling the toggling back and forth*/}

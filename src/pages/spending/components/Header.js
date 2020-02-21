@@ -1,55 +1,67 @@
-import React from "react"
-import styled from "styled-components"
-import SelectorButtonVertical from "UI/buttons/SelectorButtonVertical"
+import React from "react";
+import styled from "styled-components";
+import SelectorButtonVertical from "UI/buttons/SelectorButtonVertical";
 
+const Header = ({ display, setDisplay, monthly, toggleMonthly }) => {
+  return (
+    <HeaderWrapper>
+      <Title>
+        <h1>Spending</h1>
+      </Title>
+      <CatagorySelection>
+        <SelectorWrapper>
+          <SelectorButtonVertical
+            visible={display === "assets"}
+            onClick={() => setDisplay("liabilities")}
+          />
+        </SelectorWrapper>
 
-const Header = ({monthly, toggleMonthly}) => {
-    return (
-        <Container>
-            <Left>
-                <h1>
-                    Lifetime Spending
-                </h1>
-            </Left>
-            <Right>
-                <CatagorySelection>
-                    <SelectorButtonVertical visible={monthly} onClick={() => toggleMonthly(!monthly)} />
-                    <Catagories>
-                        <Catagory display={monthly} onClick={() => toggleMonthly(!monthly)}>
-                            <h2>Monthly</h2>
-                        </Catagory>
-                        <Catagory display={!monthly} onClick={() => toggleMonthly(!monthly)}>
-                            <h2>Annually</h2>
-                        </Catagory>
-                    </Catagories>
-                </CatagorySelection>
-            </Right>
-        </Container>
-    )
-}
+        <Catagories>
+          <Catagory display={monthly} onClick={() => toggleMonthly(!monthly)}>
+            <h2>Fixed</h2>
+            <span>22 k</span>
+          </Catagory>
+          <Catagory display={!monthly} onClick={() => toggleMonthly(!monthly)}>
+            <h2>Variable</h2>
+            <span>18 k - 27 k</span>
+          </Catagory>
+        </Catagories>
+      </CatagorySelection>
+    </HeaderWrapper>
+  );
+};
 
-export default Header
-
+export default Header;
 
 //-----------------------------------------------style-----------------------------------------------//
 
-const Left = styled.div`
-    padding: 2rem;
-    width: 60%;
+const HeaderWrapper = styled.div`
+  grid-area: a;
+   {
+    /*Grid-area set in Income, "a" positions it at the top */
+  }
+  display: flex;
+  flex-direction: row;
+  color: ${props => props.theme.color.slate};
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+`;
 
-`
-const Right = styled.div`
-    padding-top: 2rem;
-    width: 40%;
-
-`
-const Container = styled.div`
-    grid-area: a;
-    display: flex;
-`
+const Title = styled.div`
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  width: 30rem;
+  & span {
+    position: absolute;
+    right: 1rem;
+    font-size: 3rem;
+  }
+`;
 
 const Catagory = styled.div`
-    border-bottom: ${props => props.display ? "1px solid grey" : 0}
+    border-bottom: ${props => (props.display ? "1px solid grey" : 0)}
     cursor: pointer;
     padding: 1rem;
     text-align: left;
@@ -61,13 +73,19 @@ const Catagory = styled.div`
         position: absolute;
         right: 1rem;
     }
-
-`
+`;
 const Catagories = styled.div`
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-`
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+`;
 const CatagorySelection = styled.div`
-    display: flex;
-`
+  display: flex;
+`;
+
+const SelectorWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 3rem;
+  height: 10rem;
+`;
