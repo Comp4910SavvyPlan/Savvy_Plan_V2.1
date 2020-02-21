@@ -58,7 +58,7 @@ const Label = styled.label`
     left: 1rem;
     top: 1.2rem;
     transition: 200ms ease all;
-    color: ${props => props.theme.color.darkGrey};
+    color: ${props => props.theme.color.lightGrey};
 
 }
 
@@ -83,6 +83,7 @@ const Input = styled.input`
     &:focus ~ Label {
         transform: translateY(-4rem);
         font-size: 1.6rem;
+        color: ${props => props.theme.color.lightGrey};
         font-weight: 700;
     }
     }
@@ -90,6 +91,7 @@ const Input = styled.input`
     &:valid ~ Label {
         transform: translateY(-4rem);
         font-size: 1.6rem;
+        color: ${props => props.theme.color.lightGrey};
         font-weight: 700;
     }
 

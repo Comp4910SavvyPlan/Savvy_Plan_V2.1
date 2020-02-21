@@ -3,29 +3,27 @@ import {setUserDetail_action} from "redux/user/user_actions"
 import Input from "UI/forms/Input"
 import {connect} from "react-redux"
 import styled from "styled-components"
-import {rate1, rate2, investmentReturns_selector} from "redux/assumptions/assumptions_selectors"
+import {rate1, rate2, investmentReturnsArray} from "redux/assumptions/assumptions_selectors"
 import MiniRangeBar from "UI/miniRangeBar/MiniRangeBar"
-import {transaction_action, setOpitmizedValues_action} from "redux/savings/savings_actions"
-import {setInvestmentFactor_action} from "redux/assumptions/assumptions_actions"
+import {transaction_action, setInvestmentFactor_action, setOpitmizedValues_action} from "redux/savings/savings_actions"
 import {Title, Dialogue} from "pages/onboarding/components/FirstName"
 
-const PreRetirementRate = ({count, user_reducer, setInvestmentFactor_action, investmentReturns_selector}) => {
+const PreRetirementRate = ({count, user_reducer, setInvestmentFactor_action, investmentReturnsArray}) => {
 
     const setInvestmentFactor = (value, nothing, {name}) => {
         setInvestmentFactor_action(name, value) 
 
     }
-    console.log(investmentReturns_selector);
     const position = count - 6
 return (
     <>
         <Title>We need to make some assumptions.</Title>
                     {
             <MiniRangeBar
-                                                        id={investmentReturns_selector[position].name}
-                                                        key={investmentReturns_selector[position].name}
+                                                        id={investmentReturnsArray[position].name}
+                                                        key={investmentReturnsArray[position].name}
                                                         setValue={setInvestmentFactor}                                                        //Function Defined Above, sets the age in the reducer
-                                                        rangeBarProps={investmentReturns_selector[position]}                                                                            //We pass in the entire object as rangeBarProps to have access to all it's properties throughout the cycle
+                                                        rangeBarProps={investmentReturnsArray[position]}                                                                            //We pass in the entire object as rangeBarProps to have access to all it's properties throughout the cycle
                                 />
                         }
                             {
@@ -60,12 +58,6 @@ return (
                         <span> The Financial Planning Standards Council recccomends 2% </span> 
                         </Dialogue>
                     :
-                    count === 10 ? 
-                        <Dialogue>
-                           The increase in property will impact your financial plan, historically it has increased at a higher rate than inflation.
-                        <span> The Financial Planning Standards Council recccomends 3% </span> 
-                        </Dialogue>
-                    :
                     null
                 }
              
@@ -81,7 +73,7 @@ return (
 
 const mapStateToProps = (state) => ({
     user_reducer: state.user_reducer,
-    investmentReturns_selector: investmentReturns_selector(state),
+    investmentReturnsArray: investmentReturnsArray(state),
 })
 
 export default connect(mapStateToProps, {setInvestmentFactor_action, })(PreRetirementRate)

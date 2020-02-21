@@ -9,7 +9,7 @@ export const tfsaStartAge = (state) => state.pensionStartAges_reducer.rrspStartA
 
 
 
-export const investmentReturns_selector = createSelector(
+export const investmentReturnsArray = createSelector(
     [investmentReturns], 
     (investmentReturns) => Object.values(investmentReturns)
 )

@@ -29,7 +29,7 @@ export default connect(mapStateToProps, {})(Welcome )
 
 
 const Page = styled.div`
-    width: 120rem;
+    width: 100%;
     height: 60rem;
     display: flex;
     flex-direction: column;

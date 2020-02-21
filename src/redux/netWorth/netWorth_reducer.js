@@ -1,10 +1,12 @@
 import _ from "lodash"
 
 
+
 const initialState = {
-    assets: {
+    asset: {
+
     },
-    liabilities: {
+    liability: {
     }
 }
 
@@ -13,14 +15,10 @@ const netWorth_reducer = (state = initialState, action)=> {
 switch(action.type) {
     case "netWorth_reducer/SET_ITEM_VALUE": return {...state, [action.category]:{
                                                             ...state[action.category], [action.id]: {
-                                                                ...state[action.category][action.id], [action.name]:{
-                                                                    ...state[action.category][action.id][action.name], 
-                                                                                financialValue: action.financialValue,
-                                                                                rangeBarValue: action.rangeBarValue,
-                                                                }
-                                                            }
-                                                            
-                                                                                
+                                                                ...state[action.category][action.id], 
+                                                                        financialValue: action.financialValue,
+                                                                        rangeBarValue: action.rangeBarValue,
+                                                            }                        
     }
  
        }

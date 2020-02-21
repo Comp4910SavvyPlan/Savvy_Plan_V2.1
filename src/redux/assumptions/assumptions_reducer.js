@@ -36,20 +36,11 @@ const initialState = {
         step: .0001,
         numberType: "percentage",
     },
-    propertyAppreciation: {
-        name: "propertyAppreciation",
-        label: "Property Appreciation",
-        rangeBarValue:.03, 
-        min: 0,
-        max: .1,
-        step: .0001,
-        numberType: "percentage",
-    },
 }
 
 const assumptions_reducer = (state = initialState, action) => {
 switch(action.type) {
-    case "assumptions/SET_VALUE": return {...state, [action.name]: {
+    case "investmentReturns/SET_VALUE": return {...state, [action.name]: {
                                             ...state[action.name],  rangeBarValue: action.value,
                                         }
     } 
