@@ -1,18 +1,21 @@
 import React from "react";
 import styled from "styled-components";
-import SelectorButton from "UI/buttons/SelectorButton";
+import SelectorButtonVertical from "UI/buttons/SelectorButtonVertical";
 
-const Header = ({ monthly, toggleMonthly }) => {
+const Header = ({ display, setDisplay, monthly, toggleMonthly }) => {
   return (
     <HeaderWrapper>
       <Title>
         <h1>Spending</h1>
       </Title>
       <CatagorySelection>
-        <SelectorButton
-          visible={monthly}
-          onClick={() => toggleMonthly(!monthly)}
-        />
+        <SelectorWrapper>
+          <SelectorButtonVertical
+            visible={display === "assets"}
+            onClick={() => setDisplay("liabilities")}
+          />
+        </SelectorWrapper>
+
         <Catagories>
           <Catagory display={monthly} onClick={() => toggleMonthly(!monthly)}>
             <h2>Fixed</h2>
@@ -78,4 +81,11 @@ const Catagories = styled.div`
 `;
 const CatagorySelection = styled.div`
   display: flex;
+`;
+
+const SelectorWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 3rem;
+  height: 10rem;
 `;

@@ -5,7 +5,7 @@ const initialState = {
   variable: {}
 };
 
-const spending_reducer = (state = initialState(), action) => {
+const spending_reducer = (state = initialState, action) => {
   switch (action.type) {
     case "spending_reducer/SET_VALUE":
       return {

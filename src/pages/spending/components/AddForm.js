@@ -7,20 +7,14 @@ import DateInput from "UI/forms/DateInput";
 import RangeBar from "UI/rangeBar/RangeBar";
 import MiniRangeBar from "UI/miniRangeBar/MiniRangeBar";
 import ButtonLight from "UI/buttons/ButtonLight";
-import { addItem_action } from "redux/netWorth/netWorth_actions";
-import { propertyNames_selector } from "redux/netWorth/netWorth_selectors";
+import { addItem_action } from "redux/spending/spending_actions";
+//import {propertyNames_selector} from "redux/netWorth/netWorth_selectors"
 import _ from "lodash";
-import { individualItem_data } from "pages/netWorth/data/netWorth_data";
-import {
-  renderSavings,
-  optimizedWithdrawals
-} from "services/savings/savings_functions";
-import {
-  transaction_action,
-  setOpitmizedValues_action
-} from "redux/savings/savings_actions";
-import { savings_reducer } from "redux/savings/savings_reducer";
-import { rate1, rate2 } from "redux/assumptions/assumptions_selectors";
+import { individualItem_data } from "pages/spending/data/spending_data";
+//import {renderSavings, optimizedWithdrawals} from "services/savings/savings_functions"
+//import {transaction_action, setOpitmizedValues_action} from "redux/savings/savings_actions"
+//import {savings_reducer} from "redux/savings/savings_reducer"
+//import {rate1, rate2} from "redux/assumptions/assumptions_selectors"
 
 //THe add form is used to add individual items to the users net worth.
 
@@ -28,25 +22,18 @@ const AddForm = ({
   category,
   subCategory,
   user_reducer,
-  savings_reducer,
   setAddFormSubCategory,
-  transaction_action,
-  rate1,
-  rate2,
-  accountTypeArray,
-  bookValueLabel,
-  setOpitmizedValues_action,
+  expenseTypeArray,
+  durationTypeArray,
   currentValueLabel,
-  interestRateLabel,
-  addItem_action,
-  propertyNames_selector
+  ageLabel,
+  addItem_action
 }) => {
   const initialState = individualItem_data(
     category,
     subCategory,
-    bookValueLabel,
     currentValueLabel,
-    interestRateLabel
+    ageLabel
   ); //initial State is found in data
 
   const [state, setState] = useState({ ...initialState });
@@ -87,7 +74,8 @@ const AddForm = ({
     const id = (Math.random() * 10000000000).toFixed(); // Creates a unique id
     addItem_action(id, state); // Sets item in reducer
     console.log(state.registration);
-    state.subCategory === "investmentAssets"
+
+    /*state.subCategory === "investmentAssets"
       ? renderSavings(
           userAge - 1,
           userAge,
@@ -102,13 +90,13 @@ const AddForm = ({
           transaction_action,
           65
         )
-      : console.log('""');
+      : console.log('""');*/
 
     //renderSavings(fromAge, toAge, name, value, rangeBarValue, "contribute", savings_reducer, rrspStartAge, rate1, rate2, transaction_action, tfsaStartAge)
     setState({ ...initialState });
 
     //optimizedWithdrawals("tfsa", savings_reducer, setOpitmizedValues_action, .02)
-    console.log(savings_reducer);
+    //console.log(savings_reducer);
   };
 
   return (
@@ -121,9 +109,10 @@ const AddForm = ({
           {/* Choose one is used to select the account type */}
           <ChooseOne
             array={
-              subCategory === "securedDebt"
-                ? propertyNames_selector.concat("None of These")
-                : accountTypeArray
+              subCategory === "housingCosts"
+                ? //? propertyNames_selector.concat("None of These")
+                  expenseTypeArray
+                : durationTypeArray
             } //if it is secored (a mortgage) it has to be linked to the property its secured against
             setValue={value =>
               setState({ ...state, registration: value.toLowerCase() })
@@ -139,17 +128,11 @@ const AddForm = ({
             type={"text"}
             handleChange={e => setState({ ...state, label: e.target.value })} //sets the state in the local state
           />
-          {subCategory === "securedDebt" ? (
-            <DateInput
-              label={"Mortgage Start Date"}
-              value={state.startDate.date}
-              handleChange={event => setDate(event)} //sets the state in the local state
-            />
-          ) : null}
-          {subCategory === "propertyAssets" ||
-          subCategory === "securedDebt" ||
-          subCategory === "unsecuredDebt" ? ( //If its a property or mortgage we want two range bars showing the starting value
-            <RangeBar rangeBarProps={state.bookValue} setValue={setValue} />
+
+          {subCategory === "transportationCosts" ||
+          subCategory === "lifestyleCosts" ||
+          subCategory === "largeEventsCosts" ? ( //If its a property or mortgage we want two range bars showing the starting value
+            <RangeBar rangeBarProps={state.currentValue} setValue={setValue} />
           ) : null}
           <RangeBar
             rangeBarProps={state.currentValue} //Every Add item has a range bar to set its value
@@ -158,19 +141,19 @@ const AddForm = ({
         </Center>
         <Right>
           <MiniRangeBarWrapper>
-            {subCategory === "unsecuredDebt" ? ( //If its a liability we want to know its amortization
+            {subCategory === "housingCosts" ? ( //If its a liability we want to know its amortization
               <MiniRangeBar
-                rangeBarProps={state.interestRate}
+                rangeBarProps={state.currentValue}
                 setValue={setValue}
               />
-            ) : subCategory === "securedDebt" ? (
+            ) : subCategory === "transportationCosts" ? (
               <>
                 <MiniRangeBar
-                  rangeBarProps={state.amortization}
+                  rangeBarProps={state.currentValue}
                   setValue={setValue}
                 />
                 <MiniRangeBar
-                  rangeBarProps={state.interestRate}
+                  rangeBarProps={state.currentValue}
                   setValue={setValue}
                 />
               </>
@@ -192,17 +175,12 @@ const AddForm = ({
 };
 
 const mapStateToProps = state => ({
-  propertyNames_selector: propertyNames_selector(state),
   user_reducer: state.user_reducer,
-  savings_reducer: state.savings_reducer,
-  rate1: rate1(state),
-  rate2: rate2(state)
+  savings_reducer: state.savings_reducer
 });
 
 export default connect(mapStateToProps, {
-  addItem_action,
-  transaction_action,
-  setOpitmizedValues_action
+  addItem_action
 })(AddForm);
 
 //-----------------------------------------------STYLES-----------------------------------------------//

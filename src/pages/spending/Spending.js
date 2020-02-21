@@ -7,6 +7,8 @@ import ButtonLight from "UI/buttons/ButtonLight";
 import { spendingWizard_data } from "pages/spending/data/spending_data";
 import WelcomePage from "pages/spending/components/WelcomePage";
 import Main from "pages/spending/components/Main";
+import AddForm from "pages/spending/components/AddForm";
+import ItemDisplayBox from "pages/spending/components/ItemDisplayBox";
 
 const Spending = () => {
   const [count, setCount] = useState(0);
@@ -47,11 +49,13 @@ const Spending = () => {
     <Page>
       {count === 0 ? (
         <WelcomePage />
-      ) : count < 6 ? (
+      ) : count < 5 ? (
         <>
           {renderAddForm(spendingWizard_data)} {}
         </>
-      ) : null}
+      ) : (
+        <Main />
+      )}
       <Buttons>
         {" "}
         {/* Fixed plan buttons enabling the toggling back and forth*/}

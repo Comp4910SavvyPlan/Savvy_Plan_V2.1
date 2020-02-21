@@ -5,7 +5,7 @@ export const setSpendingValue_action = (
   rangeBarValue,
   category,
   rangeBarProps,
-  id
+  spendingId
 ) => {
   return {
     type: "spending_reducer/SET_VALUE",
@@ -19,7 +19,7 @@ export const setSpendingValue_action = (
 
 export const changeLabel_action = (e, rangeBarProps, spendingId) => ({
   type: "spending_reducer/CHANGE_LABEL",
-  id: spending,
+  id: spendingId,
   label: e.target.value,
   category: rangeBarProps.category,
   rangeBarProps
