@@ -16,9 +16,9 @@ import { Redirect} from "react-router-dom"
 
 function OnboardingProcess(props) {
 
-    const [count, setCount] = useState(12);
+    const [count, setCount] = useState(0);
 
-    if (count > 12) return <Redirect to="/assumptions"/>
+    if (count > 12) return <Redirect to="/plan"/>
 
         return (
                  <Wrapper>
@@ -42,16 +42,16 @@ function OnboardingProcess(props) {
                             count === 5 ? 
                             <Priorities/>
                             :
-                            count > 5 && count < 10 ? 
+                            count > 5 && count < 11 ? 
                             <RatesOfReturn count={count}/>
                             :
-                            count === 10 ? 
+                            count === 11 ? 
                             <RetirementAge/>
                             :
-                            count === 11 ? 
+                            count === 12 ? 
                             <LifeSpan/>
                             :
-                            count === 12 ? 
+                            count === 13 ? 
                             <LifeEvents/>
                             :
                             null
