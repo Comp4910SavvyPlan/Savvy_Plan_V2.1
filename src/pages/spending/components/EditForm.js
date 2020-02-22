@@ -122,7 +122,6 @@ const Header = styled.div`
     null};
     height: 4rem;
     color: ${props => props.theme.color.ice};
-
 `
 const Left = styled.div`
     width: 30rem;
