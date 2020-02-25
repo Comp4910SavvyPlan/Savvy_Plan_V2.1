@@ -4,7 +4,7 @@ import {connect} from "react-redux"
 import _ from "lodash"
 import { removeSpending_action } from "redux/spending/spending_actions";
 import ItemDisplayBox from "pages/spending/components/ItemDisplayBox";
-import EditForm from "pages/netWorth/components/EditForm";
+import EditForm from "pages/spending/components/EditForm";
 import AddForm from "pages/spending/components/AddForm"
 import { spendingWizard_data } from "pages/spending/data/spending_data";
 
