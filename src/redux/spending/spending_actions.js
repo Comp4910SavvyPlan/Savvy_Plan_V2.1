@@ -26,7 +26,7 @@ export const changeLabel_action = (e, rangeBarProps, spendingId) => ({
 });
 
 export const removeSpending_action = rangeBarProps => ({
-  type: "spending_reducer/REMOVE_VALUE",
+  type: "spending_reducer/REMOVE_ITEM",
   id: rangeBarProps.id,
   category: rangeBarProps.category
 });
