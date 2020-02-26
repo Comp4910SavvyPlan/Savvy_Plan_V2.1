@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import ExpenseType from "UI/forms/ExpenseType";
+import Duration from "UI/forms/Duration";
 import FormInput from "UI/forms/Input";
 import DateInput from "UI/forms/DateInput";
 import RangeBar from "UI/rangeBar/RangeBar";
@@ -120,6 +121,19 @@ const AddForm = ({
             value={1}
             subCategory={subCategory}
           />
+          <Duration
+            array={
+              subCategory === "housingCosts"
+                ? //? propertyNames_selector.concat("None of These")
+                  expenseTypeArray
+                : durationTypeArray
+            } //if it is secored (a mortgage) it has to be linked to the property its secured against
+            setValue={value =>
+              setState({ ...state, registration: value.toLowerCase() })
+            }
+            value={1}
+            subCategory={subCategory}
+          />
         </Left>
         <Center>
           <FormInput
@@ -162,12 +176,6 @@ const AddForm = ({
           <ButtonWrapper>
             <ButtonLight text={"Add"} onClick={() => addItem()} />
           </ButtonWrapper>
-          <ButtonLeftWrapper>
-            <ButtonLight
-              text={"Back"}
-              onClick={() => setAddFormSubCategory(false)}
-            />
-          </ButtonLeftWrapper>
         </Right>
       </Container>
     </>
@@ -217,10 +225,13 @@ const Container = styled.div`
   width: 94rem;
   border-radius: 5px;
   overflow: hidden;
-  height: ${props =>
+  height: 33rem;
+  
+  /*${props =>
     props.subCategory === "securedDebt"
       ? "33rem"
       : "30rem"}; //mortgage requires more height because there are more inputs
+  */
   border: ${props => props.theme.border.primary};
   position: relative;
   display: flex;

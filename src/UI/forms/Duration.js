@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import _ from "lodash";
 
-const ExpenseType = ({ value, setValue, array, subCategory }) => {
+const Duration = ({ value, setValue, array, subCategory }) => {
   const [selected, select] = useState(value);
   const handleSelect = value => {
     select(value);
@@ -11,7 +11,7 @@ const ExpenseType = ({ value, setValue, array, subCategory }) => {
 
   return (
     <Container>
-      <Label>Expense Type</Label>
+      <Label>Duration</Label>
       <SelectWrapper>
         {array.map(d => (
           <SelectValue
@@ -28,12 +28,12 @@ const ExpenseType = ({ value, setValue, array, subCategory }) => {
   );
 };
 
-export default ExpenseType;
+export default Duration;
 
 //-----------------------------------------------style-----------------------------------------------//
 
 const Container = styled.div`
-  overflow-y: none;
+  padding: 1rem 0rem 0rem 0rem;
   width: 25rem;
   height: 17rem;
   font-size: 1.4rem;
@@ -41,7 +41,6 @@ const Container = styled.div`
   flex-direction: column;
   margin-top: -1.6rem;
 `;
-
 const SelectWrapper = styled.div`
   height: 18rem;
   background: white;
