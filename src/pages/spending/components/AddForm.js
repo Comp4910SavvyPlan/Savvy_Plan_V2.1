@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import ChooseOne from "UI/forms/ChooseOne";
+import ExpenseType from "UI/forms/ExpenseType";
 import FormInput from "UI/forms/Input";
 import DateInput from "UI/forms/DateInput";
 import RangeBar from "UI/rangeBar/RangeBar";
@@ -106,8 +106,8 @@ const AddForm = ({
         {/* passing in subCategory is used to change the header color */}
         <Left>
           {" "}
-          {/* Choose one is used to select the account type */}
-          <ChooseOne
+          {/* ExpenseType is used to select the account type */}
+          <ExpenseType
             array={
               subCategory === "housingCosts"
                 ? //? propertyNames_selector.concat("None of These")
