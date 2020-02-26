@@ -89,21 +89,18 @@ export default connect(mapStateToProps, { removeSpending_action })(
 const Header = styled.div`
   width: 100%;
   background: ${props =>
-    props.subCategory === "cashAssets"
+    props.subCategory === "housingCosts"
       ? props.theme.color.blue
       : props =>
-          props.subCategory === "investmentAssets"
+          props.subCategory === "transportationCosts"
             ? props.theme.color.steelBlue
             : props =>
-                props.subCategory === "propertyAssets"
+                props.subCategory === "lifestyleCosts"
                   ? props.theme.color.green
                   : props =>
-                      props.subCategory === "unsecuredDebt"
+                      props.subCategory === "largeEventsCosts"
                         ? props.theme.color.salmon
-                        : props =>
-                            props.subCategory === "securedDebt"
-                              ? props.theme.color.darkSalmon
-                              : null};
+                        : null};
   height: 4rem;
   color: ${props => props.theme.color.ice};
   border-bottom: ${props => props.theme.border.primary};
@@ -122,35 +119,29 @@ const Wrapper = styled.div`
   background: ${props => props.theme.color.ice};
 `;
 const Item = styled.div`
-   
-    margin: 0.5rem 1rem 0.5rem 1rem;
-    padding: .8rem 4.5rem .8rem 4rem;
-    width: 28rem;
-    display: flex;
-    position: relative;
-    height: ${props => (props.label.length > 20 ? "7rem" : "4rem")};
-    background:${props =>
-      props.subCategory === "cashAssets"
-        ? props.theme.color.blue
-        : props =>
-            props.subCategory === "investmentAssets"
-              ? props.theme.color.steelBlue
-              : props =>
-                  props.subCategory === "propertyAssets"
-                    ? props.theme.color.green
-                    : props =>
-                        props.subCategory === "unsecuredDebt"
-                          ? props.theme.color.salmon
-                          : props =>
-                              props.subCategory === "securedDebt"
-                                ? props.theme.color.darkSalmon
-                                : null};
-    border-radius: 5px;
-    color: white
-    border: ${props => props.theme.border.primary};
-    cursor: pointer;
-
-
+  margin: 0.5rem 1rem 0.5rem 1rem;
+  padding: 0.8rem 4.5rem 0.8rem 4rem;
+  width: 28rem;
+  display: flex;
+  position: relative;
+  height: ${props => (props.label.length > 20 ? "7rem" : "4rem")};
+  background: ${props =>
+    props.subCategory === "housingCosts"
+      ? props.theme.color.blue
+      : props =>
+          props.subCategory === "transportationCosts"
+            ? props.theme.color.steelBlue
+            : props =>
+                props.subCategory === "lifestyleCosts"
+                  ? props.theme.color.green
+                  : props =>
+                      props.subCategory === "largeEventsCosts"
+                        ? props.theme.color.salmon
+                        : null};
+  border-radius: 5px;
+  color: white;
+  border: ${props => props.theme.border.primary};
+  cursor: pointer;
 `;
 const Container = styled.div`
   min-height: 10rem;
@@ -165,6 +156,7 @@ const H2 = styled.h2`
 font-size: 1.4rem
 font-weight: 700;
 `;
+
 const Text = styled.div`
   width: 25rem;
   display: flex;
