@@ -27,14 +27,16 @@ const AddForm = ({
   expenseTypeArray,
   durationTypeArray,
   currentValueLabel,
-  ageLabel,
+  ageLabel1,
+  ageLabel2,
   addItem_action
 }) => {
   const initialState = individualItem_data(
     category,
     subCategory,
     currentValueLabel,
-    ageLabel
+    ageLabel1,
+    ageLabel2
   ); //initial State is found in data
 
   const [state, setState] = useState({ ...initialState });
@@ -110,10 +112,13 @@ const AddForm = ({
           {/* ExpenseType is used to select the account type */}
           <ExpenseType
             array={
-              subCategory === "housingCosts"
+              subCategory === "housingCosts" ||
+              "transportationCosts" ||
+              "lifestyleCosts" ||
+              "largeEventsCosts"
                 ? //? propertyNames_selector.concat("None of These")
                   expenseTypeArray
-                : durationTypeArray
+                : null
             } //if it is secored (a mortgage) it has to be linked to the property its secured against
             setValue={value =>
               setState({ ...state, registration: value.toLowerCase() })
@@ -123,10 +128,13 @@ const AddForm = ({
           />
           <Duration
             array={
-              subCategory === "housingCosts"
+              subCategory === "housingCosts" ||
+              "transportationCosts" ||
+              "lifestyleCosts" ||
+              "largeEventsCosts"
                 ? //? propertyNames_selector.concat("None of These")
-                  expenseTypeArray
-                : durationTypeArray
+                  durationTypeArray
+                : null
             } //if it is secored (a mortgage) it has to be linked to the property its secured against
             setValue={value =>
               setState({ ...state, registration: value.toLowerCase() })
@@ -143,11 +151,6 @@ const AddForm = ({
             handleChange={e => setState({ ...state, label: e.target.value })} //sets the state in the local state
           />
 
-          {subCategory === "transportationCosts" ||
-          subCategory === "lifestyleCosts" ||
-          subCategory === "largeEventsCosts" ? ( //If its a property or mortgage we want two range bars showing the starting value
-            <RangeBar rangeBarProps={state.currentValue} setValue={setValue} />
-          ) : null}
           <RangeBar
             rangeBarProps={state.currentValue} //Every Add item has a range bar to set its value
             setValue={setValue}
@@ -155,21 +158,12 @@ const AddForm = ({
         </Center>
         <Right>
           <MiniRangeBarWrapper>
-            {subCategory === "housingCosts" ? ( //If its a liability we want to know its amortization
-              <MiniRangeBar
-                rangeBarProps={state.currentValue}
-                setValue={setValue}
-              />
-            ) : subCategory === "transportationCosts" ? (
+            {subCategory === "transportationCosts" || "lifestyleCosts" ? ( //If its a liability we want to know its amortization
+              <MiniRangeBar rangeBarProps={state.age1} setValue={setValue} />
+            ) : subCategory === "largeEventsCosts" ? (
               <>
-                <MiniRangeBar
-                  rangeBarProps={state.currentValue}
-                  setValue={setValue}
-                />
-                <MiniRangeBar
-                  rangeBarProps={state.currentValue}
-                  setValue={setValue}
-                />
+                <MiniRangeBar rangeBarProps={state.age1} setValue={setValue} />
+                <MiniRangeBar rangeBarProps={state.age2} setValue={setValue} />
               </>
             ) : null}
           </MiniRangeBarWrapper>

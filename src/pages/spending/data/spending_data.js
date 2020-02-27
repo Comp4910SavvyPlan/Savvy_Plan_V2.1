@@ -6,7 +6,8 @@ export const spendingWizard_data = [
     category: "fixed",
     subCategory: "housingCosts",
     currentValueLabel: "Monthly Cost",
-    ageLabel: "none",
+    ageLabel1: "none",
+    ageLabel2: "none",
     expenseTypeArray: ["Fixed", "Variable"],
     durationTypeArray: ["Limited", "Forever"]
   },
@@ -15,7 +16,8 @@ export const spendingWizard_data = [
     category: "fixed",
     subCategory: "transportationCosts",
     currentValueLabel: "Monthly Cost",
-    ageLabel: "none",
+    ageLabel1: "Years Remaining",
+    ageLabel2: "none",
     expenseTypeArray: ["Fixed", "Variable"],
     durationTypeArray: ["Limited", "Forever"]
   },
@@ -24,7 +26,8 @@ export const spendingWizard_data = [
     category: "fixed",
     subCategory: "lifestyleCosts",
     currentValueLabel: "Monthly Cost",
-    ageLabel: "Years Remaining",
+    ageLabel1: "years Remaining",
+    ageLabel2: "none",
     expenseTypeArray: ["Fixed", "Variable"],
     durationTypeArray: ["Limited", "Forever"]
   },
@@ -33,7 +36,8 @@ export const spendingWizard_data = [
     category: "fixed",
     subCategory: "largeEventsCosts",
     currentValueLabel: "Event Cost",
-    ageLabel: "Age At Event",
+    ageLabel1: "Age At Event Start",
+    ageLabel2: "Age At Event End",
     expenseTypeArray: ["Fixed", "Variable"],
     durationTypeArray: ["One Time", "Duration"]
   }
@@ -43,7 +47,8 @@ export const individualItem_data = (
   category,
   subCategory,
   currentValueLabel,
-  ageLabel
+  ageLabel1,
+  ageLabel2
 ) => ({
   category: category,
   label: "",
@@ -59,14 +64,23 @@ export const individualItem_data = (
     label: currentValueLabel
     //numberType: "percentage"
   },
-  age: {
+  age1: {
     rangeBarValue: 0,
-    name: "age",
+    name: "age1",
     max: 100,
     min: 0,
     step: 1,
-    label: ageLabel,
-    numberType: "percentage"
+    label: ageLabel1
+    //numberType: "percentage"
+  },
+  age2: {
+    rangeBarValue: 0,
+    name: "age2",
+    max: 100,
+    min: 0,
+    step: 1,
+    label: ageLabel2
+    //numberType: "percentage"
   },
   startDate: {
     rangeBarValue: 0,

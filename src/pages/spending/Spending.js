@@ -33,7 +33,8 @@ const Spending = () => {
               category={d.category}
               subCategory={d.subCategory}
               currentValueLabel={d.currentValueLabel}
-              ageLabel={d.ageLabel}
+              ageLabel1={d.ageLabel1}
+              ageLabel2={d.ageLabel2}
               expenseTypeArray={d.expenseTypeArray}
               durationTypeArray={d.durationTypeArray}
               setAddFormSubCategory={() => null}
