@@ -3,7 +3,8 @@ export const spendingWizard_data = [
     //category: fixed or variable
     //subCategory: housingCosts or transportationCosts or etc
     count: 1,
-    category: "fixed",
+    //category: "variable" || "fixed",
+    category: "variable",
     subCategory: "housingCosts",
     currentValueLabel: "Monthly Cost",
     ageLabel1: "none",
