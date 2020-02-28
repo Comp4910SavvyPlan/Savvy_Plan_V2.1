@@ -50,7 +50,7 @@ const Spending = () => {
     <Page>
       {count === 0 ? (
         <WelcomePage />
-      ) : count < 5 ? (
+      ) : count < 9 ? (
         <>
           {renderAddForm(spendingWizard_data)} {}
         </>

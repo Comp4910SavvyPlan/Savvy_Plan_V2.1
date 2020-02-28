@@ -107,10 +107,14 @@ const AddForm = ({
           {/* ExpenseType is used to select the account type */}
           <ExpenseType
             array={
-              subCategory === "housingCosts" ||
-              "transportationCosts" ||
-              "lifestyleCosts" ||
-              "largeEventsCosts"
+              subCategory === "fixedHousingCosts" ||
+              "variableHousingCosts" ||
+              "fixedTransportationCosts" ||
+              "variableTransportationCosts" ||
+              "fixedLifestyleCosts" ||
+              "variableLifestyleCosts" ||
+              "fixedLargeEventsCosts" ||
+              "variableLargeEventsCosts"
                 ? //? propertyNames_selector.concat("None of These")
                   expenseTypeArray
                 : null
@@ -123,10 +127,14 @@ const AddForm = ({
           />
           <Duration
             array={
-              subCategory === "housingCosts" ||
-              "transportationCosts" ||
-              "lifestyleCosts" ||
-              "largeEventsCosts"
+              subCategory === "fixedHousingCosts" ||
+              "variableHousingCosts" ||
+              "fixedTransportationCosts" ||
+              "variableTransportationCosts" ||
+              "fixedLifestyleCosts" ||
+              "variableLifestyleCosts" ||
+              "fixedLargeEventsCosts" ||
+              "variableLargeEventsCosts"
                 ? //? propertyNames_selector.concat("None of These")
                   durationTypeArray
                 : null
@@ -153,7 +161,10 @@ const AddForm = ({
         </Center>
         <Right>
           <MiniRangeBarWrapper>
-            {subCategory === "transportationCosts" || "lifestyleCosts" ? ( //If its a liability we want to know its amortization
+            {subCategory === "fixedTransportationCosts" ||
+            "variableTransportationCosts" ||
+            "fixedLifestyleCosts" ||
+            "variableLifestyleCosts" ? ( //If its a liability we want to know its amortization
               <MiniRangeBar rangeBarProps={state.age1} setValue={setValue} />
             ) : subCategory === "largeEventsCosts" ? (
               <>

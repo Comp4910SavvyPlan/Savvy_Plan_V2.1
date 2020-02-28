@@ -12,6 +12,14 @@ export const housing_selector = createSelector(
     ) //creates a an array of each of the income subCategory names, which is used in the stacked Income chart
 );
 
+export const v_housing_selector = createSelector(
+  [spending_reducer],
+  spending_reducer =>
+    Object.values(spending_reducer.variable).filter(
+      d => d.subCategory === "vHousingCosts"
+    ) //creates a an array of each of the income subCategory names, which is used in the stacked Income chart
+);
+
 export const transportation_selector = createSelector(
   [spending_reducer],
   spending_reducer =>

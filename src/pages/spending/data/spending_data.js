@@ -1,11 +1,8 @@
 export const spendingWizard_data = [
   {
-    //category: fixed or variable
-    //subCategory: housingCosts or transportationCosts or etc
     count: 1,
-    //category: "variable" || "fixed",
-    category: "variable",
-    subCategory: "housingCosts",
+    category: "fixed",
+    subCategory: "fixedHousingCosts",
     currentValueLabel: "Monthly Cost",
     ageLabel1: "none",
     ageLabel2: "none",
@@ -14,10 +11,10 @@ export const spendingWizard_data = [
   },
   {
     count: 2,
-    category: "fixed",
-    subCategory: "transportationCosts",
+    category: "variable",
+    subCategory: "variableHousingCosts",
     currentValueLabel: "Monthly Cost",
-    ageLabel1: "Years Remaining",
+    ageLabel1: "none",
     ageLabel2: "none",
     expenseTypeArray: ["Fixed", "Variable"],
     durationTypeArray: ["Limited", "Forever"]
@@ -25,7 +22,27 @@ export const spendingWizard_data = [
   {
     count: 3,
     category: "fixed",
-    subCategory: "lifestyleCosts",
+    subCategory: "fixedTransportationCosts",
+    currentValueLabel: "Monthly Cost",
+    ageLabel1: "none",
+    ageLabel2: "none",
+    expenseTypeArray: ["Fixed", "Variable"],
+    durationTypeArray: ["Limited", "Forever"]
+  },
+  {
+    count: 4,
+    category: "variable",
+    subCategory: "variableTransportationCosts",
+    currentValueLabel: "Monthly Cost",
+    ageLabel1: "none",
+    ageLabel2: "none",
+    expenseTypeArray: ["Fixed", "Variable"],
+    durationTypeArray: ["Limited", "Forever"]
+  },
+  {
+    count: 5,
+    category: "fixed",
+    subCategory: "fixedLifestyleCosts",
     currentValueLabel: "Monthly Cost",
     ageLabel1: "years Remaining",
     ageLabel2: "none",
@@ -33,9 +50,29 @@ export const spendingWizard_data = [
     durationTypeArray: ["Limited", "Forever"]
   },
   {
-    count: 4,
+    count: 6,
+    category: "variable",
+    subCategory: "variableLifestyleCosts",
+    currentValueLabel: "Monthly Cost",
+    ageLabel1: "years Remaining",
+    ageLabel2: "none",
+    expenseTypeArray: ["Fixed", "Variable"],
+    durationTypeArray: ["Limited", "Forever"]
+  },
+  {
+    count: 7,
     category: "fixed",
-    subCategory: "largeEventsCosts",
+    subCategory: "fixedLargeEventsCosts",
+    currentValueLabel: "Event Cost",
+    ageLabel1: "Age At Event Start",
+    ageLabel2: "Age At Event End",
+    expenseTypeArray: ["Fixed", "Variable"],
+    durationTypeArray: ["One Time", "Duration"]
+  },
+  {
+    count: 8,
+    category: "variable",
+    subCategory: "variableLargeEventsCosts",
     currentValueLabel: "Event Cost",
     ageLabel1: "Age At Event Start",
     ageLabel2: "Age At Event End",

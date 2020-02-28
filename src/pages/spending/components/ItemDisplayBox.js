@@ -89,18 +89,32 @@ export default connect(mapStateToProps, { removeSpending_action })(
 const Header = styled.div`
   width: 100%;
   background: ${props =>
-    props.subCategory === "housingCosts"
+    props.subCategory === "fixedHousingCosts"
       ? props.theme.color.blue
       : props =>
-          props.subCategory === "transportationCosts"
-            ? props.theme.color.steelBlue
+          props.subCategory === "variableHousingCosts"
+            ? props.theme.color.blue
             : props =>
-                props.subCategory === "lifestyleCosts"
-                  ? props.theme.color.green
+                props.subCategory === "fixedTransportationCosts"
+                  ? props.theme.color.steelBlue
                   : props =>
-                      props.subCategory === "largeEventsCosts"
-                        ? props.theme.color.salmon
-                        : null};
+                      props.subCategory === "variableTransportationCosts"
+                        ? props.theme.color.steelBlue
+                        : props =>
+                            props.subCategory === "fixedLifestyleCosts"
+                              ? props.theme.color.green
+                              : props =>
+                                  props.subCategory === "variableLifestyleCosts"
+                                    ? props.theme.color.green
+                                    : props =>
+                                        props.subCategory ===
+                                        "fixedLargeEventsCosts"
+                                          ? props.theme.color.salmon
+                                          : props =>
+                                              props.subCategory ===
+                                              "variableLargeEventsCosts"
+                                                ? props.theme.color.salmon
+                                                : null};
   height: 4rem;
   color: ${props => props.theme.color.ice};
   border-bottom: ${props => props.theme.border.primary};
@@ -126,18 +140,32 @@ const Item = styled.div`
   position: relative;
   height: ${props => (props.label.length > 20 ? "7rem" : "4rem")};
   background: ${props =>
-    props.subCategory === "housingCosts"
+    props.subCategory === "fixedHousingCosts"
       ? props.theme.color.blue
       : props =>
-          props.subCategory === "transportationCosts"
-            ? props.theme.color.steelBlue
+          props.subCategory === "variableHousingCosts"
+            ? props.theme.color.blue
             : props =>
-                props.subCategory === "lifestyleCosts"
-                  ? props.theme.color.green
+                props.subCategory === "fixedTransportationCosts"
+                  ? props.theme.color.steelBlue
                   : props =>
-                      props.subCategory === "largeEventsCosts"
-                        ? props.theme.color.salmon
-                        : null};
+                      props.subCategory === "variableTransportationCosts"
+                        ? props.theme.color.steelBlue
+                        : props =>
+                            props.subCategory === "fixedLifestyleCosts"
+                              ? props.theme.color.green
+                              : props =>
+                                  props.subCategory === "variableLifestyleCosts"
+                                    ? props.theme.color.green
+                                    : props =>
+                                        props.subCategory ===
+                                        "fixedLargeEventsCosts"
+                                          ? props.theme.color.salmon
+                                          : props =>
+                                              props.subCategory ===
+                                              "variableLargeEventsCosts"
+                                                ? props.theme.color.salmon
+                                                : null};
   border-radius: 5px;
   color: white;
   border: ${props => props.theme.border.primary};
