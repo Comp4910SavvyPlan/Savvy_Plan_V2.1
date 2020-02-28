@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { removeItem_action } from "redux/spending/spending_actions";
+import {connect} from "react-redux"
+import { removeSpending_action } from "redux/spending/spending_actions";
 import EditForm from "pages/netWorth/components/EditForm";
 import ItemDisplayBox from "pages/spending/components/ItemDisplayBox";
 import { spendingWizard_data } from "pages/spending/data/spending_data";
@@ -56,7 +57,11 @@ const ControlPanel = ({ setCount, display, spending_reducer }) => {
   );
 };
 
-export default ControlPanel;
+const mapStateToProps = (state) => ({
+    spending_reducer: state.spending_reducer,
+})
+
+export default connect(mapStateToProps,{removeSpending_action})(ControlPanel)
 
 //-----------------------------------------------style-----------------------------------------------//
 
