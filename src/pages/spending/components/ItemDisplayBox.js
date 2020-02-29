@@ -29,6 +29,8 @@ const ItemDisplay = ({ value, removeSpending_action, item, setItemId }) => {
 
 const ItemDisplayBox = ({
   category,
+  count,
+  section,
   setAddFormSubCategory,
   subCategory,
   spending_reducer,
@@ -37,12 +39,35 @@ const ItemDisplayBox = ({
 }) => {
   //Box wrapping the items being added
 
-  const arrayOfitems = Object.values(spending_reducer[category]).filter(
+  //var prev = Object.values(spending_reducer[count - 1]);
+  //var next = Object.values(spending_reducer[count + 1]);
+
+  const arrayOfitemsF = Object.values(spending_reducer["fixed"]).filter(
+    d => d.subCategory === subCategory && d.section === section
+  ); //Pulls out all the items added and turns them into an array
+
+  const arrayOfitemsV = Object.values(spending_reducer["variable"]).filter(
     d => d.subCategory === subCategory
   ); //Pulls out all the items added and turns them into an array
-  const totalValue =
-    arrayOfitems.length > 0
-      ? arrayOfitems
+
+  //const arrayOfitemsPrev = prev
+  //  .values(spending_reducer["fixed"])
+  //  .filter(d => d.subCategory === subCategory); //Pulls out all the items added and turns them into an array
+
+  //const arrayOfitemsNext = next
+  //  .values(spending_reducer["fixed"])
+  //  .filter(d => d.subCategory === subCategory); //Pulls out all the items added and turns them into an array
+
+  const totalValueV =
+    arrayOfitemsV.length > 0
+      ? arrayOfitemsV
+          .map(d => d.currentValue.financialValue)
+          .reduce((acc, num) => acc + num)
+      : 0; //Sums the value of the category
+
+  const totalValueF =
+    arrayOfitemsF.length > 0
+      ? arrayOfitemsF
           .map(d => d.currentValue.financialValue)
           .reduce((acc, num) => acc + num)
       : 0; //Sums the value of the category
@@ -53,13 +78,14 @@ const ItemDisplayBox = ({
         {" "}
         {/*The header passes subCategory to Styled-components so the color can change*/}
         <h2>{_.startCase(subCategory)}</h2>
-        <h2>{totalValue / 1000}k</h2>{" "}
+        <h2>{"Fixed: " + totalValueF / 1000}k</h2>
+        <h2>{"Variable: " + totalValueV / 1000}</h2>
         {/*Shows the total value for that subCategory */}
       </Header>
 
       <Container>
-        {arrayOfitems.map(item => {
-          return item.category === "fixed" ? (
+        {arrayOfitemsF.map(item => {
+          return (
             <Left>
               <ItemDisplay //Maps through the items showing each one
                 item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
@@ -69,7 +95,11 @@ const ItemDisplayBox = ({
                 setItemId={setItemId}
               />
             </Left>
-          ) : (
+          );
+        })}
+
+        {arrayOfitemsV.map(item => {
+          return (
             <Right>
               <ItemDisplay //Maps through the items showing each one
                 item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
@@ -233,7 +263,7 @@ const DarkAdd = styled(Add)`
 `;
 
 const Right = styled.div`
-  margin: 0.5rem 0rem 0.5rem 1rem;
+  margin: 0.5rem 0rem 0.5rem 50rem;
   width: 28rem;
   height: 100%;
   padding: 0rem;
