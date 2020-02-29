@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import {connect} from "react-redux"
+import ButtonLight from "UI/buttons/ButtonLight";
 import _ from "lodash"
 import { removeSpending_action } from "redux/spending/spending_actions";
 import ItemDisplayBox from "pages/spending/components/ItemDisplayBox";
@@ -22,6 +23,8 @@ const ControlPanel = ({ setCount, display, spending_reducer }) => {
   const subCategory = itemId
     ? spending_reducer[category][itemId].subCategory
     : "housingCosts"; //if we have an id we get the subCategory from the reducer, otherwise we set it to housingCosts
+
+  const [subCount, setSubCount] = useState(0);
 
   return (
     <Wrapper>
@@ -52,22 +55,47 @@ const ControlPanel = ({ setCount, display, spending_reducer }) => {
                 //if neither add or edit forms are clicked then it renders out the item display
               d => (
               d.category === display ?
-                <Section key={d.subCategory}>
-                  <ItemDisplayBox //Displays all the fixed or variables they have added
-                    category={d.category}
-                    item={d}
-                    subCategory={d.subCategory}
-                    setCount={setCount}
-                    setItemId={setItemId}
-                    setAddFormSubCategory={setAddFormSubCategory}
-                  />
-                </Section>
+              (
+                //only display first 3 out of 4 subcategories
+                (((d.subCategory === 'housingCosts') || (d.subCategory === 'transportationCosts') || (d.subCategory === 'lifestyleCosts')) && (subCount === 0)) ?
+                  <Section key={d.subCategory}>
+                    <ItemDisplayBox //Displays all the fixed or variables they have added
+                      category={d.category}
+                      item={d}
+                      subCategory={d.subCategory}
+                      setCount={setCount}
+                      setItemId={setItemId}
+                      setAddFormSubCategory={setAddFormSubCategory}
+                      />
+                  </Section>
+                :
+                //only display last 3 out of 4 subcategories
+                (((d.subCategory === 'transportationCosts') || (d.subCategory === 'lifestyleCosts') || (d.subCategory === 'largeEventsCosts')) && (subCount === 1)) ?
+                  <Section key={d.subCategory}>
+                    <ItemDisplayBox //Displays all the fixed or variables they have added
+                      category={d.category}
+                      item={d}
+                      subCategory={d.subCategory}
+                      setCount={setCount}
+                      setItemId={setItemId}
+                      setAddFormSubCategory={setAddFormSubCategory}
+                      />
+                  </Section>
+
+                  : null
+              )
                : null
             ))
           }
           </>
         }
       </Sections>
+      <Buttons>
+        {" "}
+        <ButtonLight backward onClick={() => setSubCount(subCount === 1 ? subCount - 1 : 0)} />
+        <ButtonLight forward onClick={() => setSubCount(subCount === 0 ? subCount + 1 : 1)} />
+        {console.log(subCount)}
+      </Buttons>
     </Wrapper>
   );
 };
@@ -96,4 +124,14 @@ const Sections = styled.div`
 const Section = styled.div`
   width: 30%;
   margin: 1rem;
+`;
+
+const Buttons = styled.div`
+  position: absolute;
+  width: 20rem;
+  top: 65rem;
+  left: 50rem;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
 `;
