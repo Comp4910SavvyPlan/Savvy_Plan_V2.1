@@ -1,6 +1,9 @@
-import React from "react";
-import styled from "styled-components";
-import SelectorButtonVertical from "UI/buttons/SelectorButtonVertical";
+import React from "react"
+import styled from "styled-components"
+import SelectorButtonVertical from "UI/buttons/SelectorButtonVertical"
+import {createStructuredSelector} from "reselect"
+import {totalFixedSpending_selector, totalVariableSpending_selector} from "redux/spending/spending_selectors"
+import {connect} from "react-redux"
 
 const Header = ({ display, setDisplay, monthly, toggleMonthly }) => {
   return (
@@ -31,7 +34,13 @@ const Header = ({ display, setDisplay, monthly, toggleMonthly }) => {
   );
 };
 
-export default Header;
+const mapStateToProps = createStructuredSelector({                                                                                                           //the header pulls these values from the selector so they can be displayed
+    totalFixedSpending_selector,
+    totalVariableSpending_selector
+
+})
+export default connect(mapStateToProps)(Header)
+
 
 //-----------------------------------------------style-----------------------------------------------//
 
