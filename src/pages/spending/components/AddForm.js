@@ -11,6 +11,7 @@ import ButtonLight from "UI/buttons/ButtonLight";
 import { addItem_action } from "redux/spending/spending_actions";
 import _ from "lodash";
 import { individualItem_data } from "pages/spending/data/spending_data";
+import DualRangeRangeBar from "UI/dualRangeBar/oldDualRangeBar";
 
 //THe add form is used to add individual items to the users net worth.
 
@@ -105,26 +106,6 @@ const AddForm = ({
         <Left>
           {" "}
           {/* ExpenseType is used to select the account type */}
-          <ExpenseType
-            array={
-              subCategory === "fixedHousingCosts" ||
-              "variableHousingCosts" ||
-              "fixedTransportationCosts" ||
-              "variableTransportationCosts" ||
-              "fixedLifestyleCosts" ||
-              "variableLifestyleCosts" ||
-              "fixedLargeEventsCosts" ||
-              "variableLargeEventsCosts"
-                ? //? propertyNames_selector.concat("None of These")
-                  expenseTypeArray
-                : null
-            } //if it is secored (a mortgage) it has to be linked to the property its secured against
-            setValue={value =>
-              setState({ ...state, registration: value.toLowerCase() })
-            }
-            value={1}
-            subCategory={subCategory}
-          />
           <Duration
             array={
               subCategory === "fixedHousingCosts" ||
@@ -236,4 +217,13 @@ const Container = styled.div`
   position: relative;
   display: flex;
   background: ${props => props.theme.color.ice};
+`;
+
+const SelectorTitleWrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  padding: 0.5rem;
+  font-size: ${props => props.theme.fontSize.small};
+  color: ${props => props.theme.color.slate};
 `;

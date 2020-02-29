@@ -125,5 +125,10 @@ export const individualItem_data = (
     name: "startDate",
     label: "Start Date",
     date: ""
+  },
+  dual: {
+    name: "dual",
+    fromAge: 12,
+    toAge: 45
   }
 });

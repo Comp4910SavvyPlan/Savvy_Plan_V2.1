@@ -14,7 +14,7 @@ const ItemDisplay = ({ value, removeSpending_action, item, setItemId }) => {
     removeSpending_action(item); //This removes the item from the reducer
   };
   return (
-    <Item label={label} subCategory={subCategory}>
+    <ItemLeft label={label} subCategory={subCategory}>
       <Text onClick={() => setItemId(id)}>
         {" "}
         {/*When the item is clicked the id is set which fills out the edit form with the items details */}
@@ -22,8 +22,8 @@ const ItemDisplay = ({ value, removeSpending_action, item, setItemId }) => {
         <H2>{value / 1000}K</H2>
       </Text>
       <Exit onClick={() => removeItem()} />{" "}
-      {/*If the x is clicked the item is removed */}
-    </Item>
+      {/*If the x is clicked the item is removed */};
+    </ItemLeft>
   );
 };
 
@@ -59,14 +59,26 @@ const ItemDisplayBox = ({
 
       <Container>
         {arrayOfitems.map(item => {
-          return (
-            <ItemDisplay //Maps through the items showing each one
-              item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
-              key={item.id}
-              removeSpending_action={removeSpending_action}
-              value={item.currentValue.financialValue}
-              setItemId={setItemId}
-            />
+          return item.category === "fixed" ? (
+            <Left>
+              <ItemDisplay //Maps through the items showing each one
+                item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                key={item.id}
+                removeSpending_action={removeSpending_action}
+                value={item.currentValue.financialValue}
+                setItemId={setItemId}
+              />
+            </Left>
+          ) : (
+            <Right>
+              <ItemDisplay //Maps through the items showing each one
+                item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                key={item.id}
+                removeSpending_action={removeSpending_action}
+                value={item.currentValue.financialValue}
+                setItemId={setItemId}
+              />
+            </Right>
           );
         })}
 
@@ -132,8 +144,8 @@ const Wrapper = styled.div`
   margin-bottom: 1rem;
   background: ${props => props.theme.color.ice};
 `;
-const Item = styled.div`
-  margin: 0.5rem 1rem 0.5rem 1rem;
+const ItemLeft = styled.div`
+  margin: 0.5rem 0rem 0.5rem 1rem;
   padding: 0.8rem 4.5rem 0.8rem 4rem;
   width: 28rem;
   display: flex;
@@ -218,4 +230,18 @@ const DarkAdd = styled(Add)`
   position: relative;
   color: grey;
   cursor: pointer;
+`;
+
+const Right = styled.div`
+  margin: 0.5rem 0rem 0.5rem 1rem;
+  width: 28rem;
+  height: 100%;
+  padding: 0rem;
+`;
+
+const Left = styled.div`
+  margin: 0.5rem 0rem 0.5rem 1rem;
+  width: 28rem;
+  height: 100%;
+  padding: 0rem;
 `;
