@@ -31,6 +31,7 @@ const ItemDisplayBox = ({
   category,
   count,
   section,
+  reference,
   setAddFormSubCategory,
   subCategory,
   spending_reducer,
@@ -39,16 +40,24 @@ const ItemDisplayBox = ({
 }) => {
   //Box wrapping the items being added
 
-  //var prev = Object.values(spending_reducer[count - 1]);
-  //var next = Object.values(spending_reducer[count + 1]);
+  var prev = Object.values(spending_reducer["fixed"]);
+  var next = Object.values(spending_reducer["variable"]);
 
-  const arrayOfitemsF = Object.values(spending_reducer["fixed"]).filter(
-    d => d.subCategory === subCategory && d.section === section
-  ); //Pulls out all the items added and turns them into an array
+  const arrayOfitemsFixedHousing = Object.values(
+    spending_reducer["fixed"]
+  ).filter(d => d.subCategory === "fixedHousingCosts"); //Pulls out all the items added and turns them into an array
 
-  const arrayOfitemsV = Object.values(spending_reducer["variable"]).filter(
-    d => d.subCategory === subCategory
-  ); //Pulls out all the items added and turns them into an array
+  const arrayOfitemsVariableHousing = Object.values(
+    spending_reducer["variable"]
+  ).filter(d => d.subCategory === "variableHousingCosts"); //Pulls out all the items added and turns them into an array
+
+  const arrayOfitemsFixedTransportation = Object.values(
+    spending_reducer["fixed"]
+  ).filter(d => d.subCategory === "fixedTransportationCosts"); //Pulls out all the items added and turns them into an array
+
+  const arrayOfitemsVariableTransportation = Object.values(
+    spending_reducer["variable"]
+  ).filter(d => d.subCategory === "variableTransportationCosts"); //Pulls out all the items added and turns them into an array
 
   //const arrayOfitemsPrev = prev
   //  .values(spending_reducer["fixed"])
@@ -58,62 +67,162 @@ const ItemDisplayBox = ({
   //  .values(spending_reducer["fixed"])
   //  .filter(d => d.subCategory === subCategory); //Pulls out all the items added and turns them into an array
 
-  const totalValueV =
-    arrayOfitemsV.length > 0
-      ? arrayOfitemsV
+  const totalValueVariableHousing =
+    arrayOfitemsVariableHousing.length > 0
+      ? arrayOfitemsVariableHousing
           .map(d => d.currentValue.financialValue)
           .reduce((acc, num) => acc + num)
       : 0; //Sums the value of the category
 
-  const totalValueF =
-    arrayOfitemsF.length > 0
-      ? arrayOfitemsF
+  const totalValueFixedHousing =
+    arrayOfitemsFixedHousing.length > 0
+      ? arrayOfitemsFixedHousing
+          .map(d => d.currentValue.financialValue)
+          .reduce((acc, num) => acc + num)
+      : 0; //Sums the value of the category
+
+  const totalValueX =
+    arrayOfitemsFixedTransportation.length > 0
+      ? arrayOfitemsFixedTransportation
+          .map(d => d.currentValue.financialValue)
+          .reduce((acc, num) => acc + num)
+      : 0; //Sums the value of the category
+
+  const totalValueY =
+    arrayOfitemsVariableTransportation.length > 0
+      ? arrayOfitemsVariableTransportation
           .map(d => d.currentValue.financialValue)
           .reduce((acc, num) => acc + num)
       : 0; //Sums the value of the category
 
   return (
     <Wrapper>
-      <Header subCategory={subCategory}>
-        {" "}
-        {/*The header passes subCategory to Styled-components so the color can change*/}
-        <h2>{_.startCase(subCategory)}</h2>
-        <h2>{"Fixed: " + totalValueF / 1000}k</h2>
-        <h2>{"Variable: " + totalValueV / 1000}</h2>
-        {/*Shows the total value for that subCategory */}
-      </Header>
+      {subCategory === "fixedHousingCosts" ? (
+        <Header subCategory={subCategory}>
+          {" "}
+          {/*The header passes subCategory to Styled-components so the color can change*/}
+          <h2>{_.startCase(subCategory)}</h2>
+          <h2>{"Fixed: " + totalValueFixedHousing / 1000}k</h2>
+          <h2>{"Variable: " + totalValueVariableHousing / 1000}</h2>
+          {/*Shows the total value for that subCategory */}
+        </Header>
+      ) : subCategory === "variableHousingCosts" ? (
+        <Header subCategory={subCategory}>
+          {" "}
+          {/*The header passes subCategory to Styled-components so the color can change*/}
+          <h2>{_.startCase(subCategory)}</h2>
+          <h2>{"Fixed: " + totalValueFixedHousing / 1000}k</h2>
+          <h2>{"Variable: " + totalValueVariableHousing / 1000}</h2>
+          {/*Shows the total value for that subCategory */}
+        </Header>
+      ) : subCategory === "fixedTransportationCosts" ? (
+        <Header subCategory={subCategory}>
+          {" "}
+          {/*The header passes subCategory to Styled-components so the color can change*/}
+          <h2>{_.startCase(subCategory)}</h2>
+          <h2>{"Fixed: " + totalValueX / 1000}k</h2>
+          <h2>{"Variable: " + totalValueY / 1000}</h2>
+          {/*Shows the total value for that subCategory */}
+        </Header>
+      ) : null}
 
-      <Container>
-        {arrayOfitemsF.map(item => {
-          return (
-            <Left>
-              <ItemDisplay //Maps through the items showing each one
-                item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
-                key={item.id}
-                removeSpending_action={removeSpending_action}
-                value={item.currentValue.financialValue}
-                setItemId={setItemId}
-              />
-            </Left>
-          );
-        })}
+      {subCategory === "fixedHousingCosts" ? (
+        <Container>
+          {arrayOfitemsFixedHousing.map(item => {
+            return (
+              <Left>
+                <ItemDisplay //Maps through the items showing each one
+                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                  key={item.id}
+                  removeSpending_action={removeSpending_action}
+                  value={item.currentValue.financialValue}
+                  setItemId={setItemId}
+                />
+              </Left>
+            );
+          })}
 
-        {arrayOfitemsV.map(item => {
-          return (
-            <Right>
-              <ItemDisplay //Maps through the items showing each one
-                item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
-                key={item.id}
-                removeSpending_action={removeSpending_action}
-                value={item.currentValue.financialValue}
-                setItemId={setItemId}
-              />
-            </Right>
-          );
-        })}
+          {arrayOfitemsVariableHousing.map(item => {
+            return (
+              <Right>
+                <ItemDisplay //Maps through the items showing each one
+                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                  key={item.id}
+                  removeSpending_action={removeSpending_action}
+                  value={item.currentValue.financialValue}
+                  setItemId={setItemId}
+                />
+              </Right>
+            );
+          })}
 
-        <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
-      </Container>
+          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
+        </Container>
+      ) : subCategory === "variableHousingCosts" ? (
+        <Container>
+          {arrayOfitemsFixedHousing.map(item => {
+            return (
+              <Left>
+                <ItemDisplay //Maps through the items showing each one
+                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                  key={item.id}
+                  removeSpending_action={removeSpending_action}
+                  value={item.currentValue.financialValue}
+                  setItemId={setItemId}
+                />
+              </Left>
+            );
+          })}
+
+          {arrayOfitemsVariableHousing.map(item => {
+            return (
+              <Right>
+                <ItemDisplay //Maps through the items showing each one
+                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                  key={item.id}
+                  removeSpending_action={removeSpending_action}
+                  value={item.currentValue.financialValue}
+                  setItemId={setItemId}
+                />
+              </Right>
+            );
+          })}
+
+          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
+        </Container>
+      ) : subCategory === "fixedTransportationCosts" ? (
+        <Container>
+          {arrayOfitemsFixedTransportation.map(item => {
+            return (
+              <Left>
+                <ItemDisplay //Maps through the items showing each one
+                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                  key={item.id}
+                  removeSpending_action={removeSpending_action}
+                  value={item.currentValue.financialValue}
+                  setItemId={setItemId}
+                />
+              </Left>
+            );
+          })}
+
+          {arrayOfitemsVariableTransportation.map(item => {
+            return (
+              <Right>
+                <ItemDisplay //Maps through the items showing each one
+                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                  key={item.id}
+                  removeSpending_action={removeSpending_action}
+                  value={item.currentValue.financialValue}
+                  setItemId={setItemId}
+                />
+              </Right>
+            );
+          })}
+
+          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
+        </Container>
+      ) : null}
     </Wrapper>
   );
 };

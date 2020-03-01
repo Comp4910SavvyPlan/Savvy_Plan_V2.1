@@ -17,6 +17,7 @@ import DualRangeRangeBar from "UI/dualRangeBar/oldDualRangeBar";
 
 const AddForm = ({
   category,
+  reference,
   subCategory,
   user_reducer,
   setAddFormSubCategory,
@@ -29,6 +30,7 @@ const AddForm = ({
 }) => {
   const initialState = individualItem_data(
     category,
+    reference,
     subCategory,
     currentValueLabel,
     ageLabel1,

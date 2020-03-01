@@ -22,7 +22,9 @@ const Spending = () => {
             {}
             <ItemDisplayBox
               category={d.category}
+              reference={d.reference}
               subCategory={d.subCategory}
+              section={d.section}
               setItemId={() => null}
             />
           </DisplayWrapper>
@@ -31,6 +33,7 @@ const Spending = () => {
             {}
             <AddForm
               category={d.category}
+              reference={d.reference}
               subCategory={d.subCategory}
               currentValueLabel={d.currentValueLabel}
               ageLabel1={d.ageLabel1}

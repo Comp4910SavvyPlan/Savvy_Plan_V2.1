@@ -18,6 +18,10 @@ const ControlPanel = ({ setCount, display, spending_reducer }) => {
     ? spending_reducer[category][itemId].subCategory
     : "housingCosts"; //if we have an id we get the subCategory from the reducer, otherwise we set it to housingCosts
 
+  const reference = itemId
+    ? spending_reducer[category][itemId].reference
+    : "housingCosts";
+
   return (
     <Wrapper>
       <Sections>
@@ -25,6 +29,7 @@ const ControlPanel = ({ setCount, display, spending_reducer }) => {
           <EditForm
             itemId={itemId} //Clicking add takes the id of the item being added and sets it in the local state
             category={category}
+            reference={reference}
             subCategory={subCategory}
             setItemId={setItemId}
           />
@@ -41,6 +46,8 @@ const ControlPanel = ({ setCount, display, spending_reducer }) => {
                   <ItemDisplayBox //Displays all the fixed or variables they have added
                     category={d.category}
                     item={d}
+                    reference={d.reference}
+                    section={d.section}
                     subCategory={d.subCategory}
                     setCount={setCount}
                     setItemId={setItemId}
