@@ -1,33 +1,66 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styled from "styled-components"
 import {connect} from "react-redux"
-import CreditScoreTile from "pages/dashboard/components/CreditScoreTile"
+import SpendingTile from "pages/dashboard/components/SpendingTile"
 import NetWorthTile from "./components/NetWorthTile"
 import SavingsPlanTile from "./components/SavingsPlanTile"
 import LifetimeIncomeTile from "./components/LifetimeIncomeTile"
 import TaxTile from "./components/TaxTile"
 import HomePurchaseTile from "./components/HomePurchaseTile"
-import VerticalTimeline from "charts/assumptions/VerticalTimeline"
+import ContributionPlanTile from "./components/ContributionPlanTile"
+import Wizard from "./components/Wizard"
+import {setProgress_action} from "redux/progress/progress_actions"
 
-const Dashboard = () =>  {
+const Dashboard = ({progress_reducer, setProgress_action}) =>  {
+    const [count, setCount] = useState(progress_reducer.dashboard)
+console.log(progress_reducer.dashboard);
+    const setCountAndProgress = (section, number) => {
+        setProgress_action(section, number)
+        setCount(number)
+    }
+
+    console.log(count);
         return (
             <Page>
-                   <NetWorthTile/>
-                   <LifetimeIncomeTile/>
-                   <TaxTile/>
-                   <SavingsPlanTile/>
-                   <ChartWrapper>
-                        <VerticalTimeline />
-                   </ChartWrapper>
+                 {
+                  count < 7 ?  <Blackout/> : null
+                }
+              
+                <Wizard 
+                    count={count}
+                    setCountAndProgress={setCountAndProgress}
+                    progress_reducer={progress_reducer}
+                    />
+                   <NetWorthTile 
+                        progress_reducer={progress_reducer}
+                        onClick = {() => count === 2 ? setCountAndProgress(count + 1) : null}
+                        />
+                   <LifetimeIncomeTile
+                        progress_reducer={progress_reducer}
+                        onClick = {() => count === 2 ? setCountAndProgress(count + 1) : null}
+                   />
+                   <TaxTile
+                     progress_reducer={progress_reducer}
+                     onClick = {() => count === 2 ? setCountAndProgress(count + 1) : null}
+                   />
+                   <HomePurchaseTile/>
+                   <SpendingTile
+                     progress_reducer={progress_reducer}
+                   />
+                   <SavingsPlanTile
+                       progress_reducer={progress_reducer}
+                       onClick = {() => count === 2 ? setCountAndProgress(count + 1) : null}
+                   />
+                   <ContributionPlanTile/>
             </Page>
         )
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state) => ({
+    progress_reducer: state. progress_reducer
+})
 
-}
-
-export default connect(mapStateToProps)(Dashboard)
+export default connect(mapStateToProps, {setProgress_action})(Dashboard)
 
 //-----------------style--------------------------------------------------//
 
@@ -39,16 +72,16 @@ const Page = styled.div`
    grid-template-columns: repeat(24, 1fr);
    grid-template-rows: repeat(16, minmax(3rem, 4rem)) ;
    grid-template-areas:
-   "a a a a a a b b b b b b c c c c c c h h h h h"
-   "a a a a a a b b b b b b c c c c c c h h h h h"
-   "a a a a a a b b b b b b c c c c c c h h h h h"
-   "a a a a a a b b b b b b c c c c c c h h h h h"
-   "e e e e e e e e e e e e e e e e e e h h h h h"
-   "e e e e e e e e e e e e e e e e e e h h h h h"
-   "e e e e e e e e e e e e e e e e e e h h h h h"
-   "e e e e e e e e e e e e e e e e e e h h h h h"
-   "e e e e e e e e e e e e e e e e e e h h h h h"
-   "e e e e e e e e e e e e e e e e e e h h h h h"
+   "a a a a a a b b b b b b b b b b b b c c c c c"
+   "a a a a a a b b b b b b b b b b b b c c c c c"
+   "a a a a a a b b b b b b b b b b b b d d d d d"
+   "a a a a a a b b b b b b b b b b b b d d d d d"
+   "e e e e e e e e e e e e e e e e e e e e e e e"
+   "e e e e e e e e e e e e e e e e e e e e e e e"
+   "e e e e e e e e e e e e e e e e e e e e e e e"
+   "e e e e e e e e e e e e e e e e e e e e e e e"
+   "e e e e e e e e e e e e e e e e e e e e e e e"
+   "e e e e e e e e e e e e e e e e e e e e e e e"
    "g g g g g g g g g g g g g g g g g g h h h h h"
    "g g g g g g g g g g g g g g g g g g h h h h h"
    "g g g g g g g g g g g g g g g g g g h h h h h"
@@ -65,6 +98,16 @@ const ChartWrapper = styled.div`
     display: flex;
     grid-area: h;
 `
+const Blackout = styled.div`
+    background: black;
+    opacity: .5;
+    position: absolute;
+    top: -44rem;
+    left: -30rem;
+    height: 300rem;
+    width: 200rem;
+    z-index: 500;
+    `
 
 //This is the grid container that positions each of the tiles in the dashboard.
 

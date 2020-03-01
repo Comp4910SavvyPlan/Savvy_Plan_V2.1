@@ -1,136 +1,72 @@
 import React, { Component } from 'react'
 import styled from "styled-components"
-//import calculateMarginalTaxRate from "services/taxCalculationServices/taxCalculator"
-import Tooltip from "UI/toolTip/Tooltip"
-export default class HeaderValues extends Component {
+import {connect} from "react-redux"
+import {cpp_selector, oas_selector} from "redux/income/income_selectors"
 
-//GRAB MOUSE COORDINATES FOR TOOLTIP
-    state = { 
-              x: 0,                                                                                                              //These coordinates are set onMouseMove placing the tootip beside the mouse
-              y: 0,                                                                                                              //They are passed as props to the Tooltip componnent 
-            }
-   handleMouseMove(e) {
-                this.setState({ x: e.clientX -120, y: e.clientY -140 })                                                          //Sets the state according to mouse position
-              }                                                                                                                  //They are passed as props to the Tooltip componnent                                                                                             //They are passed as props to the Tooltip componnent 
+const Header = ({cpp_selector, oas_selector}) => {
 
-    render() {
 
-//DESTRUCTURE REDUCERS TO ASSIGN VARIABLES
-        const {
-             cppIncome : {financialValue: cppIncome },                                                                          //Grabs and assigns variable names from reducer
-             oasIncome : {financialValue: oasIncome },
-             rrsp: {financialValue: rrsp },
-             tfsa: {financialValue: tfsa },
-             nonRegistered: {financialValue: nonRegistered },
-        } = this.props.income_reducer[75]            
+    const cppIncome = cpp_selector.income.financialValue
+    const oasIncome = oas_selector.income.financialValue
+    const rrsp = 22000
+    const tfsa = 22000
 
 
 
 return (
-            <HeaderValuesWrapper onMouseMove={(e) => this.handleMouseMove(e)}>
-            <Left >
-                                                                                                                 {/* Displays the total shortfall, the value determines the color of the number negative for red or  positive for lightGrey */}
+            <Wrapper>
+            <Left >                                                                                         {/* Displays the total shortfall, the value determines the color of the number negative for red or  positive for lightGrey */}
                 <h1>
                     Lifetime Income Chart
                 </h1>
             </Left>
             <Right>
             <h2>Optimized Retirement Income Plan</h2>
-            <PensionIncomeWrapper onMouseMove={(e) => this.handleMouseMove(e) }>
-                    <CPPSummary>
+            <Container >
+                    <Summary>
                     {`${(cppIncome)/1000}k`}  
                         <h4>CPP</h4>
                         <Circle color={"#F29278"}/>
-                        <Tooltip 
-                            x={this.state.x} 
-                            y={this.state.y} 
-                            text="  A monthly, taxable benefit that replaces part of your income when you retire. 
-                                    If you qualify, you’ll receive the CPP retirement pension for the rest of your life. 
-                                    To qualify you must:
-                                    be at least 60 years old
-                                    have made at least one valid contribution to the CPP"
-                            header= "Canada Pension Plan"
-                            className="cppTooltip"
-                        />
-                    </CPPSummary>
-                    <OASSummary >
+                    </Summary>
+                    <Summary >
                     {`${(oasIncome)/1000}k`}
                         <h4 >OAS</h4>
                         <Circle color={"#7DA8B8"}/>
-                        <Tooltip 
-                        x={this.state.x} 
-                        y={this.state.y} 
-                        text=   " The OAS pension is a monthly payment available to seniors aged 65 and older who 
-                                  meet the Canadian legal status and residence requirements. It is not based on 
-                                  contributions, every Canadian is elgible."
-                        header= "Old Age Security"
-                        className="oasTooltip"
-                         />
-                    </OASSummary>
+                    </Summary>
                     <Vr/>
-                    <RRIFSummary>
+                    <Summary>
                     {`${(rrsp)/1000}k`}
                     <h4 >RRSP</h4>
                          <Circle color={"#B0CFE3"}/>
-                        <Tooltip 
-                        x={this.state.x} 
-                        y={this.state.y} 
-                        text=   "A Registered Retirement Income Fund (rrsp) is an account registered with the government that 
-                                 pays you income in retirement. Before, you were putting money into your RRSP to accumulate
-                                 savings for retirement. Now, you withdraw that money from your rrsp as retirement income."
-                        header= "Registered Retirement Income Fund"
-                        className="rrifTooltip"
-                    />
-                    </RRIFSummary>
-                    <NRegSummary>
+                    </Summary>
+                    <Summary>
                     {`${tfsa/1000}k`}
                     <h4>TFSA</h4>
                          <Circle color={"#81CCAF"}/>
-                    <Tooltip 
-                    x={this.state.x} 
-                    y={this.state.y} 
-                    text="      Marginal tax is the amount of tax paid on an additional dollar of income. As income rises, so does the tax rate. 
-                                If retirement, if you earn over $78,000 you're Old Age Security will be clawed back
-                                at a rate of 15% on every additional dollar earned. "
-                    header= "Canada Pension Plan"
-                    className="taxTooltip"
-                />
-                    </NRegSummary>
-                    {
-                        nonRegistered > 1000 ? 
-                        <NRegSummary>
-                        {`${nonRegistered/1000}k`}
-                        <h4>N-Reg</h4>
-                             <Circle color={"#B9B0A2"}/>
-                        <Tooltip 
-                        x={this.state.x} 
-                        y={this.state.y} 
-                        text="      Marginal tax is the amount of tax paid on an additional dollar of income. As income rises, so does the tax rate. 
-                                    If retirement, if you earn over $78,000 you're Old Age Security will be clawed back
-                                    at a rate of 15% on every additional dollar earned. "
-                        header= "Canada Pension Plan"
-                        className="taxTooltip"
-                    />
-                      </NRegSummary>
-                    : null
-                    }
-
-            </PensionIncomeWrapper>
+                    </Summary>
+            </Container>
             <Summary>
-             {`${(cppIncome + oasIncome + rrsp + tfsa + nonRegistered)/1000}k`}
+             {`${(cppIncome + oasIncome + rrsp + tfsa)/1000}k`}
             <h4>Total</h4>
             </Summary>
             </Right>
             
-            </HeaderValuesWrapper>
+            </Wrapper>
         )
-    }
+
 }
+
+const mapStateToProps = (state) => ({
+    cpp_selector: cpp_selector(state),
+    oas_selector: oas_selector(state),
+})
+
+export default connect(mapStateToProps, {})(Header )
 
 //-----------------------------------------------style-----------------------------------------------//
 
 
-const HeaderValuesWrapper = styled.div`
+const Wrapper = styled.div`
     grid-area: a;                                                                                             {/*Grid-area set in Income, "a" positions it at the top */}
     height: 100%;
     width: 100%;
@@ -159,30 +95,6 @@ const Summary = styled.div`
 
   
 `
-const CPPSummary = styled(Summary)`
-    &:hover .cppTooltip {
-        opacity: 1;
-        visibility: visible;
-    }
-`
-const OASSummary = styled(Summary)`
-    &:hover .oasTooltip {
-        opacity: 1;
-        visibility: visible;
-    }
-`
-const RRIFSummary = styled(Summary)`
-    &:hover .rrifTooltip {
-        opacity: 1;
-        visibility: visible;
-    }
-`
-const NRegSummary = styled(Summary)`
-    &:hover .taxTooltip {
-        opacity: 1;
-        visibility: visible;
-    }
-`
 
 const Vr = styled.div`
     height: 60%;
@@ -195,6 +107,7 @@ const Vr = styled.div`
 
 const Right = styled.div`
     width: 45%;
+    margin-top: -4rem;
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -211,7 +124,7 @@ const Circle = styled.div`
 `
 
 
-const PensionIncomeWrapper = styled.div`
+const Container = styled.div`
     display: flex;
     width: 60%;
     border-bottom: ${props => props.theme.border.primary};
