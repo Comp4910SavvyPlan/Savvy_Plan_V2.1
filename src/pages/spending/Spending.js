@@ -11,7 +11,7 @@ import AddForm from "pages/spending/components/AddForm";
 import ItemDisplayBox from "pages/spending/components/ItemDisplayBox";
 
 const Spending = () => {
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState(0);
 
   const renderAddForm = data => {
     return data.map(d =>
@@ -67,7 +67,10 @@ const Spending = () => {
           backward
           onClick={() => setCount(count > 0 ? count - 1 : 0)}
         />
-        <ButtonLight forward onClick={() => setCount(count + 1)} />
+        <ButtonLight
+          forward
+          onClick={() => setCount(count < 9 ? count + 1 : 9)}
+        />
       </Buttons>
     </Page>
   );
