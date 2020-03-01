@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { connect } from "react-redux";
+import {connect} from "react-redux"
+import ButtonLight from "UI/buttons/ButtonLight";
+import _ from "lodash"
 import { removeSpending_action } from "redux/spending/spending_actions";
 import EditForm from "pages/netWorth/components/EditForm";
 import ItemDisplayBox from "pages/spending/components/ItemDisplayBox";
@@ -8,29 +10,28 @@ import AddForm from "pages/spending/components/AddForm";
 import { spendingWizard_data } from "pages/spending/data/spending_data";
 
 const ControlPanel = ({ setCount, display, spending_reducer }) => {
-  const [itemId, setItemId] = useState(); //If the user wants to change something this sets the id of the item they want to change
 
-  const [addFormSubCategory, setAddFormSubCategory] = useState(); //If wants to add something this sets the category of the item theyd like to add
+  const [itemId, setItemId] = useState();                                         //If the user wants to change something this sets the id of the item they want to change
+
+  const [addFormSubCategory, setAddFormSubCategory] = useState();                 //If wants to add something this sets the category of the item theyd like to add
 
   const addFormDetails = spendingWizard_data.find(
     d => d.subCategory === addFormSubCategory
-  ); //Provides the add form with the details to render
+  );                                                                              //Provides the add form with the details to render
 
-  const category = display; //Display is either fixed or variable and is used to show either of those
+  const category = display;                                                       //Display is either fixed or variable and is used to show either of those
   const subCategory = itemId
     ? spending_reducer[category][itemId].subCategory
-    : "housingCosts"; //if we have an id we get the subCategory from the reducer, otherwise we set it to housingCosts
+    : "housingCosts";                                                             //if we have an id we get the subCategory from the reducer, otherwise we set it to housingCosts
 
-  const reference = itemId
-    ? spending_reducer[category][itemId].reference
-    : "housingCosts";
+  const [subCount, setSubCount] = useState(0);
 
   return (
     <Wrapper>
       <Sections>
         {itemId ? (
           <EditForm
-            itemId={itemId} //Clicking add takes the id of the item being added and sets it in the local state
+            itemId={itemId}                                                      //Clicking add takes the id of the item being added and sets it in the local state
             category={category}
             reference={reference}
             subCategory={subCategory}
@@ -48,27 +49,52 @@ const ControlPanel = ({ setCount, display, spending_reducer }) => {
           />
         ) : (
           <>
-            {spendingWizard_data.map(
-              //if neither add or edit forms are clicked then it renders out the item display
-              d =>
-                d.category === display ? (
+            {
+              spendingWizard_data.map(
+                                                                                  //if neither add or edit forms are clicked then it renders out the item display
+              d => (
+              d.category === display ?
+              (
+                                                                                  //only display first 3 out of 4 subcategories
+                (((d.subCategory === 'housingCosts') || (d.subCategory === 'transportationCosts') || (d.subCategory === 'lifestyleCosts')) && (subCount === 0)) ?
                   <Section key={d.subCategory}>
-                    <ItemDisplayBox //Displays all the fixed or variables they have added
+                    <ItemDisplayBox                                               //Displays all the fixed or variables they have added
                       category={d.category}
                       item={d}
-                      reference={d.reference}
-                      section={d.section}
                       subCategory={d.subCategory}
                       setCount={setCount}
                       setItemId={setItemId}
                       setAddFormSubCategory={setAddFormSubCategory}
-                    />
+                      />
                   </Section>
-                ) : null
-            )}
+                :
+                                                                                  //only display last 3 out of 4 subcategories
+                (((d.subCategory === 'transportationCosts') || (d.subCategory === 'lifestyleCosts') || (d.subCategory === 'largeEventsCosts')) && (subCount === 1)) ?
+                  <Section key={d.subCategory}>
+                    <ItemDisplayBox                                               //Displays all the fixed or variables they have added
+                      category={d.category}
+                      item={d}
+                      subCategory={d.subCategory}
+                      setCount={setCount}
+                      setItemId={setItemId}
+                      setAddFormSubCategory={setAddFormSubCategory}
+                      />
+                  </Section>
+
+                  : null
+              )
+               : null
+            ))
+          }
           </>
         )}
       </Sections>
+      <Buttons>
+        {" "}
+        <ButtonLight backward onClick={() => setSubCount(subCount === 1 ? subCount - 1 : 0)} />
+        <ButtonLight forward onClick={() => setSubCount(subCount === 0 ? subCount + 1 : 1)} />
+        {console.log(subCount)}
+      </Buttons>
     </Wrapper>
   );
 };
@@ -99,4 +125,14 @@ const Sections = styled.div`
 const Section = styled.div`
   width: 30%;
   margin: 1rem;
+`;
+
+const Buttons = styled.div`
+  position: absolute;
+  width: 20rem;
+  top: 65rem;
+  left: 50rem;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
 `;

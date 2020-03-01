@@ -6,12 +6,14 @@ import chart from "assets/images/spending_chart.png";
 import circle_chart from "assets/images/spending_chart_circle.png";
 
 const Main = () => {
-  const [monthly, toggleMonthly] = useState(true);
   const [display, setDisplay] = useState("fixed")
 
   return (
     <>
-      <Header monthly={monthly} toggleMonthly={toggleMonthly} />
+      <Header
+        display={display}
+        setDisplay={setDisplay}
+      />
       <ChartWrapper>
         <CircleChartPlaceHolder>
           <img src={circle_chart} />
@@ -21,7 +23,7 @@ const Main = () => {
         </ChartPlaceHolder>
       </ChartWrapper>
       <ControlPanel
-      display={display}
+        display={display}
       />
     </>
   );
