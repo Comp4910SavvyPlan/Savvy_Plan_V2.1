@@ -40,8 +40,7 @@ const ItemDisplayBox = ({
 }) => {
   //Box wrapping the items being added
 
-  var prev = Object.values(spending_reducer["fixed"]);
-  var next = Object.values(spending_reducer["variable"]);
+  //arrays
 
   const arrayOfitemsFixedHousing = Object.values(
     spending_reducer["fixed"]
@@ -59,20 +58,23 @@ const ItemDisplayBox = ({
     spending_reducer["variable"]
   ).filter(d => d.subCategory === "variableTransportationCosts"); //Pulls out all the items added and turns them into an array
 
-  //const arrayOfitemsPrev = prev
-  //  .values(spending_reducer["fixed"])
-  //  .filter(d => d.subCategory === subCategory); //Pulls out all the items added and turns them into an array
+  const arrayOfitemsFixedLifestyle = Object.values(
+    spending_reducer["fixed"]
+  ).filter(d => d.subCategory === "fixedLifestyleCosts"); //Pulls out all the items added and turns them into an array
 
-  //const arrayOfitemsNext = next
-  //  .values(spending_reducer["fixed"])
-  //  .filter(d => d.subCategory === subCategory); //Pulls out all the items added and turns them into an array
+  const arrayOfitemsVariableLifestyle = Object.values(
+    spending_reducer["variable"]
+  ).filter(d => d.subCategory === "variableLifestyleCosts"); //Pulls out all the items added and turns them into an array
 
-  const totalValueVariableHousing =
-    arrayOfitemsVariableHousing.length > 0
-      ? arrayOfitemsVariableHousing
-          .map(d => d.currentValue.financialValue)
-          .reduce((acc, num) => acc + num)
-      : 0; //Sums the value of the category
+  const arrayOfitemsFixedLargeEvents = Object.values(
+    spending_reducer["fixed"]
+  ).filter(d => d.subCategory === "fixedLargeEventsCosts"); //Pulls out all the items added and turns them into an array
+
+  const arrayOfitemsVariableLargeEvents = Object.values(
+    spending_reducer["variable"]
+  ).filter(d => d.subCategory === "variableLargeEventsCosts"); //Pulls out all the items added and turns them into an array
+
+  //total values
 
   const totalValueFixedHousing =
     arrayOfitemsFixedHousing.length > 0
@@ -81,16 +83,51 @@ const ItemDisplayBox = ({
           .reduce((acc, num) => acc + num)
       : 0; //Sums the value of the category
 
-  const totalValueX =
+  const totalValueVariableHousing =
+    arrayOfitemsVariableHousing.length > 0
+      ? arrayOfitemsVariableHousing
+          .map(d => d.currentValue.financialValue)
+          .reduce((acc, num) => acc + num)
+      : 0; //Sums the value of the category
+
+  const totalValueFixedTransportation =
     arrayOfitemsFixedTransportation.length > 0
       ? arrayOfitemsFixedTransportation
           .map(d => d.currentValue.financialValue)
           .reduce((acc, num) => acc + num)
       : 0; //Sums the value of the category
 
-  const totalValueY =
+  const totalValueVariableTransportation =
     arrayOfitemsVariableTransportation.length > 0
       ? arrayOfitemsVariableTransportation
+          .map(d => d.currentValue.financialValue)
+          .reduce((acc, num) => acc + num)
+      : 0; //Sums the value of the category
+
+  const totalValueFixedLifestyle =
+    arrayOfitemsFixedLifestyle.length > 0
+      ? arrayOfitemsFixedLifestyle
+          .map(d => d.currentValue.financialValue)
+          .reduce((acc, num) => acc + num)
+      : 0; //Sums the value of the category
+
+  const totalValueVariableLifestyle =
+    arrayOfitemsVariableLifestyle.length > 0
+      ? arrayOfitemsVariableLifestyle
+          .map(d => d.currentValue.financialValue)
+          .reduce((acc, num) => acc + num)
+      : 0; //Sums the value of the category
+
+  const totalValueFixedLargeEvents =
+    arrayOfitemsFixedLargeEvents.length > 0
+      ? arrayOfitemsFixedLargeEvents
+          .map(d => d.currentValue.financialValue)
+          .reduce((acc, num) => acc + num)
+      : 0; //Sums the value of the category
+
+  const totalValueVariableLargeEvents =
+    arrayOfitemsVariableLargeEvents.length > 0
+      ? arrayOfitemsVariableLargeEvents
           .map(d => d.currentValue.financialValue)
           .reduce((acc, num) => acc + num)
       : 0; //Sums the value of the category
@@ -120,8 +157,53 @@ const ItemDisplayBox = ({
           {" "}
           {/*The header passes subCategory to Styled-components so the color can change*/}
           <h2>{_.startCase(subCategory)}</h2>
-          <h2>{"Fixed: " + totalValueX / 1000}k</h2>
-          <h2>{"Variable: " + totalValueY / 1000}</h2>
+          <h2>{"Fixed: " + totalValueFixedTransportation / 1000}k</h2>
+          <h2>{"Variable: " + totalValueVariableTransportation / 1000}</h2>
+          {/*Shows the total value for that subCategory */}
+        </Header>
+      ) : subCategory === "variableTransportationCosts" ? (
+        <Header subCategory={subCategory}>
+          {" "}
+          {/*The header passes subCategory to Styled-components so the color can change*/}
+          <h2>{_.startCase(subCategory)}</h2>
+          <h2>{"Fixed: " + totalValueFixedTransportation / 1000}k</h2>
+          <h2>{"Variable: " + totalValueVariableTransportation / 1000}</h2>
+          {/*Shows the total value for that subCategory */}
+        </Header>
+      ) : subCategory === "fixedLifestyleCosts" ? (
+        <Header subCategory={subCategory}>
+          {" "}
+          {/*The header passes subCategory to Styled-components so the color can change*/}
+          <h2>{_.startCase(subCategory)}</h2>
+          <h2>{"Fixed: " + totalValueFixedLifestyle / 1000}k</h2>
+          <h2>{"Variable: " + totalValueVariableLifestyle / 1000}</h2>
+          {/*Shows the total value for that subCategory */}
+        </Header>
+      ) : subCategory === "variableLifestyleCosts" ? (
+        <Header subCategory={subCategory}>
+          {" "}
+          {/*The header passes subCategory to Styled-components so the color can change*/}
+          <h2>{_.startCase(subCategory)}</h2>
+          <h2>{"Fixed: " + totalValueFixedLifestyle / 1000}k</h2>
+          <h2>{"Variable: " + totalValueVariableLifestyle / 1000}</h2>
+          {/*Shows the total value for that subCategory */}
+        </Header>
+      ) : subCategory === "fixedLargeEventsCosts" ? (
+        <Header subCategory={subCategory}>
+          {" "}
+          {/*The header passes subCategory to Styled-components so the color can change*/}
+          <h2>{_.startCase(subCategory)}</h2>
+          <h2>{"Fixed: " + totalValueFixedLargeEvents / 1000}k</h2>
+          <h2>{"Variable: " + totalValueVariableLargeEvents / 1000}</h2>
+          {/*Shows the total value for that subCategory */}
+        </Header>
+      ) : subCategory === "variableLargeEventsCosts" ? (
+        <Header subCategory={subCategory}>
+          {" "}
+          {/*The header passes subCategory to Styled-components so the color can change*/}
+          <h2>{_.startCase(subCategory)}</h2>
+          <h2>{"Fixed: " + totalValueFixedLargeEvents / 1000}k</h2>
+          <h2>{"Variable: " + totalValueVariableLargeEvents / 1000}</h2>
           {/*Shows the total value for that subCategory */}
         </Header>
       ) : null}
@@ -207,6 +289,166 @@ const ItemDisplayBox = ({
           })}
 
           {arrayOfitemsVariableTransportation.map(item => {
+            return (
+              <Right>
+                <ItemDisplay //Maps through the items showing each one
+                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                  key={item.id}
+                  removeSpending_action={removeSpending_action}
+                  value={item.currentValue.financialValue}
+                  setItemId={setItemId}
+                />
+              </Right>
+            );
+          })}
+
+          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
+        </Container>
+      ) : subCategory === "variableTransportationCosts" ? (
+        <Container>
+          {arrayOfitemsFixedTransportation.map(item => {
+            return (
+              <Left>
+                <ItemDisplay //Maps through the items showing each one
+                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                  key={item.id}
+                  removeSpending_action={removeSpending_action}
+                  value={item.currentValue.financialValue}
+                  setItemId={setItemId}
+                />
+              </Left>
+            );
+          })}
+
+          {arrayOfitemsVariableTransportation.map(item => {
+            return (
+              <Right>
+                <ItemDisplay //Maps through the items showing each one
+                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                  key={item.id}
+                  removeSpending_action={removeSpending_action}
+                  value={item.currentValue.financialValue}
+                  setItemId={setItemId}
+                />
+              </Right>
+            );
+          })}
+
+          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
+        </Container>
+      ) : subCategory === "fixedLifestyleCosts" ? (
+        <Container>
+          {arrayOfitemsFixedLifestyle.map(item => {
+            return (
+              <Left>
+                <ItemDisplay //Maps through the items showing each one
+                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                  key={item.id}
+                  removeSpending_action={removeSpending_action}
+                  value={item.currentValue.financialValue}
+                  setItemId={setItemId}
+                />
+              </Left>
+            );
+          })}
+
+          {arrayOfitemsVariableLifestyle.map(item => {
+            return (
+              <Right>
+                <ItemDisplay //Maps through the items showing each one
+                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                  key={item.id}
+                  removeSpending_action={removeSpending_action}
+                  value={item.currentValue.financialValue}
+                  setItemId={setItemId}
+                />
+              </Right>
+            );
+          })}
+
+          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
+        </Container>
+      ) : subCategory === "variableLifestyleCosts" ? (
+        <Container>
+          {arrayOfitemsFixedLifestyle.map(item => {
+            return (
+              <Left>
+                <ItemDisplay //Maps through the items showing each one
+                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                  key={item.id}
+                  removeSpending_action={removeSpending_action}
+                  value={item.currentValue.financialValue}
+                  setItemId={setItemId}
+                />
+              </Left>
+            );
+          })}
+
+          {arrayOfitemsVariableLifestyle.map(item => {
+            return (
+              <Right>
+                <ItemDisplay //Maps through the items showing each one
+                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                  key={item.id}
+                  removeSpending_action={removeSpending_action}
+                  value={item.currentValue.financialValue}
+                  setItemId={setItemId}
+                />
+              </Right>
+            );
+          })}
+
+          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
+        </Container>
+      ) : subCategory === "fixedLargeEventsCosts" ? (
+        <Container>
+          {arrayOfitemsFixedLargeEvents.map(item => {
+            return (
+              <Left>
+                <ItemDisplay //Maps through the items showing each one
+                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                  key={item.id}
+                  removeSpending_action={removeSpending_action}
+                  value={item.currentValue.financialValue}
+                  setItemId={setItemId}
+                />
+              </Left>
+            );
+          })}
+
+          {arrayOfitemsVariableLargeEvents.map(item => {
+            return (
+              <Right>
+                <ItemDisplay //Maps through the items showing each one
+                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                  key={item.id}
+                  removeSpending_action={removeSpending_action}
+                  value={item.currentValue.financialValue}
+                  setItemId={setItemId}
+                />
+              </Right>
+            );
+          })}
+
+          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
+        </Container>
+      ) : subCategory === "variableLargeEventsCosts" ? (
+        <Container>
+          {arrayOfitemsFixedLargeEvents.map(item => {
+            return (
+              <Left>
+                <ItemDisplay //Maps through the items showing each one
+                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                  key={item.id}
+                  removeSpending_action={removeSpending_action}
+                  value={item.currentValue.financialValue}
+                  setItemId={setItemId}
+                />
+              </Left>
+            );
+          })}
+
+          {arrayOfitemsVariableLargeEvents.map(item => {
             return (
               <Right>
                 <ItemDisplay //Maps through the items showing each one
