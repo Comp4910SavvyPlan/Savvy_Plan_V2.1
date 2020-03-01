@@ -46,12 +46,14 @@ const EditForm = ({category, subCategory, setItemId, itemId, spending_reducer, s
                         subCategory === "housingCosts" || subCategory === "transportationCosts" || subCategory === "lifestyleCosts" || subCategory === "largeEventsCosts" ?
 
                         <RangeBar
-                            setValue=50
+                            rangeBarProps={item.currentValue}
+                            setValue={50}
                         /> : null
                     }
 
                 <RangeBar
-                        setValue=60
+                        rangeBarProps={item.currentValue}
+                        setValue={60}
                     />
 
                 </Center>
@@ -62,20 +64,23 @@ const EditForm = ({category, subCategory, setItemId, itemId, spending_reducer, s
                           //if category is variable
                             category === "variable" ?
                             <MiniRangeBar
-                            setValue=10
+                            rangeBarProps={item.currentValue}
+                            setValue={10}
                         />
                         :
 
                         //if category is fixed
                         subCategory === "housingCosts"  ?
                             <MiniRangeBar
-                            setValue=20
+                            rangeBarProps={item.currentValue}
+                            setValue={20}
                          />
                          :
                          subCategory === "transportationCosts"  ?
                             <MiniRangeBar
-                            setValue=30
-                      />
+                            rangeBarProps={item.currentValue}
+                            setValue={30}
+                         />
 
 
                        : null
