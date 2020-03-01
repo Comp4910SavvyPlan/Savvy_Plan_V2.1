@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import {connect} from "react-redux"
-import _ from "lodash"
+import { connect } from "react-redux";
 import { removeSpending_action } from "redux/spending/spending_actions";
+import EditForm from "pages/netWorth/components/EditForm";
 import ItemDisplayBox from "pages/spending/components/ItemDisplayBox";
-import EditForm from "pages/spending/components/EditForm";
-import AddForm from "pages/spending/components/AddForm"
+import AddForm from "pages/spending/components/AddForm";
 import { spendingWizard_data } from "pages/spending/data/spending_data";
 
 const ControlPanel = ({ setCount, display, spending_reducer }) => {
-
   const [itemId, setItemId] = useState(); //If the user wants to change something this sets the id of the item they want to change
 
   const [addFormSubCategory, setAddFormSubCategory] = useState(); //If wants to add something this sets the category of the item theyd like to add
@@ -30,8 +28,7 @@ const ControlPanel = ({ setCount, display, spending_reducer }) => {
   return (
     <Wrapper>
       <Sections>
-        {
-          itemId ?
+        {itemId ? (
           <EditForm
             itemId={itemId} //Clicking add takes the id of the item being added and sets it in the local state
             category={category}
@@ -39,8 +36,7 @@ const ControlPanel = ({ setCount, display, spending_reducer }) => {
             subCategory={subCategory}
             setItemId={setItemId}
           />
-         :
-          addFormSubCategory ?
+        ) : addFormSubCategory ? (
           <AddForm
             category={addFormDetails.category}
             subCategory={addFormDetails.subCategory}
@@ -50,40 +46,40 @@ const ControlPanel = ({ setCount, display, spending_reducer }) => {
             durationTypeArray={addFormDetails.durationTypeArray}
             setAddFormSubCategory={setAddFormSubCategory}
           />
-          :
+        ) : (
           <>
-            {
-              spendingWizard_data.map(
-                //if neither add or edit forms are clicked then it renders out the item display
-              d => (
-              d.category === display ?
-                <Section key={d.subCategory}>
-                  <ItemDisplayBox //Displays all the fixed or variables they have added
-                    category={d.category}
-                    item={d}
-                    reference={d.reference}
-                    section={d.section}
-                    subCategory={d.subCategory}
-                    setCount={setCount}
-                    setItemId={setItemId}
-                    setAddFormSubCategory={setAddFormSubCategory}
-                  />
-                </Section>
-               : null
-            ))
-          }
+            {spendingWizard_data.map(
+              //if neither add or edit forms are clicked then it renders out the item display
+              d =>
+                d.category === display ? (
+                  <Section key={d.subCategory}>
+                    <ItemDisplayBox //Displays all the fixed or variables they have added
+                      category={d.category}
+                      item={d}
+                      reference={d.reference}
+                      section={d.section}
+                      subCategory={d.subCategory}
+                      setCount={setCount}
+                      setItemId={setItemId}
+                      setAddFormSubCategory={setAddFormSubCategory}
+                    />
+                  </Section>
+                ) : null
+            )}
           </>
-        }
+        )}
       </Sections>
     </Wrapper>
   );
 };
 
-const mapStateToProps = (state) => ({
-    spending_reducer: state.spending_reducer,
-})
+const mapStateToProps = state => ({
+  spending_reducer: state.spending_reducer
+});
 
-export default connect(mapStateToProps,{removeSpending_action})(ControlPanel);
+export default connect(mapStateToProps, { removeSpending_action })(
+  ControlPanel
+);
 
 //-----------------------------------------------style-----------------------------------------------//
 

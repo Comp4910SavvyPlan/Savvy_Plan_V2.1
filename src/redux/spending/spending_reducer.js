@@ -1,9 +1,9 @@
-import _ from "lodash";
+import _ from "lodash"
 
 const initialState = {
   fixed: {},
   variable: {}
-};
+}
 
 const spending_reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -21,7 +21,7 @@ const spending_reducer = (state = initialState, action) => {
             }
           }
         }
-      };
+      }
     case "spending_reducer/CHANGE_LABEL":
       return {
         ...state,
@@ -32,13 +32,13 @@ const spending_reducer = (state = initialState, action) => {
             label: action.label
           }
         }
-      };
+      }
 
     case "spending_reducer/REMOVE_ITEM":
       return {
         ...state,
         [action.category]: _.omit(state[action.category], action.id)
-      };
+      }
 
     case "spending_reducer/ADD_ITEM": {
       return {
@@ -47,15 +47,15 @@ const spending_reducer = (state = initialState, action) => {
           ...state[action.payload.category],
           [action.payload.id]: action.payload
         }
-      };
+      }
     }
 
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default spending_reducer;
+export default spending_reducer
 
 //-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_FILE DETAILS-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_//
 /*
