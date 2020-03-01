@@ -7,6 +7,7 @@ import circle_chart from "assets/images/spending_chart_circle.png";
 
 const Main = () => {
   const [monthly, toggleMonthly] = useState(true);
+  const [display, setDisplay] = useState("fixed")
 
   return (
     <>
@@ -19,7 +20,9 @@ const Main = () => {
           <img src={chart} />
         </ChartPlaceHolder>
       </ChartWrapper>
-      <ControlPanel />
+      <ControlPanel
+      display={display}
+      />
     </>
   );
 };
