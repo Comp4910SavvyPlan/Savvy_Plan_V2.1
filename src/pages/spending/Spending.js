@@ -11,7 +11,7 @@ import AddForm from "pages/spending/components/AddForm";
 import ItemDisplayBox from "pages/spending/components/ItemDisplayBox";
 
 const Spending = () => {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(5);
 
   const renderAddForm = data => {
     return data.map(d =>
