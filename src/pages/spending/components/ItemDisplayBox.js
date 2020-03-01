@@ -237,10 +237,10 @@ const ItemDisplayBox = ({
               </Right>
             );
           })}
-
-          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
         </Container>
-      ) : subCategory === "variableHousingCosts" ? (
+      ) : null}
+
+      {subCategory === "variableHousingCosts" ? (
         <Container>
           {arrayOfitemsFixedHousing.map(item => {
             return (
@@ -269,8 +269,6 @@ const ItemDisplayBox = ({
               </Right>
             );
           })}
-
-          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
         </Container>
       ) : subCategory === "fixedTransportationCosts" ? (
         <Container>
@@ -301,8 +299,6 @@ const ItemDisplayBox = ({
               </Right>
             );
           })}
-
-          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
         </Container>
       ) : subCategory === "variableTransportationCosts" ? (
         <Container>
@@ -333,8 +329,6 @@ const ItemDisplayBox = ({
               </Right>
             );
           })}
-
-          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
         </Container>
       ) : subCategory === "fixedLifestyleCosts" ? (
         <Container>
@@ -365,8 +359,6 @@ const ItemDisplayBox = ({
               </Right>
             );
           })}
-
-          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
         </Container>
       ) : subCategory === "variableLifestyleCosts" ? (
         <Container>
@@ -397,8 +389,6 @@ const ItemDisplayBox = ({
               </Right>
             );
           })}
-
-          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
         </Container>
       ) : subCategory === "fixedLargeEventsCosts" ? (
         <Container>
@@ -429,8 +419,6 @@ const ItemDisplayBox = ({
               </Right>
             );
           })}
-
-          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
         </Container>
       ) : subCategory === "variableLargeEventsCosts" ? (
         <Container>
@@ -461,8 +449,6 @@ const ItemDisplayBox = ({
               </Right>
             );
           })}
-
-          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
         </Container>
       ) : null}
     </Wrapper>
@@ -573,6 +559,29 @@ const Container = styled.div`
   justify-content: flex-start;
   overflow: scroll;
 `;
+
+const LeftContainer = styled.div`
+  min-height: 10rem;
+  max-height: 50rem;
+  width: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0.5rem;
+  justify-content: flex-start;
+  overflow: scroll;
+`;
+
+const RightContainer = styled.div`
+  min-height: 10rem;
+  max-height: 50rem;
+  width: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0.5rem;
+  justify-content: flex-start;
+  overflow: scroll;
+`;
+
 const H2 = styled.h2`
 font-size: 1.4rem
 font-weight: 700;
@@ -614,7 +623,7 @@ const DarkAdd = styled(Add)`
 `;
 
 const Right = styled.div`
-  margin: 0.5rem 0rem 0.5rem 50rem;
+  margin: 0.5rem 0rem 0.5rem 1rem;
   width: 28rem;
   height: 100%;
   padding: 0rem;

@@ -76,28 +76,7 @@ const AddForm = ({
     addItem_action(id, state); // Sets item in reducer
     console.log(state.registration);
 
-    /*state.subCategory === "investmentAssets"
-      ? renderSavings(
-          userAge - 1,
-          userAge,
-          state.registration,
-          state.currentValue.financialValue,
-          3,
-          "contribute",
-          savings_reducer,
-          65,
-          rate1,
-          rate2,
-          transaction_action,
-          65
-        )
-      : console.log('""');*/
-
-    //renderSavings(fromAge, toAge, name, value, rangeBarValue, "contribute", savings_reducer, rrspStartAge, rate1, rate2, transaction_action, tfsaStartAge)
     setState({ ...initialState });
-
-    //optimizedWithdrawals("tfsa", savings_reducer, setOpitmizedValues_action, .02)
-    //console.log(savings_reducer);
   };
 
   return (
