@@ -1,31 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import SelectorButtonVertical from "UI/buttons/SelectorButtonVertical";
+import {connect} from "react-redux"
 
-const Header = ({ display, setDisplay, monthly, toggleMonthly }) => {
+const Header = ({display, setDisplay}) => {
+  
   return (
     <HeaderWrapper>
       <Title>
         <h1>Spending</h1>
       </Title>
       <CatagorySelection>
-        <SelectorWrapper>
-          <SelectorButtonVertical
-            visible={display === "assets"}
-            onClick={() => setDisplay("liabilities")}
-          />
-        </SelectorWrapper>
-
-        <Catagories>
-          <Catagory display={monthly} onClick={() => toggleMonthly(!monthly)}>
-            <h2>Fixed</h2>
-            <span>22 k</span>
-          </Catagory>
-          <Catagory display={!monthly} onClick={() => toggleMonthly(!monthly)}>
-            <h2>Variable</h2>
-            <span>18 k - 27 k</span>
-          </Catagory>
-        </Catagories>
+          <SelectorWrapper>
+               <SelectorButtonVertical visible={display === "fixed"} onClick={() => setDisplay("variable")}/>
+          </SelectorWrapper>
+          <Catagories>
+              <Catagory display={"fixed"} onClick={() => setDisplay("fixed")}>
+                  <h2>Fixed</h2>
+                  <span>
+                  22k
+                  </span>
+              </Catagory>
+              <Catagory display={"variable"} onClick={() => setDisplay("variable")} style={{color: "#F29278"}}>
+                  <h2>Variable</h2>
+                  <span>
+                  18k - 27k
+                  </span>
+              </Catagory>
+          </Catagories>
       </CatagorySelection>
     </HeaderWrapper>
   );
