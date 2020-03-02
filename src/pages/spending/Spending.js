@@ -22,7 +22,9 @@ const Spending = () => {
             {}
             <ItemDisplayBox
               category={d.category}
+              reference={d.reference}
               subCategory={d.subCategory}
+              section={d.section}
               setItemId={() => null}
             />
           </DisplayWrapper>
@@ -31,9 +33,11 @@ const Spending = () => {
             {}
             <AddForm
               category={d.category}
+              reference={d.reference}
               subCategory={d.subCategory}
               currentValueLabel={d.currentValueLabel}
-              ageLabel={d.ageLabel}
+              ageLabel1={d.ageLabel1}
+              ageLabel2={d.ageLabel2}
               expenseTypeArray={d.expenseTypeArray}
               durationTypeArray={d.durationTypeArray}
               setAddFormSubCategory={() => null}
@@ -49,7 +53,7 @@ const Spending = () => {
     <Page>
       {count === 0 ? (
         <WelcomePage />
-      ) : count < 5 ? (
+      ) : count < 9 ? (
         <>
           {renderAddForm(spendingWizard_data)} {}
         </>
@@ -63,7 +67,10 @@ const Spending = () => {
           backward
           onClick={() => setCount(count > 0 ? count - 1 : 0)}
         />
-        <ButtonLight forward onClick={() => setCount(count + 1)} />
+        <ButtonLight
+          forward
+          onClick={() => setCount(count < 9 ? count + 1 : 9)}
+        />
       </Buttons>
     </Page>
   );

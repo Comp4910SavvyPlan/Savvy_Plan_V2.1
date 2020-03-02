@@ -4,9 +4,9 @@ import {connect} from "react-redux"
 import ButtonLight from "UI/buttons/ButtonLight";
 import _ from "lodash"
 import { removeSpending_action } from "redux/spending/spending_actions";
+import EditForm from "pages/netWorth/components/EditForm";
 import ItemDisplayBox from "pages/spending/components/ItemDisplayBox";
-import EditForm from "pages/spending/components/EditForm";
-import AddForm from "pages/spending/components/AddForm"
+import AddForm from "pages/spending/components/AddForm";
 import { spendingWizard_data } from "pages/spending/data/spending_data";
 
 const ControlPanel = ({ setCount, display, spending_reducer }) => {
@@ -29,16 +29,15 @@ const ControlPanel = ({ setCount, display, spending_reducer }) => {
   return (
     <Wrapper>
       <Sections>
-        {
-          itemId ?
+        {itemId ? (
           <EditForm
             itemId={itemId}                                                      //Clicking add takes the id of the item being added and sets it in the local state
             category={category}
+            reference={reference}
             subCategory={subCategory}
             setItemId={setItemId}
           />
-         :
-          addFormSubCategory ?
+        ) : addFormSubCategory ? (
           <AddForm
             category={addFormDetails.category}
             subCategory={addFormDetails.subCategory}
@@ -48,7 +47,7 @@ const ControlPanel = ({ setCount, display, spending_reducer }) => {
             durationTypeArray={addFormDetails.durationTypeArray}
             setAddFormSubCategory={setAddFormSubCategory}
           />
-          :
+        ) : (
           <>
             {
               spendingWizard_data.map(
@@ -88,7 +87,7 @@ const ControlPanel = ({ setCount, display, spending_reducer }) => {
             ))
           }
           </>
-        }
+        )}
       </Sections>
       <Buttons>
         {" "}
@@ -100,11 +99,13 @@ const ControlPanel = ({ setCount, display, spending_reducer }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-    spending_reducer: state.spending_reducer,
-})
+const mapStateToProps = state => ({
+  spending_reducer: state.spending_reducer
+});
 
-export default connect(mapStateToProps,{removeSpending_action})(ControlPanel);
+export default connect(mapStateToProps, { removeSpending_action })(
+  ControlPanel
+);
 
 //-----------------------------------------------style-----------------------------------------------//
 
