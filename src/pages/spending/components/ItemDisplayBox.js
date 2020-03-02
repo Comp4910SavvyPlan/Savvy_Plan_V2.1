@@ -494,7 +494,7 @@ const Header = styled.div`
                                               "variableLargeEventsCosts"
                                                 ? props.theme.color.salmon
                                                 : null};
-  height: 4rem;
+  height: 6rem;
   color: ${props => props.theme.color.ice};
   border-bottom: ${props => props.theme.border.primary};
   display: flex;
