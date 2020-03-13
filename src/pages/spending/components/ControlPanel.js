@@ -4,7 +4,7 @@ import {connect} from "react-redux"
 import ButtonLight from "UI/buttons/ButtonLight";
 import _ from "lodash"
 import { removeSpending_action } from "redux/spending/spending_actions";
-import EditForm from "pages/netWorth/components/EditForm";
+import EditForm from "pages/spending/components/EditForm";
 import ItemDisplayBox from "pages/spending/components/ItemDisplayBox";
 import AddForm from "pages/spending/components/AddForm";
 import { spendingWizard_data } from "pages/spending/data/spending_data";
@@ -55,7 +55,10 @@ const ControlPanel = ({ setCount, display, spending_reducer }) => {
               d.category === display ?
               (
                                                                                   //only display first 3 out of 4 subcategories
-                (((d.subCategory === 'housingCosts') || (d.subCategory === 'transportationCosts') || (d.subCategory === 'lifestyleCosts')) && (subCount === 0)) ?
+                d.category === "fixed" ?
+                (
+
+                (((d.subCategory === 'fixedHousingCosts') || (d.subCategory === 'fixedTransportationCosts') || (d.subCategory === 'fixedLifestyleCosts')) && (subCount === 0)) ?
                   <Section key={d.subCategory}>
                     <ItemDisplayBox                                               //Displays all the fixed or variables they have added
                       category={d.category}
@@ -68,7 +71,7 @@ const ControlPanel = ({ setCount, display, spending_reducer }) => {
                   </Section>
                 :
                                                                                   //only display last 3 out of 4 subcategories
-                (((d.subCategory === 'transportationCosts') || (d.subCategory === 'lifestyleCosts') || (d.subCategory === 'largeEventsCosts')) && (subCount === 1)) ?
+                (((d.subCategory === 'fixedTransportationCosts') || (d.subCategory === 'fixedLifestyleCosts') || (d.subCategory === 'fixedLargeEventsCosts')) && (subCount === 1)) ?
                   <Section key={d.subCategory}>
                     <ItemDisplayBox                                               //Displays all the fixed or variables they have added
                       category={d.category}
@@ -81,6 +84,40 @@ const ControlPanel = ({ setCount, display, spending_reducer }) => {
                   </Section>
 
                   : null
+                )
+
+                : d.category === "variable" ?
+                (
+
+                (((d.subCategory === 'variableHousingCosts') || (d.subCategory === 'variableTransportationCosts') || (d.subCategory === 'variableLifestyleCosts')) && (subCount === 0)) ?
+                  <Section key={d.subCategory}>
+                    <ItemDisplayBox                                               //Displays all the fixed or variables they have added
+                      category={d.category}
+                      item={d}
+                      subCategory={d.subCategory}
+                      setCount={setCount}
+                      setItemId={setItemId}
+                      setAddFormSubCategory={setAddFormSubCategory}
+                      />
+                  </Section>
+                :
+                                                                                  //only display last 3 out of 4 subcategories
+                (((d.subCategory === 'variableTransportationCosts') || (d.subCategory === 'variableLifestyleCosts') || (d.subCategory === 'variableLargeEventsCosts')) && (subCount === 1)) ?
+                  <Section key={d.subCategory}>
+                    <ItemDisplayBox                                               //Displays all the fixed or variables they have added
+                      category={d.category}
+                      item={d}
+                      subCategory={d.subCategory}
+                      setCount={setCount}
+                      setItemId={setItemId}
+                      setAddFormSubCategory={setAddFormSubCategory}
+                      />
+                  </Section>
+
+                  : null
+                )
+
+                : null
               )
                : null
             ))
