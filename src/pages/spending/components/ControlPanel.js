@@ -33,7 +33,6 @@ const ControlPanel = ({ setCount, display, spending_reducer }) => {
           <EditForm
             itemId={itemId}                                                      //Clicking add takes the id of the item being added and sets it in the local state
             category={category}
-            reference={reference}
             subCategory={subCategory}
             setItemId={setItemId}
           />
