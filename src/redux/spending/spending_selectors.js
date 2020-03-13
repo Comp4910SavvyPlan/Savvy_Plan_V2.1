@@ -50,71 +50,35 @@ let arrayOfLabels = [...new Set(spendingArray.map(d => d.category))]
 
 //Spending SELECTORS
 
-export const f_housing_selector = createSelector(
-  [spending_reducer],
-  spending_reducer =>
-    Object.values(spending_reducer.fixed).filter(
-      d => d.subCategory === "housingCosts"
-    ) //creates a an array of each of the income subCategory names, which is used in the stacked Income chart
+//Updating Spending selectors to be used
+
+export const spending_selector = createSelector(                                                             //Adds the CPP and OAS Income into the reducer
+    spending_reducer,
+    (income_reducer) => ({...income_reducer})
 )
 
-export const v_housing_selector = createSelector(
-  [spending_reducer],
-  spending_reducer =>
-    Object.values(spending_reducer.variable).filter(
-      d => d.subCategory === "vHousingCosts"
-    ) //creates a an array of each of the income subCategory names, which is used in the stacked Income chart
-);
+//Housing Selector
+export const housing_selector = createSelector(
+    spending_selector,
+    (spending_selector) =>  [...new Set((Object.values(spending_selector)).filter(d => d.fixed.subCategory === "variableHousingCosts" || d.fixed.subCategory === "fixedHousingCosts").map(d => d.category))]
 
-export const f_transportation_selector = createSelector(
-  [spending_reducer],
-  spending_reducer =>
-    Object.values(spending_reducer.fixed).filter(
-      d => d.subCategory === "transportationCosts"
-    ) //creates a an array of each of the income subCategory names, which is used in the stacked Income chart
-)
+//Transportation Selector
+export const transportation_selector = createSelector(
+    spending_selector,
+    (spending_selector) =>  [...new Set((Object.values(spending_selector)).filter(d => d.fixed.subCategory === "variableTransportationCosts" || d.fixed.subCategory === "fixedTransportationCosts").map(d => d.category))]
 
-export const v_transportation_selector = createSelector(
-  [spending_reducer],
-  spending_reducer =>
-    Object.values(spending_reducer.variable).filter(
-      d => d.subCategory === "transportationCosts"
-    ) //creates a an array of each of the income subCategory names, which is used in the stacked Income chart
-)
+//Lifestyle Selector
+export const lifestyle_selector = createSelector(
+    spending_selector,
+    (spending_selector) =>  [...new Set((Object.values(spending_selector)).filter(d => d.fixed.subCategory === "variableLifestyleCosts" || d.fixed.subCategory === "fixedLifestyleCosts").map(d => d.category))]
 
-export const f_lifestyle_selector = createSelector(
-  [spending_reducer],
-  spending_reducer =>
-    Object.values(spending_reducer.fixed).filter(
-      d => d.subCategory === "lifestyleCosts"
-    ) //creates a an array of each of the income subCategory names, which is used in the stacked Income chart
-)
-
-export const v_lifestyle_selector = createSelector(
-  [spending_reducer],
-  spending_reducer =>
-    Object.values(spending_reducer.variable).filter(
-      d => d.subCategory === "transportationCosts"
-    ) //creates a an array of each of the income subCategory names, which is used in the stacked Income chart
-)
-
-export const f_largeEvents_selector = createSelector(
-  [spending_reducer],
-  spending_reducer =>
-    Object.values(spending_reducer.fixed).filter(
-      d => d.subCategory === "largeEventsCosts"
-    ) //creates a an array of each of the income subCategory names, which is used in the stacked Income chart
-)
-
-export const v_largeEvents_selector = createSelector(
-  [spending_reducer],
-  spending_reducer =>
-    Object.values(spending_reducer.variable).filter(
-      d => d.subCategory === "largeEventsCosts"
-    ) //creates a an array of each of the income subCategory names, which is used in the stacked Income chart
-)
-
+//Large events selector
+export const large_events_selector = createSelector(
+    spending_selector,
+    (spending_selector) =>  [...new Set((Object.values(spending_selector)).filter(d => d.fixed.subCategory === "variableLargeEventsCosts" || d.fixed.subCategory === "fixedLargeEventsCosts").map(d => d.category))]
 //Total Variable Spending
+
+/*
 export const totalVariableSpending_selector = createSelector(
     [spending_reducer],
     spending_reducer =>  {
@@ -131,3 +95,4 @@ export const totalFixedSpending_selector = createSelector(
         return array.length > 0 ? Math.round(array.map(d => d.currentValue.financialValue).reduce((acc, num) => acc + num)/1000)*1000 : 0
     }
 )
+*/

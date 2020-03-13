@@ -4,6 +4,7 @@ import Header from "pages/spending/components/Header";
 import ControlPanel from "pages/spending/components/ControlPanel";
 import chart from "assets/images/spending_chart.png";
 import circle_chart from "assets/images/spending_chart_circle.png";
+import SpendingBarChart from "charts/spending/SpendingBarChart"
 
 const Main = () => {
   const [display, setDisplay] = useState("fixed")
@@ -15,12 +16,7 @@ const Main = () => {
         setDisplay={setDisplay}
       />
       <ChartWrapper>
-        <CircleChartPlaceHolder>
-          <img src={circle_chart} />
-        </CircleChartPlaceHolder>
-        <ChartPlaceHolder>
-          <img src={chart} />
-        </ChartPlaceHolder>
+        <SpendingBarChart/>
       </ChartWrapper>
       <ControlPanel
         display={display}
