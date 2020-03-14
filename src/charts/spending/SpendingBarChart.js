@@ -1,7 +1,7 @@
 import React, { useRef, useEffect} from 'react'
 import * as d3 from "d3"
 import styled from "styled-components"
-import {spendingData} from "charts/spending/spending_data"
+import {spendingData_selector} from "redux/spending/spending_selectors"
 import {connect} from "react-redux"
 import _ from "lodash"
 
@@ -166,12 +166,11 @@ console.log(data);
 
 }
 
-const SpendingBarChart = () =>  {
+const SpendingBarChart = ({spendingData_selector}) =>  {
 
-    const data  = spendingData()
-
+    const data  = spendingData_selector
     const inputRef = useRef(null)
-
+    console.log(data)
     useEffect(()=> {
        const width = inputRef.current.offsetWidth
        const height = inputRef.current.offsetHeight
@@ -185,7 +184,7 @@ const SpendingBarChart = () =>  {
 }
 
 const mapStateToProps = (state) => ({
-
+spendingData_selector: spendingData_selector(state)
 })
 
 export default connect(mapStateToProps)(SpendingBarChart)

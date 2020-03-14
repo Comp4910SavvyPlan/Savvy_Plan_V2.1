@@ -19,6 +19,7 @@ const AddForm = ({
   category,
   reference,
   subCategory,
+  section,
   user_reducer,
   setAddFormSubCategory,
   expenseTypeArray,
@@ -31,12 +32,14 @@ const AddForm = ({
   const initialState = individualItem_data(
     category,
     reference,
+    section,
     subCategory,
     currentValueLabel,
     ageLabel1,
     ageLabel2
   ); //initial State is found in data
-
+console.log(section)
+console.log(initialState)
   const [state, setState] = useState({ ...initialState });
 
   useEffect(() => {
@@ -188,7 +191,7 @@ const Container = styled.div`
   border-radius: 5px;
   overflow: hidden;
   height: 33rem;
-  
+
   /*${props =>
     props.subCategory === "securedDebt"
       ? "33rem"

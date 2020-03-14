@@ -3,7 +3,7 @@ import { createSelector } from "reselect"
 const spending_reducer = state => state.spending_reducer
 const thisYear = new Date()
 const thisMonth = thisYear.getMonth()
-const UserAge = state => thisYear.getFullYear() - state.user_reducer.birthYear
+const userAge = state => thisYear.getFullYear() - state.user_reducer.birthYear
 
 //Array to make the charts
 //Built 2 ways depending on way that data will be structured
@@ -16,30 +16,30 @@ const subCategoryArray = (category, subCategory) => {
 }
 
 //Selector implemented in Income section
-const convertReducerToArray = (spending_reducer) => {
+const convertReducerToArray = (spending_reducer, userAge) => {
 
-  const spendingArray = Object.values(spending_reducer)
-
-  const returnSpending = (spendingArray, subCategory, age) =>{
+  const spendingArray = Object.values(spending_reducer.fixed)
+console.log(spendingArray)
+  const returnSpending = (spendingArray, section, age) =>{
 
   if(spendingArray.length > 0){
-    const subCategorySpending = spendingArray.map(d => d.subCategory === subCategory
-                      && age >= d.ageLabel1
-                      && age <= d.ageLabel2 ?
-                      d.spending.financialValue : 0
+    const sectionSpending = spendingArray.map(d => d.section === section
+                      && age >= d.dual.fromAge
+                      && age <= d.dual.toAge ?
+                      d.currentValue.financialValue : 0
                     )
-                    return Math.max(...subCategorySpending)
+                    return Math.max(...sectionSpending)
   }
   return 0
 }
 
-let arrayOfLabels = [...new Set(spendingArray.map(d => d.category))]
-
+let arrayOfLabels = [...new Set(spendingArray.map(d => d.section))]
+  console.log(arrayOfLabels)
     const array = []
-    for (let age = UserAge; age < 95; age++) {
+    for (let age = userAge; age < 95; age++) {
         const itemObject = {age: age}
-        const details = Object.assign(itemObject,  ...arrayOfLabels.map(category => (
-                            {[category]: returnSpending(spendingArray, category, age)}
+        const details = Object.assign(itemObject,  ...arrayOfLabels.map(section => (
+                            {[section]: returnSpending(spendingArray, section, age)}
                             )))
         array.push(details)
     }
@@ -54,9 +54,20 @@ let arrayOfLabels = [...new Set(spendingArray.map(d => d.category))]
 
 export const spending_selector = createSelector(                                                             //Adds the CPP and OAS Income into the reducer
     spending_reducer,
-    (income_reducer) => ({...income_reducer})
+    (spending_reducer) => ({...spending_reducer})
 )
 
+
+export const fixedHousing_selector = createSelector(
+    spending_reducer,
+    (spending_reducer) => Object.values(spending_reducer.fixed).filter(d => d.subCategory === "fixedHousingCosts"))
+
+export const spendingData_selector = createSelector(
+   spending_reducer,
+   userAge,
+   (spending_reducer, userAge) => convertReducerToArray(spending_reducer, userAge)
+)
+/*
 //Housing Selector
 export const housing_selector = createSelector(
     spending_selector,

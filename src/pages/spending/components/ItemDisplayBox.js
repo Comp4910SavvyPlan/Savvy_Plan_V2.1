@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import _ from "lodash";
 import { Close, PlusIcon } from "style/Icons";
 import { removeSpending_action } from "redux/spending/spending_actions";
+import {fixedHousing_selector} from "redux/spending/spending_selectors";
 
 //displays the items the users have added, such as "car" or "checking account"
 
@@ -36,7 +37,8 @@ const ItemDisplayBox = ({
   subCategory,
   spending_reducer,
   removeSpending_action,
-  setItemId
+  setItemId,
+  fixedHousing_selector
 }) => {
   //Box wrapping the items being added
 
@@ -242,7 +244,7 @@ const ItemDisplayBox = ({
 
       {subCategory === "variableHousingCosts" ? (
         <Container>
-          {arrayOfitemsFixedHousing.map(item => {
+          {fixedHousing_selector.map(item => {
             return (
               <Left>
                 <ItemDisplay //Maps through the items showing each one
@@ -456,7 +458,8 @@ const ItemDisplayBox = ({
 };
 
 const mapStateToProps = state => ({
-  spending_reducer: state.spending_reducer
+  spending_reducer: state.spending_reducer,
+  fixedHousing_selector: fixedHousing_selector(state)
 });
 
 export default connect(mapStateToProps, { removeSpending_action })(
