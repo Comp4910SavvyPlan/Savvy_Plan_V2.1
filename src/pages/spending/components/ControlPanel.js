@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import {connect} from "react-redux"
 import ButtonLight from "UI/buttons/ButtonLight";
-import _ from "lodash"
+import _ from "lodash";
 import { removeSpending_action } from "redux/spending/spending_actions";
 import EditForm from "pages/spending/components/EditForm";
 import ItemDisplayBox from "pages/spending/components/ItemDisplayBox";
