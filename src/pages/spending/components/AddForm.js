@@ -21,6 +21,8 @@ const AddForm = ({
   subCategory,
   user_reducer,
   setAddFormSubCategory,
+  section,
+  spending_reducer,
   expenseTypeArray,
   durationTypeArray,
   currentValueLabel,
@@ -31,6 +33,7 @@ const AddForm = ({
   const initialState = individualItem_data(
     category,
     reference,
+    section,
     subCategory,
     currentValueLabel,
     ageLabel1,
@@ -55,6 +58,8 @@ const AddForm = ({
       }
     });
   };
+
+  console.log(spending_reducer);
 
   const setDate = event => {
     setState({
@@ -146,7 +151,7 @@ const AddForm = ({
 
 const mapStateToProps = state => ({
   user_reducer: state.user_reducer,
-  savings_reducer: state.savings_reducer
+  spending_reducer: state.spending_reducer
 });
 
 export default connect(mapStateToProps, {
