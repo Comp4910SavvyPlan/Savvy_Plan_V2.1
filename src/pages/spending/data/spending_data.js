@@ -6,7 +6,7 @@ export const spendingWizard_data = [
     reference: "variableHousingCosts",
     section: "housingCosts",
     currentValueLabel: "Monthly Cost",
-    ageLabel1: "none",
+    ageLabel1: "Years Remaining",
     ageLabel2: "none",
     expenseTypeArray: ["Fixed", "Variable"],
     durationTypeArray: ["Limited", "Forever"]
@@ -18,7 +18,7 @@ export const spendingWizard_data = [
     reference: "fixedHousingCosts",
     section: "housingCosts",
     currentValueLabel: "Monthly Cost",
-    ageLabel1: "none",
+    ageLabel1: "Years Remaining",
     ageLabel2: "none",
     expenseTypeArray: ["Fixed", "Variable"],
     durationTypeArray: ["Limited", "Forever"]
@@ -30,7 +30,7 @@ export const spendingWizard_data = [
     reference: "variableTransportationCosts",
     section: "transportationCosts",
     currentValueLabel: "Monthly Cost",
-    ageLabel1: "none",
+    ageLabel1: "Years Remaining",
     ageLabel2: "none",
     expenseTypeArray: ["Fixed", "Variable"],
     durationTypeArray: ["Limited", "Forever"]
@@ -42,7 +42,7 @@ export const spendingWizard_data = [
     reference: "fixedTransportationCosts",
     section: "transportationCosts",
     currentValueLabel: "Monthly Cost",
-    ageLabel1: "none",
+    ageLabel1: "Years Remaining",
     ageLabel2: "none",
     expenseTypeArray: ["Fixed", "Variable"],
     durationTypeArray: ["Limited", "Forever"]
@@ -54,7 +54,7 @@ export const spendingWizard_data = [
     reference: "variableLifestyleCosts",
     section: "lifestyleCosts",
     currentValueLabel: "Monthly Cost",
-    ageLabel1: "years Remaining",
+    ageLabel1: "Years Remaining",
     ageLabel2: "none",
     expenseTypeArray: ["Fixed", "Variable"],
     durationTypeArray: ["Limited", "Forever"]
@@ -115,12 +115,8 @@ export const individualItem_data = (
   currentValue: {
     rangeBarValue: 0,
     name: "currentValue",
-    //max: 5000,
-    //min: 0,
-    //step: 100,
     financialValue: 0,
     label: currentValueLabel
-    //numberType: "percentage"
   },
   age1: {
     rangeBarValue: 0,
@@ -129,7 +125,6 @@ export const individualItem_data = (
     min: 0,
     step: 1,
     label: ageLabel1
-    //numberType: "percentage"
   },
   age2: {
     rangeBarValue: 0,
@@ -138,7 +133,6 @@ export const individualItem_data = (
     min: 0,
     step: 1,
     label: ageLabel2
-    //numberType: "percentage"
   },
   startDate: {
     rangeBarValue: 0,
