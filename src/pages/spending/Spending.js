@@ -15,7 +15,7 @@ const Spending = (
     spending_reducer
   }
 ) => {
-  const [count, setCount] = useState(7);
+  const [count, setCount] = useState(0);
  console.log(spending_reducer)
   const renderAddForm = data => {
     return data.map(d =>

@@ -52,58 +52,46 @@ let arrayOfLabels = [...new Set(spendingArray.map(d => d.section))]
 
 //Updating Spending selectors to be used
 
-export const spending_selector = createSelector(                                                             //Adds the CPP and OAS Income into the reducer
+export const spending_selector = createSelector(                                                             
     spending_reducer,
     (spending_reducer) => ({...spending_reducer})
 )
 
-
+//Selectors to be used
 export const fixedHousing_selector = createSelector(
     spending_reducer,
     (spending_reducer) => Object.values(spending_reducer.fixed).filter(d => d.subCategory === "fixedHousingCosts"))
+
+export const variableHousing_selector = createSelector(
+    spending_reducer,
+    (spending_reducer) => Object.values(spending_reducer.variable).filter(d => d.subCategory === "variableHousingCosts"))
+
+export const fixedTransportation_selector = createSelector(
+    spending_reducer,
+    (spending_reducer) => Object.values(spending_reducer.fixed).filter(d => d.subCategory === "fixedTransportationCosts"))
+
+export const variableTransportation_selector = createSelector(
+    spending_reducer,
+    (spending_reducer) => Object.values(spending_reducer.variable).filter(d => d.subCategory === "variableTransportationCosts"))
+
+export const fixedLifestyle_selector = createSelector(
+    spending_reducer,
+    (spending_reducer) => Object.values(spending_reducer.fixed).filter(d => d.subCategory === "fixedLifestyleCosts"))
+
+export const variableLifestyle_selector = createSelector(
+    spending_reducer,
+    (spending_reducer) => Object.values(spending_reducer.variable).filter(d => d.subCategory === "variableLifestyleCosts"))
+
+export const fixedLargeEvents_selector = createSelector(
+    spending_reducer,
+    (spending_reducer) => Object.values(spending_reducer.fixed).filter(d => d.subCategory === "fixedLargeEventsCosts"))
+
+export const variableLargeEvents_selector = createSelector(
+    spending_reducer,
+    (spending_reducer) => Object.values(spending_reducer.variable).filter(d => d.subCategory === "variableLargeEventsCosts"))
 
 export const spendingData_selector = createSelector(
    spending_reducer,
    userAge,
    (spending_reducer, userAge) => convertReducerToArray(spending_reducer, userAge)
 )
-/*
-//Housing Selector
-export const housing_selector = createSelector(
-    spending_selector,
-    (spending_selector) =>  [...new Set((Object.values(spending_selector)).filter(d => d.fixed.subCategory === "variableHousingCosts" || d.fixed.subCategory === "fixedHousingCosts").map(d => d.category))]
-
-//Transportation Selector
-export const transportation_selector = createSelector(
-    spending_selector,
-    (spending_selector) =>  [...new Set((Object.values(spending_selector)).filter(d => d.fixed.subCategory === "variableTransportationCosts" || d.fixed.subCategory === "fixedTransportationCosts").map(d => d.category))]
-
-//Lifestyle Selector
-export const lifestyle_selector = createSelector(
-    spending_selector,
-    (spending_selector) =>  [...new Set((Object.values(spending_selector)).filter(d => d.fixed.subCategory === "variableLifestyleCosts" || d.fixed.subCategory === "fixedLifestyleCosts").map(d => d.category))]
-
-//Large events selector
-export const large_events_selector = createSelector(
-    spending_selector,
-    (spending_selector) =>  [...new Set((Object.values(spending_selector)).filter(d => d.fixed.subCategory === "variableLargeEventsCosts" || d.fixed.subCategory === "fixedLargeEventsCosts").map(d => d.category))]
-//Total Variable Spending
-
-/*
-export const totalVariableSpending_selector = createSelector(
-    [spending_reducer],
-    spending_reducer =>  {
-      const array =  Object.values(spending_reducer.variable)
-        return array.length > 0 ? Math.round(array.map(d => d.currentValue.financialValue).reduce((acc, num) => acc + num)/1000)*1000 : 0
-    }
-)
-
-//Total Fixed Spending
-export const totalFixedSpending_selector = createSelector(
-    [spending_reducer],
-    spending_reducer =>  {
-      const array =  Object.values(spending_reducer.fixed)
-        return array.length > 0 ? Math.round(array.map(d => d.currentValue.financialValue).reduce((acc, num) => acc + num)/1000)*1000 : 0
-    }
-)
-*/

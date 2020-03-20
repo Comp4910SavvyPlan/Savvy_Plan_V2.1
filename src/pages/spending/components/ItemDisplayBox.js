@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import _ from "lodash";
 import { Close, PlusIcon } from "style/Icons";
 import { removeSpending_action } from "redux/spending/spending_actions";
-import {fixedHousing_selector} from "redux/spending/spending_selectors";
+import {fixedHousing_selector, variableHousing_selector, fixedTransportation_selector, variableTransportation_selector,
+fixedLifestyle_selector, variableLifestyle_selector, fixedLargeEvents_selector, variableLargeEvents_selector} from "redux/spending/spending_selectors";
 
 //displays the items the users have added, such as "car" or "checking account"
 
@@ -38,7 +39,14 @@ const ItemDisplayBox = ({
   spending_reducer,
   removeSpending_action,
   setItemId,
-  fixedHousing_selector
+  fixedHousing_selector,
+  variableHousing_selector,
+  fixedTransportation_selector,
+  variableTransportation_selector,
+  fixedLifestyle_selector,
+  variableLifestyle_selector,
+  fixedLargeEvents_selector,
+  variableLargeEvents_selector
 }) => {
   //Box wrapping the items being added
 
@@ -212,7 +220,7 @@ const ItemDisplayBox = ({
 
       {subCategory === "fixedHousingCosts" ? (
         <Container>
-          {arrayOfitemsFixedHousing.map(item => {
+          {fixedHousing_selector.map(item => {
             return (
               <Left>
                 <ItemDisplay //Maps through the items showing each one
@@ -226,7 +234,7 @@ const ItemDisplayBox = ({
             );
           })}
 
-          {arrayOfitemsVariableHousing.map(item => {
+          {variableHousing_selector.map(item => {
             return (
               <Right>
                 <ItemDisplay //Maps through the items showing each one
@@ -258,7 +266,7 @@ const ItemDisplayBox = ({
             );
           })}
 
-          {arrayOfitemsVariableHousing.map(item => {
+          {variableHousing_selector.map(item => {
             return (
               <Right>
                 <ItemDisplay //Maps through the items showing each one
@@ -274,7 +282,7 @@ const ItemDisplayBox = ({
         </Container>
       ) : subCategory === "fixedTransportationCosts" ? (
         <Container>
-          {arrayOfitemsFixedTransportation.map(item => {
+          {fixedTransportation_selector.map(item => {
             return (
               <Left>
                 <ItemDisplay //Maps through the items showing each one
@@ -288,7 +296,7 @@ const ItemDisplayBox = ({
             );
           })}
 
-          {arrayOfitemsVariableTransportation.map(item => {
+          {variableTransportation_selector.map(item => {
             return (
               <Right>
                 <ItemDisplay //Maps through the items showing each one
@@ -304,7 +312,7 @@ const ItemDisplayBox = ({
         </Container>
       ) : subCategory === "variableTransportationCosts" ? (
         <Container>
-          {arrayOfitemsFixedTransportation.map(item => {
+          {fixedTransportation_selector.map(item => {
             return (
               <Left>
                 <ItemDisplay //Maps through the items showing each one
@@ -318,7 +326,7 @@ const ItemDisplayBox = ({
             );
           })}
 
-          {arrayOfitemsVariableTransportation.map(item => {
+          {variableTransportation_selector.map(item => {
             return (
               <Right>
                 <ItemDisplay //Maps through the items showing each one
@@ -334,7 +342,7 @@ const ItemDisplayBox = ({
         </Container>
       ) : subCategory === "fixedLifestyleCosts" ? (
         <Container>
-          {arrayOfitemsFixedLifestyle.map(item => {
+          {fixedLifestyle_selector.map(item => {
             return (
               <Left>
                 <ItemDisplay //Maps through the items showing each one
@@ -348,7 +356,7 @@ const ItemDisplayBox = ({
             );
           })}
 
-          {arrayOfitemsVariableLifestyle.map(item => {
+          {variableLifestyle_selector.map(item => {
             return (
               <Right>
                 <ItemDisplay //Maps through the items showing each one
@@ -364,7 +372,7 @@ const ItemDisplayBox = ({
         </Container>
       ) : subCategory === "variableLifestyleCosts" ? (
         <Container>
-          {arrayOfitemsFixedLifestyle.map(item => {
+          {fixedLifestyle_selector.map(item => {
             return (
               <Left>
                 <ItemDisplay //Maps through the items showing each one
@@ -378,7 +386,7 @@ const ItemDisplayBox = ({
             );
           })}
 
-          {arrayOfitemsVariableLifestyle.map(item => {
+          {variableLifestyle_selector.map(item => {
             return (
               <Right>
                 <ItemDisplay //Maps through the items showing each one
@@ -394,7 +402,7 @@ const ItemDisplayBox = ({
         </Container>
       ) : subCategory === "fixedLargeEventsCosts" ? (
         <Container>
-          {arrayOfitemsFixedLargeEvents.map(item => {
+          {fixedLargeEvents_selector.map(item => {
             return (
               <Left>
                 <ItemDisplay //Maps through the items showing each one
@@ -408,7 +416,7 @@ const ItemDisplayBox = ({
             );
           })}
 
-          {arrayOfitemsVariableLargeEvents.map(item => {
+          {variableLargeEvents_selector.map(item => {
             return (
               <Right>
                 <ItemDisplay //Maps through the items showing each one
@@ -424,7 +432,7 @@ const ItemDisplayBox = ({
         </Container>
       ) : subCategory === "variableLargeEventsCosts" ? (
         <Container>
-          {arrayOfitemsFixedLargeEvents.map(item => {
+          {fixedLargeEvents_selector.map(item => {
             return (
               <Left>
                 <ItemDisplay //Maps through the items showing each one
@@ -438,7 +446,7 @@ const ItemDisplayBox = ({
             );
           })}
 
-          {arrayOfitemsVariableLargeEvents.map(item => {
+          {variableLargeEvents_selector.map(item => {
             return (
               <Right>
                 <ItemDisplay //Maps through the items showing each one
@@ -459,7 +467,14 @@ const ItemDisplayBox = ({
 
 const mapStateToProps = state => ({
   spending_reducer: state.spending_reducer,
-  fixedHousing_selector: fixedHousing_selector(state)
+  fixedHousing_selector: fixedHousing_selector(state),
+  variableHousing_selector: variableHousing_selector(state),
+  fixedTransportation_selector: fixedTransportation_selector(state),
+  variableTransportation_selector: variableTransportation_selector(state),
+  fixedLifestyle_selector: fixedLifestyle_selector(state),
+  variableLifestyle_selector: variableLifestyle_selector(state),
+  fixedLargeEvents_selector: fixedLargeEvents_selector(state),
+  variableLargeEvents_selector: variableLargeEvents_selector(state)
 });
 
 export default connect(mapStateToProps, { removeSpending_action })(
