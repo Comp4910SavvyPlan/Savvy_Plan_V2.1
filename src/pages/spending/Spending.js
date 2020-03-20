@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Header from "pages/spending/components/Header";
-import ControlPanel from "pages/spending/components/ControlPanel";
 import { connect } from "react-redux";
 import ButtonLight from "UI/buttons/ButtonLight";
 import { spendingWizard_data } from "pages/spending/data/spending_data";
@@ -58,8 +56,8 @@ const Spending = () => {
           {renderAddForm(spendingWizard_data)} {}
         </>
       ) : (
-        <Main />
-      )}
+            <Main />
+          )}
       <Buttons>
         {" "}
         {/* Fixed plan buttons enabling the toggling back and forth*/}
@@ -94,22 +92,7 @@ const Page = styled.div`
 `;
 const AddPage = styled(Page)``;
 
-const Charts = styled.div`
-  grid-area: b;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: space-around;
-  flex-direction: row;
-`;
-const SunBurstChartPlaceHolder = styled.div`
-  width: 30%;
-  height: 90%;
-`;
-const ProjectionChartPlaceHolder = styled.div`
-  width: 70%;
-  height: 100%;
-`;
+
 
 const Buttons = styled.div`
   position: absolute;
