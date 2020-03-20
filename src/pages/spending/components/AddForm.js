@@ -104,15 +104,29 @@ const AddForm = ({
         </Center>
         <Right>
           <MiniRangeBarWrapper>
-            {subCategory === "fixedTransportationCosts" ||
-              "variableTransportationCosts" ||
-              "fixedLifestyleCosts" ||
-              "variableLifestyleCosts" ? ( //If its a liability we want to know its amortization
-                <MiniRangeBar rangeBarProps={state.age1} setValue={setValue} />
-              ) : subCategory === "largeEventsCosts" ? (
+            {subCategory ===
+              "fixedHousingCosts" ||
+              subCategory === "variableHousingCosts" ||
+              subCategory === "fixedTransportationCosts" ||
+              subCategory === "variableTransportationCosts" ||
+              subCategory === "fixedLifestyleCosts" ||
+              subCategory === "variableLifestyleCosts" ? ( //If its a liability we want to know its amortization
+
+                <MiniRangeBar
+                  rangeBarProps={state.age1}
+                  setValue={setValue}
+                />
+
+              ) : subCategory === "fixedLargeEventsCosts" || subCategory === "variableLargeEventsCosts" ? (
                 <>
-                  <MiniRangeBar rangeBarProps={state.age1} setValue={setValue} />
-                  <MiniRangeBar rangeBarProps={state.age2} setValue={setValue} />
+                  <MiniRangeBar
+                    rangeBarProps={state.age1}
+                    setValue={setValue}
+                  />
+                  <MiniRangeBar
+                    rangeBarProps={state.age2}
+                    setValue={setValue}
+                  />
                 </>
               ) : null}
           </MiniRangeBarWrapper>
