@@ -221,6 +221,7 @@ const ItemDisplayBox = ({
           })}
 
 
+
           {arrayOfitemsVariableHousing.map(item => {
             return (
               <Right>
