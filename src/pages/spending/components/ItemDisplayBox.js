@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import _ from "lodash";
@@ -29,11 +29,6 @@ const ItemDisplay = ({ value, removeSpending_action, item, setItemId }) => {
 };
 
 const ItemDisplayBox = ({
-  category,
-  count,
-  section,
-  reference,
-  setAddFormSubCategory,
   subCategory,
   spending_reducer,
   removeSpending_action,
@@ -561,28 +556,6 @@ const Container = styled.div`
   overflow: scroll;
 `;
 
-const LeftContainer = styled.div`
-  min-height: 10rem;
-  max-height: 50rem;
-  width: 50%;
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0.5rem;
-  justify-content: flex-start;
-  overflow: scroll;
-`;
-
-const RightContainer = styled.div`
-  min-height: 10rem;
-  max-height: 50rem;
-  width: 50%;
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0.5rem;
-  justify-content: flex-start;
-  overflow: scroll;
-`;
-
 const H2 = styled.h2`
 font-size: 1.4rem
 font-weight: 700;
@@ -613,14 +586,6 @@ const Add = styled(PlusIcon)`
   position: absolute;
   top: 0.8rem;
   left: 0rem;
-`;
-const DarkAdd = styled(Add)`
-  width: 4rem;
-  color: white;
-  display: flex;
-  position: relative;
-  color: grey;
-  cursor: pointer;
 `;
 
 const Right = styled.div`
