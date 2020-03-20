@@ -1,7 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import ControlPanel from "pages/spending/components/ControlPanel";
-import Header from "pages/spending/components/Header";
 import { connect } from "react-redux";
 
 const Welcome = () => {

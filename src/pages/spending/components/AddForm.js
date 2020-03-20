@@ -15,10 +15,8 @@ const AddForm = ({
   category,
   reference,
   subCategory,
-  user_reducer,
   setAddFormSubCategory,
   section,
-  spending_reducer,
   durationTypeArray,
   currentValueLabel,
   ageLabel1,
@@ -54,30 +52,11 @@ const AddForm = ({
     });
   };
 
-  /*
-  console.log(spending_reducer);
-
-  const setDate = event => {
-    setState({
-      ...state,
-      startDate: {
-        //used to store the date added in the mortgage section
-        ...state.startDate,
-        date: event.target.value
-      }
-    });
-  };
-  */
-
-  const userAge = new Date().getFullYear() - user_reducer.birthYear;
-
   const addItem = () => {
     //Adds the item to the reducer
     setAddFormSubCategory(false);
     const id = (Math.random() * 10000000000).toFixed(); // Creates a unique id
     addItem_action(id, state); // Sets item in reducer
-    console.log(state.registration);
-
     setState({ ...initialState });
   };
 
@@ -162,20 +141,24 @@ const Left = styled.div`
   height: 100%;
   padding: 2rem;
 `;
+
 const ButtonWrapper = styled.div`
   position: absolute;
   bottom: 0rem;
   right: 2rem;
 `;
+
 const MiniRangeBarWrapper = styled.div`
   position: absolute;
   right: 3rem;
   top: 1rem;
 `;
+
 const Right = styled.div`
   width: 30rem;
   padding: 2rem;
 `;
+
 const Center = styled.div`
   width: 45rem;
   padding: 2rem;
