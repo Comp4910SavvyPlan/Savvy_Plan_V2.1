@@ -8,6 +8,7 @@ import { removeSpending_action } from "redux/spending/spending_actions";
 //displays the items the users have added, such as "car" or "checking account"
 
 const ItemDisplay = ({ value, removeSpending_action, item, setItemId }) => {
+
   //Individual item that is added
   const { label, subCategory, id } = item;
   const removeItem = () => {
@@ -79,57 +80,57 @@ const ItemDisplayBox = ({
   const totalValueFixedHousing =
     arrayOfitemsFixedHousing.length > 0
       ? arrayOfitemsFixedHousing
-          .map(d => d.currentValue.financialValue)
-          .reduce((acc, num) => acc + num)
+        .map(d => d.currentValue.financialValue)
+        .reduce((acc, num) => acc + num)
       : 0; //Sums the value of the category
 
   const totalValueVariableHousing =
     arrayOfitemsVariableHousing.length > 0
       ? arrayOfitemsVariableHousing
-          .map(d => d.currentValue.financialValue)
-          .reduce((acc, num) => acc + num)
+        .map(d => d.currentValue.financialValue)
+        .reduce((acc, num) => acc + num)
       : 0; //Sums the value of the category
 
   const totalValueFixedTransportation =
     arrayOfitemsFixedTransportation.length > 0
       ? arrayOfitemsFixedTransportation
-          .map(d => d.currentValue.financialValue)
-          .reduce((acc, num) => acc + num)
+        .map(d => d.currentValue.financialValue)
+        .reduce((acc, num) => acc + num)
       : 0; //Sums the value of the category
 
   const totalValueVariableTransportation =
     arrayOfitemsVariableTransportation.length > 0
       ? arrayOfitemsVariableTransportation
-          .map(d => d.currentValue.financialValue)
-          .reduce((acc, num) => acc + num)
+        .map(d => d.currentValue.financialValue)
+        .reduce((acc, num) => acc + num)
       : 0; //Sums the value of the category
 
   const totalValueFixedLifestyle =
     arrayOfitemsFixedLifestyle.length > 0
       ? arrayOfitemsFixedLifestyle
-          .map(d => d.currentValue.financialValue)
-          .reduce((acc, num) => acc + num)
+        .map(d => d.currentValue.financialValue)
+        .reduce((acc, num) => acc + num)
       : 0; //Sums the value of the category
 
   const totalValueVariableLifestyle =
     arrayOfitemsVariableLifestyle.length > 0
       ? arrayOfitemsVariableLifestyle
-          .map(d => d.currentValue.financialValue)
-          .reduce((acc, num) => acc + num)
+        .map(d => d.currentValue.financialValue)
+        .reduce((acc, num) => acc + num)
       : 0; //Sums the value of the category
 
   const totalValueFixedLargeEvents =
     arrayOfitemsFixedLargeEvents.length > 0
       ? arrayOfitemsFixedLargeEvents
-          .map(d => d.currentValue.financialValue)
-          .reduce((acc, num) => acc + num)
+        .map(d => d.currentValue.financialValue)
+        .reduce((acc, num) => acc + num)
       : 0; //Sums the value of the category
 
   const totalValueVariableLargeEvents =
     arrayOfitemsVariableLargeEvents.length > 0
       ? arrayOfitemsVariableLargeEvents
-          .map(d => d.currentValue.financialValue)
-          .reduce((acc, num) => acc + num)
+        .map(d => d.currentValue.financialValue)
+        .reduce((acc, num) => acc + num)
       : 0; //Sums the value of the category
 
   return (
@@ -471,29 +472,29 @@ const Header = styled.div`
     props.subCategory === "fixedHousingCosts"
       ? props.theme.color.blue
       : props =>
-          props.subCategory === "variableHousingCosts"
-            ? props.theme.color.blue
-            : props =>
-                props.subCategory === "fixedTransportationCosts"
+        props.subCategory === "variableHousingCosts"
+          ? props.theme.color.blue
+          : props =>
+            props.subCategory === "fixedTransportationCosts"
+              ? props.theme.color.steelBlue
+              : props =>
+                props.subCategory === "variableTransportationCosts"
                   ? props.theme.color.steelBlue
                   : props =>
-                      props.subCategory === "variableTransportationCosts"
-                        ? props.theme.color.steelBlue
-                        : props =>
-                            props.subCategory === "fixedLifestyleCosts"
-                              ? props.theme.color.green
+                    props.subCategory === "fixedLifestyleCosts"
+                      ? props.theme.color.green
+                      : props =>
+                        props.subCategory === "variableLifestyleCosts"
+                          ? props.theme.color.green
+                          : props =>
+                            props.subCategory ===
+                              "fixedLargeEventsCosts"
+                              ? props.theme.color.salmon
                               : props =>
-                                  props.subCategory === "variableLifestyleCosts"
-                                    ? props.theme.color.green
-                                    : props =>
-                                        props.subCategory ===
-                                        "fixedLargeEventsCosts"
-                                          ? props.theme.color.salmon
-                                          : props =>
-                                              props.subCategory ===
-                                              "variableLargeEventsCosts"
-                                                ? props.theme.color.salmon
-                                                : null};
+                                props.subCategory ===
+                                  "variableLargeEventsCosts"
+                                  ? props.theme.color.salmon
+                                  : null};
   height: 6rem;
   color: ${props => props.theme.color.ice};
   border-bottom: ${props => props.theme.border.primary};
@@ -522,29 +523,29 @@ const ItemLeft = styled.div`
     props.subCategory === "fixedHousingCosts"
       ? props.theme.color.blue
       : props =>
-          props.subCategory === "variableHousingCosts"
-            ? props.theme.color.blue
-            : props =>
-                props.subCategory === "fixedTransportationCosts"
+        props.subCategory === "variableHousingCosts"
+          ? props.theme.color.blue
+          : props =>
+            props.subCategory === "fixedTransportationCosts"
+              ? props.theme.color.steelBlue
+              : props =>
+                props.subCategory === "variableTransportationCosts"
                   ? props.theme.color.steelBlue
                   : props =>
-                      props.subCategory === "variableTransportationCosts"
-                        ? props.theme.color.steelBlue
-                        : props =>
-                            props.subCategory === "fixedLifestyleCosts"
-                              ? props.theme.color.green
+                    props.subCategory === "fixedLifestyleCosts"
+                      ? props.theme.color.green
+                      : props =>
+                        props.subCategory === "variableLifestyleCosts"
+                          ? props.theme.color.green
+                          : props =>
+                            props.subCategory ===
+                              "fixedLargeEventsCosts"
+                              ? props.theme.color.salmon
                               : props =>
-                                  props.subCategory === "variableLifestyleCosts"
-                                    ? props.theme.color.green
-                                    : props =>
-                                        props.subCategory ===
-                                        "fixedLargeEventsCosts"
-                                          ? props.theme.color.salmon
-                                          : props =>
-                                              props.subCategory ===
-                                              "variableLargeEventsCosts"
-                                                ? props.theme.color.salmon
-                                                : null};
+                                props.subCategory ===
+                                  "variableLargeEventsCosts"
+                                  ? props.theme.color.salmon
+                                  : null};
   border-radius: 5px;
   color: white;
   border: ${props => props.theme.border.primary};

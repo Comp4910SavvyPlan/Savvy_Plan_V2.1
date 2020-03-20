@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import ExpenseType from "UI/forms/ExpenseType";
 import Duration from "UI/forms/Duration";
 import FormInput from "UI/forms/Input";
-import DateInput from "UI/forms/DateInput";
 import RangeBar from "UI/rangeBar/RangeBar";
 import MiniRangeBar from "UI/miniRangeBar/MiniRangeBar";
 import ButtonLight from "UI/buttons/ButtonLight";
 import { addItem_action } from "redux/spending/spending_actions";
-import _ from "lodash";
 import { individualItem_data } from "pages/spending/data/spending_data";
-import DualRangeRangeBar from "UI/dualRangeBar/oldDualRangeBar";
 
 //THe add form is used to add individual items to the users net worth.
 
@@ -23,7 +19,6 @@ const AddForm = ({
   setAddFormSubCategory,
   section,
   spending_reducer,
-  expenseTypeArray,
   durationTypeArray,
   currentValueLabel,
   ageLabel1,
@@ -59,6 +54,7 @@ const AddForm = ({
     });
   };
 
+  /*
   console.log(spending_reducer);
 
   const setDate = event => {
@@ -71,6 +67,7 @@ const AddForm = ({
       }
     });
   };
+  */
 
   const userAge = new Date().getFullYear() - user_reducer.birthYear;
 
@@ -95,15 +92,15 @@ const AddForm = ({
           <Duration
             array={
               subCategory === "fixedHousingCosts" ||
-              "variableHousingCosts" ||
-              "fixedTransportationCosts" ||
-              "variableTransportationCosts" ||
-              "fixedLifestyleCosts" ||
-              "variableLifestyleCosts" ||
-              "fixedLargeEventsCosts" ||
-              "variableLargeEventsCosts"
+                "variableHousingCosts" ||
+                "fixedTransportationCosts" ||
+                "variableTransportationCosts" ||
+                "fixedLifestyleCosts" ||
+                "variableLifestyleCosts" ||
+                "fixedLargeEventsCosts" ||
+                "variableLargeEventsCosts"
                 ? //? propertyNames_selector.concat("None of These")
-                  durationTypeArray
+                durationTypeArray
                 : null
             } //if it is secored (a mortgage) it has to be linked to the property its secured against
             setValue={value =>
@@ -129,16 +126,16 @@ const AddForm = ({
         <Right>
           <MiniRangeBarWrapper>
             {subCategory === "fixedTransportationCosts" ||
-            "variableTransportationCosts" ||
-            "fixedLifestyleCosts" ||
-            "variableLifestyleCosts" ? ( //If its a liability we want to know its amortization
-              <MiniRangeBar rangeBarProps={state.age1} setValue={setValue} />
-            ) : subCategory === "largeEventsCosts" ? (
-              <>
+              "variableTransportationCosts" ||
+              "fixedLifestyleCosts" ||
+              "variableLifestyleCosts" ? ( //If its a liability we want to know its amortization
                 <MiniRangeBar rangeBarProps={state.age1} setValue={setValue} />
-                <MiniRangeBar rangeBarProps={state.age2} setValue={setValue} />
-              </>
-            ) : null}
+              ) : subCategory === "largeEventsCosts" ? (
+                <>
+                  <MiniRangeBar rangeBarProps={state.age1} setValue={setValue} />
+                  <MiniRangeBar rangeBarProps={state.age2} setValue={setValue} />
+                </>
+              ) : null}
           </MiniRangeBarWrapper>
           <ButtonWrapper>
             <ButtonLight text={"Add"} onClick={() => addItem()} />
@@ -170,11 +167,6 @@ const ButtonWrapper = styled.div`
   bottom: 0rem;
   right: 2rem;
 `;
-const ButtonLeftWrapper = styled.div`
-  position: absolute;
-  bottom: 0rem;
-  left: 2rem;
-`;
 const MiniRangeBarWrapper = styled.div`
   position: absolute;
   right: 3rem;
@@ -188,28 +180,15 @@ const Center = styled.div`
   width: 45rem;
   padding: 2rem;
 `;
+
 const Container = styled.div`
   width: 94rem;
   border-radius: 5px;
   overflow: hidden;
   height: 33rem;
-  
-  /*${props =>
-    props.subCategory === "securedDebt"
-      ? "33rem"
-      : "30rem"}; //mortgage requires more height because there are more inputs
-  */
   border: ${props => props.theme.border.primary};
   position: relative;
   display: flex;
   background: ${props => props.theme.color.ice};
 `;
 
-const SelectorTitleWrapper = styled.div`
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-  padding: 0.5rem;
-  font-size: ${props => props.theme.fontSize.small};
-  color: ${props => props.theme.color.slate};
-`;
