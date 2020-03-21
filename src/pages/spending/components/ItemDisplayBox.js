@@ -1,3 +1,4 @@
+
 import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
@@ -14,8 +15,9 @@ const ItemDisplay = ({ value, removeSpending_action, item, setItemId }) => {
   const removeItem = () => {
     removeSpending_action(item); //This removes the item from the reducer
   };
+
   return (
-    <ItemLeft label={label} subCategory={subCategory}>
+    <Item label={label} subCategory={subCategory}>
       <Text onClick={() => setItemId(id)}>
         {" "}
         {/*When the item is clicked the id is set which fills out the edit form with the items details */}
@@ -24,7 +26,7 @@ const ItemDisplay = ({ value, removeSpending_action, item, setItemId }) => {
       </Text>
       <Exit onClick={() => removeItem()} />{" "}
       {/*If the x is clicked the item is removed */};
-    </ItemLeft>
+    </Item>
   );
 };
 
@@ -236,219 +238,219 @@ const ItemDisplayBox = ({
             );
           })}
         </Container>
-      ) : null}
+      ) :
 
-      {subCategory === "variableHousingCosts" ? (
-        <Container>
-          {arrayOfitemsFixedHousing.map(item => {
-            return (
-              <Left>
-                <ItemDisplay //Maps through the items showing each one
-                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
-                  key={item.id}
-                  removeSpending_action={removeSpending_action}
-                  value={item.currentValue.financialValue}
-                  setItemId={setItemId}
-                />
-              </Left>
-            );
-          })}
+        subCategory === "variableHousingCosts" ? (
+          <Container>
+            {arrayOfitemsFixedHousing.map(item => {
+              return (
+                <Left>
+                  <ItemDisplay //Maps through the items showing each one
+                    item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                    key={item.id}
+                    removeSpending_action={removeSpending_action}
+                    value={item.currentValue.financialValue}
+                    setItemId={setItemId}
+                  />
+                </Left>
+              );
+            })}
 
-          {arrayOfitemsVariableHousing.map(item => {
-            return (
-              <Right>
-                <ItemDisplay //Maps through the items showing each one
-                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
-                  key={item.id}
-                  removeSpending_action={removeSpending_action}
-                  value={item.currentValue.financialValue}
-                  setItemId={setItemId}
-                />
-              </Right>
-            );
-          })}
-        </Container>
-      ) : subCategory === "fixedTransportationCosts" ? (
-        <Container>
-          {arrayOfitemsFixedTransportation.map(item => {
-            return (
-              <Left>
-                <ItemDisplay //Maps through the items showing each one
-                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
-                  key={item.id}
-                  removeSpending_action={removeSpending_action}
-                  value={item.currentValue.financialValue}
-                  setItemId={setItemId}
-                />
-              </Left>
-            );
-          })}
+            {arrayOfitemsVariableHousing.map(item => {
+              return (
+                <Right>
+                  <ItemDisplay //Maps through the items showing each one
+                    item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                    key={item.id}
+                    removeSpending_action={removeSpending_action}
+                    value={item.currentValue.financialValue}
+                    setItemId={setItemId}
+                  />
+                </Right>
+              );
+            })}
+          </Container>
+        ) : subCategory === "fixedTransportationCosts" ? (
+          <Container>
+            {arrayOfitemsFixedTransportation.map(item => {
+              return (
+                <Left>
+                  <ItemDisplay //Maps through the items showing each one
+                    item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                    key={item.id}
+                    removeSpending_action={removeSpending_action}
+                    value={item.currentValue.financialValue}
+                    setItemId={setItemId}
+                  />
+                </Left>
+              );
+            })}
 
-          {arrayOfitemsVariableTransportation.map(item => {
-            return (
-              <Right>
-                <ItemDisplay //Maps through the items showing each one
-                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
-                  key={item.id}
-                  removeSpending_action={removeSpending_action}
-                  value={item.currentValue.financialValue}
-                  setItemId={setItemId}
-                />
-              </Right>
-            );
-          })}
-        </Container>
-      ) : subCategory === "variableTransportationCosts" ? (
-        <Container>
-          {arrayOfitemsFixedTransportation.map(item => {
-            return (
-              <Left>
-                <ItemDisplay //Maps through the items showing each one
-                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
-                  key={item.id}
-                  removeSpending_action={removeSpending_action}
-                  value={item.currentValue.financialValue}
-                  setItemId={setItemId}
-                />
-              </Left>
-            );
-          })}
+            {arrayOfitemsVariableTransportation.map(item => {
+              return (
+                <Right>
+                  <ItemDisplay //Maps through the items showing each one
+                    item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                    key={item.id}
+                    removeSpending_action={removeSpending_action}
+                    value={item.currentValue.financialValue}
+                    setItemId={setItemId}
+                  />
+                </Right>
+              );
+            })}
+          </Container>
+        ) : subCategory === "variableTransportationCosts" ? (
+          <Container>
+            {arrayOfitemsFixedTransportation.map(item => {
+              return (
+                <Left>
+                  <ItemDisplay //Maps through the items showing each one
+                    item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                    key={item.id}
+                    removeSpending_action={removeSpending_action}
+                    value={item.currentValue.financialValue}
+                    setItemId={setItemId}
+                  />
+                </Left>
+              );
+            })}
 
-          {arrayOfitemsVariableTransportation.map(item => {
-            return (
-              <Right>
-                <ItemDisplay //Maps through the items showing each one
-                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
-                  key={item.id}
-                  removeSpending_action={removeSpending_action}
-                  value={item.currentValue.financialValue}
-                  setItemId={setItemId}
-                />
-              </Right>
-            );
-          })}
-        </Container>
-      ) : subCategory === "fixedLifestyleCosts" ? (
-        <Container>
-          {arrayOfitemsFixedLifestyle.map(item => {
-            return (
-              <Left>
-                <ItemDisplay //Maps through the items showing each one
-                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
-                  key={item.id}
-                  removeSpending_action={removeSpending_action}
-                  value={item.currentValue.financialValue}
-                  setItemId={setItemId}
-                />
-              </Left>
-            );
-          })}
+            {arrayOfitemsVariableTransportation.map(item => {
+              return (
+                <Right>
+                  <ItemDisplay //Maps through the items showing each one
+                    item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                    key={item.id}
+                    removeSpending_action={removeSpending_action}
+                    value={item.currentValue.financialValue}
+                    setItemId={setItemId}
+                  />
+                </Right>
+              );
+            })}
+          </Container>
+        ) : subCategory === "fixedLifestyleCosts" ? (
+          <Container>
+            {arrayOfitemsFixedLifestyle.map(item => {
+              return (
+                <Left>
+                  <ItemDisplay //Maps through the items showing each one
+                    item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                    key={item.id}
+                    removeSpending_action={removeSpending_action}
+                    value={item.currentValue.financialValue}
+                    setItemId={setItemId}
+                  />
+                </Left>
+              );
+            })}
 
-          {arrayOfitemsVariableLifestyle.map(item => {
-            return (
-              <Right>
-                <ItemDisplay //Maps through the items showing each one
-                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
-                  key={item.id}
-                  removeSpending_action={removeSpending_action}
-                  value={item.currentValue.financialValue}
-                  setItemId={setItemId}
-                />
-              </Right>
-            );
-          })}
-        </Container>
-      ) : subCategory === "variableLifestyleCosts" ? (
-        <Container>
-          {arrayOfitemsFixedLifestyle.map(item => {
-            return (
-              <Left>
-                <ItemDisplay //Maps through the items showing each one
-                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
-                  key={item.id}
-                  removeSpending_action={removeSpending_action}
-                  value={item.currentValue.financialValue}
-                  setItemId={setItemId}
-                />
-              </Left>
-            );
-          })}
+            {arrayOfitemsVariableLifestyle.map(item => {
+              return (
+                <Right>
+                  <ItemDisplay //Maps through the items showing each one
+                    item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                    key={item.id}
+                    removeSpending_action={removeSpending_action}
+                    value={item.currentValue.financialValue}
+                    setItemId={setItemId}
+                  />
+                </Right>
+              );
+            })}
+          </Container>
+        ) : subCategory === "variableLifestyleCosts" ? (
+          <Container>
+            {arrayOfitemsFixedLifestyle.map(item => {
+              return (
+                <Left>
+                  <ItemDisplay //Maps through the items showing each one
+                    item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                    key={item.id}
+                    removeSpending_action={removeSpending_action}
+                    value={item.currentValue.financialValue}
+                    setItemId={setItemId}
+                  />
+                </Left>
+              );
+            })}
 
-          {arrayOfitemsVariableLifestyle.map(item => {
-            return (
-              <Right>
-                <ItemDisplay //Maps through the items showing each one
-                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
-                  key={item.id}
-                  removeSpending_action={removeSpending_action}
-                  value={item.currentValue.financialValue}
-                  setItemId={setItemId}
-                />
-              </Right>
-            );
-          })}
-        </Container>
-      ) : subCategory === "fixedLargeEventsCosts" ? (
-        <Container>
-          {arrayOfitemsFixedLargeEvents.map(item => {
-            return (
-              <Left>
-                <ItemDisplay //Maps through the items showing each one
-                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
-                  key={item.id}
-                  removeSpending_action={removeSpending_action}
-                  value={item.currentValue.financialValue}
-                  setItemId={setItemId}
-                />
-              </Left>
-            );
-          })}
+            {arrayOfitemsVariableLifestyle.map(item => {
+              return (
+                <Right>
+                  <ItemDisplay //Maps through the items showing each one
+                    item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                    key={item.id}
+                    removeSpending_action={removeSpending_action}
+                    value={item.currentValue.financialValue}
+                    setItemId={setItemId}
+                  />
+                </Right>
+              );
+            })}
+          </Container>
+        ) : subCategory === "fixedLargeEventsCosts" ? (
+          <Container>
+            {arrayOfitemsFixedLargeEvents.map(item => {
+              return (
+                <Left>
+                  <ItemDisplay //Maps through the items showing each one
+                    item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                    key={item.id}
+                    removeSpending_action={removeSpending_action}
+                    value={item.currentValue.financialValue}
+                    setItemId={setItemId}
+                  />
+                </Left>
+              );
+            })}
 
-          {arrayOfitemsVariableLargeEvents.map(item => {
-            return (
-              <Right>
-                <ItemDisplay //Maps through the items showing each one
-                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
-                  key={item.id}
-                  removeSpending_action={removeSpending_action}
-                  value={item.currentValue.financialValue}
-                  setItemId={setItemId}
-                />
-              </Right>
-            );
-          })}
-        </Container>
-      ) : subCategory === "variableLargeEventsCosts" ? (
-        <Container>
-          {arrayOfitemsFixedLargeEvents.map(item => {
-            return (
-              <Left>
-                <ItemDisplay //Maps through the items showing each one
-                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
-                  key={item.id}
-                  removeSpending_action={removeSpending_action}
-                  value={item.currentValue.financialValue}
-                  setItemId={setItemId}
-                />
-              </Left>
-            );
-          })}
+            {arrayOfitemsVariableLargeEvents.map(item => {
+              return (
+                <Right>
+                  <ItemDisplay //Maps through the items showing each one
+                    item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                    key={item.id}
+                    removeSpending_action={removeSpending_action}
+                    value={item.currentValue.financialValue}
+                    setItemId={setItemId}
+                  />
+                </Right>
+              );
+            })}
+          </Container>
+        ) : subCategory === "variableLargeEventsCosts" ? (
+          <Container>
+            {arrayOfitemsFixedLargeEvents.map(item => {
+              return (
+                <Left>
+                  <ItemDisplay //Maps through the items showing each one
+                    item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                    key={item.id}
+                    removeSpending_action={removeSpending_action}
+                    value={item.currentValue.financialValue}
+                    setItemId={setItemId}
+                  />
+                </Left>
+              );
+            })}
 
-          {arrayOfitemsVariableLargeEvents.map(item => {
-            return (
-              <Right>
-                <ItemDisplay //Maps through the items showing each one
-                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
-                  key={item.id}
-                  removeSpending_action={removeSpending_action}
-                  value={item.currentValue.financialValue}
-                  setItemId={setItemId}
-                />
-              </Right>
-            );
-          })}
-        </Container>
-      ) : null}
+            {arrayOfitemsVariableLargeEvents.map(item => {
+              return (
+                <Right>
+                  <ItemDisplay //Maps through the items showing each one
+                    item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                    key={item.id}
+                    removeSpending_action={removeSpending_action}
+                    value={item.currentValue.financialValue}
+                    setItemId={setItemId}
+                  />
+                </Right>
+              );
+            })}
+          </Container>
+        ) : null}
     </Wrapper>
   );
 };
@@ -466,32 +468,18 @@ export default connect(mapStateToProps, { removeSpending_action })(
 const Header = styled.div`
   width: 100%;
   background: ${props =>
-    props.subCategory === "fixedHousingCosts"
-      ? props.theme.color.blue
+    props.subCategory === "fixedHousingCosts" || props.subCategory === "variableHousingCosts"
+      ? props.theme.color.steelBlue
       : props =>
-        props.subCategory === "variableHousingCosts"
-          ? props.theme.color.blue
+        props.subCategory === "fixedTransportationCosts" || props.subCategory === "variableTransportationCosts"
+          ? props.theme.color.green
           : props =>
-            props.subCategory === "fixedTransportationCosts"
-              ? props.theme.color.steelBlue
+            props.subCategory === "fixedLifestyleCosts" || props.subCategory === "variableLifestyleCosts"
+              ? props.theme.color.blue
               : props =>
-                props.subCategory === "variableTransportationCosts"
-                  ? props.theme.color.steelBlue
-                  : props =>
-                    props.subCategory === "fixedLifestyleCosts"
-                      ? props.theme.color.green
-                      : props =>
-                        props.subCategory === "variableLifestyleCosts"
-                          ? props.theme.color.green
-                          : props =>
-                            props.subCategory ===
-                              "fixedLargeEventsCosts"
-                              ? props.theme.color.salmon
-                              : props =>
-                                props.subCategory ===
-                                  "variableLargeEventsCosts"
-                                  ? props.theme.color.salmon
-                                  : null};
+                props.subCategory === "fixedLargeEventsCosts" || props.subCategory === "variableLargeEventsCosts"
+                  ? props.theme.color.lightGrey
+                  : props.theme.color.blue};
   height: 6rem;
   color: ${props => props.theme.color.ice};
   border-bottom: ${props => props.theme.border.primary};
@@ -509,7 +497,7 @@ const Wrapper = styled.div`
   margin-bottom: 1rem;
   background: ${props => props.theme.color.ice};
 `;
-const ItemLeft = styled.div`
+const Item = styled.div`
   margin: 0.5rem 0rem 0.5rem 1rem;
   padding: 0.8rem 4.5rem 0.8rem 4rem;
   width: 28rem;
@@ -517,37 +505,24 @@ const ItemLeft = styled.div`
   position: relative;
   height: ${props => (props.label.length > 20 ? "7rem" : "4rem")};
   background: ${props =>
-    props.subCategory === "fixedHousingCosts"
-      ? props.theme.color.blue
+    props.subCategory === "fixedHousingCosts" || props.subCategory === "variableHousingCosts"
+      ? props.theme.color.steelBlue
       : props =>
-        props.subCategory === "variableHousingCosts"
-          ? props.theme.color.blue
+        props.subCategory === "fixedTransportationCosts" || props.subCategory === "variableTransportationCosts"
+          ? props.theme.color.green
           : props =>
-            props.subCategory === "fixedTransportationCosts"
-              ? props.theme.color.steelBlue
+            props.subCategory === "fixedLifestyleCosts" || props.subCategory === "variableLifestyleCosts"
+              ? props.theme.color.blue
               : props =>
-                props.subCategory === "variableTransportationCosts"
-                  ? props.theme.color.steelBlue
-                  : props =>
-                    props.subCategory === "fixedLifestyleCosts"
-                      ? props.theme.color.green
-                      : props =>
-                        props.subCategory === "variableLifestyleCosts"
-                          ? props.theme.color.green
-                          : props =>
-                            props.subCategory ===
-                              "fixedLargeEventsCosts"
-                              ? props.theme.color.salmon
-                              : props =>
-                                props.subCategory ===
-                                  "variableLargeEventsCosts"
-                                  ? props.theme.color.salmon
-                                  : null};
+                props.subCategory === "fixedLargeEventsCosts" || props.subCategory === "variableLargeEventsCosts"
+                  ? props.theme.color.lightGrey
+                  : props.theme.color.blue};
   border-radius: 5px;
   color: white;
   border: ${props => props.theme.border.primary};
   cursor: pointer;
 `;
+
 const Container = styled.div`
   min-height: 10rem;
   max-height: 50rem;
@@ -559,7 +534,7 @@ const Container = styled.div`
 `;
 
 const H2 = styled.h2`
-font-size: 1.4rem
+font-size: 1.4rem;
 font-weight: 700;
 `;
 

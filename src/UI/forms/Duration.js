@@ -41,6 +41,7 @@ const Container = styled.div`
   flex-direction: column;
   margin-top: -1.6rem;
 `;
+
 const SelectWrapper = styled.div`
   height: 18rem;
   background: white;
@@ -52,6 +53,7 @@ const SelectWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
 const Label = styled.label`
   font-size: 1.6rem;
   font-weight: normal;
@@ -70,43 +72,43 @@ const SelectValue = styled.div`
     flex-direction: column;
     align-items: center;
     width: 100%;
-    color: ${props => (props.selected ? "white" : props.theme.color.slate)}
+    color: ${props => (props.selected ? "white" : props.theme.color.slate)};
     font-size: 1.6rem;
     background: ${props =>
-      props.selected
-        ? props =>
-            props.subCategory === "investmentAssets"
-              ? props.theme.color.steelBlue
+    props.selected
+      ? props =>
+        props.subCategory === "fixedHousingCosts" || props.subCategory === "variableHousingCosts"
+          ? props.theme.color.steelBlue
+          : props =>
+            props.subCategory === "fixedTransportationCosts" || props.subCategory === "variableTransportationCosts"
+              ? props.theme.color.green
               : props =>
-                  props.subCategory === "propertyAssets"
-                    ? props.theme.color.green
-                    : props =>
-                        props.subCategory === "unsecuredDebt"
-                          ? props.theme.color.salmon
-                          : props =>
-                              props.subCategory === "securedDebt"
-                                ? props.theme.color.darkSalmon
-                                : props.theme.color.blue
-        : "white"}
+                props.subCategory === "fixedLifestyleCosts" || props.subCategory === "variableLifestyleCosts"
+                  ? props.theme.color.blue
+                  : props =>
+                    props.subCategory === "fixedLargeEventsCosts" || props.subCategory === "variableLargeEventsCosts"
+                      ? props.theme.color.lightGrey
+                      : props.theme.color.blue
+      : "white"};
     text-align: center;
     &:hover {
         background: ${props =>
-          props.selected
-            ? props =>
-                props.subCategory === "investmentAssets"
-                  ? props.theme.color.steelBlue
+    props.selected
+      ? props =>
+        props.subCategory === "fixedHousingCosts" || props.subCategory === "variableHousingCosts"
+          ? props.theme.color.steelBlue
+          : props =>
+            props.subCategory === "fixedTransportationCosts" || props.subCategory === "variableTransportationCosts"
+              ? props.theme.color.green
+              : props =>
+                props.subCategory === "fixedLifestyleCosts" || props.subCategory === "variableLifestyleCosts"
+                  ? props.theme.color.blue
                   : props =>
-                      props.subCategory === "propertyAssets"
-                        ? props.theme.color.green
-                        : props =>
-                            props.subCategory === "unsecuredDebt"
-                              ? props.theme.color.salmon
-                              : props =>
-                                  props.subCategory === "securedDebt"
-                                    ? props.theme.color.darkSalmon
-                                    : props.theme.color.blue
-            : props.theme.color.ice}
-        color: ${props => (props.selected ? "white" : props.theme.color.slate)}
+                    props.subCategory === "fixedLargeEventsCosts" || props.subCategory === "variableLargeEventsCosts"
+                      ? props.theme.color.lightGrey
+                      : props.theme.color.blue
+      : props.theme.color.ice};
+        color: ${props => (props.selected ? "white" : props.theme.color.slate)};
         cursor: pointer;
     }
 `;

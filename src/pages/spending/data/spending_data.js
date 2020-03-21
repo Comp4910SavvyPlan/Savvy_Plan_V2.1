@@ -133,16 +133,5 @@ export const individualItem_data = (
     min: 0,
     step: 1,
     label: ageLabel2
-  },
-  startDate: {
-    rangeBarValue: 0,
-    name: "startDate",
-    label: "Start Date",
-    date: ""
-  },
-  dual: {
-    name: "dual",
-    fromAge: 12,
-    toAge: 45
   }
 });

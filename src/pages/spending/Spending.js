@@ -90,9 +90,8 @@ const Page = styled.div`
     "b b b b b b b b b b b b"
     "c c c c c c c c c c c c";
 `;
+
 const AddPage = styled(Page)``;
-
-
 
 const Buttons = styled.div`
   position: absolute;
