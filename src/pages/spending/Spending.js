@@ -18,11 +18,9 @@ import Main from "pages/spending/components/Main";
 import AddForm from "pages/spending/components/AddForm";
 import ItemDisplayBox from "pages/spending/components/ItemDisplayBox";
 
-const Spending = () => {
-
-  //Component begins at page 0
+const Spending = ({ spending_reducer }) => {
   const [count, setCount] = useState(0);
-
+  console.log(spending_reducer);
   const renderAddForm = data => {
     return data.map(d =>
       d.count === count ? (
@@ -47,6 +45,7 @@ const Spending = () => {
               category={d.category}
               reference={d.reference}
               subCategory={d.subCategory}
+              section={d.section}
               currentValueLabel={d.currentValueLabel}
               ageLabel1={d.ageLabel1}
               ageLabel2={d.ageLabel2}
@@ -73,8 +72,8 @@ const Spending = () => {
           {renderAddForm(spendingWizard_data)} {}
         </>
       ) : (
-            <Main />
-          )}
+        <Main />
+      )}
       <Buttons>
         {" "}
         {}
@@ -84,14 +83,18 @@ const Spending = () => {
         />
         <ButtonLight
           forward
-          onClick={() => setCount(count < spendingEnd ? count + 1 : spendingEnd)}
+          onClick={() =>
+            setCount(count < spendingEnd ? count + 1 : spendingEnd)
+          }
         />
       </Buttons>
     </Page>
   );
 };
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  spending_reducer: state.spending_reducer
+});
 
 export default connect(mapStateToProps, {})(Spending);
 

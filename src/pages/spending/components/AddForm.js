@@ -14,11 +14,12 @@ import ButtonLight from "UI/buttons/ButtonLight";
 import { addItem_action } from "redux/spending/spending_actions";
 import { individualItem_data } from "pages/spending/data/spending_data";
 
-
 const AddForm = ({
   category,
   reference,
   subCategory,
+  section,
+  user_reducer,
   setAddFormSubCategory,
   section,
   durationTypeArray,
@@ -36,8 +37,9 @@ const AddForm = ({
     currentValueLabel,
     ageLabel1,
     ageLabel2
-  );
-
+  ); //initial State is found in data
+  console.log(section);
+  console.log(initialState);
   const [state, setState] = useState({ ...initialState });
 
   //Updates state on page change
@@ -70,7 +72,6 @@ const AddForm = ({
       <Container subCategory={subCategory}>
         {" "}
         {}
-
         <Left>
           {" "}
           {}
@@ -78,15 +79,14 @@ const AddForm = ({
             //Specifies duration options based on subCategory
             array={
               subCategory === "fixedHousingCosts" ||
-                subCategory === "variableHousingCosts" ||
-                subCategory === "fixedTransportationCosts" ||
-                subCategory === "variableTransportationCosts" ||
-                subCategory === "fixedLifestyleCosts" ||
-                subCategory === "variableLifestyleCosts" ||
-                subCategory === "fixedLargeEventsCosts" ||
-                subCategory === "variableLargeEventsCosts"
-                ?
-                durationTypeArray
+              subCategory === "variableHousingCosts" ||
+              subCategory === "fixedTransportationCosts" ||
+              subCategory === "variableTransportationCosts" ||
+              subCategory === "fixedLifestyleCosts" ||
+              subCategory === "variableLifestyleCosts" ||
+              subCategory === "fixedLargeEventsCosts" ||
+              subCategory === "variableLargeEventsCosts"
+                ? durationTypeArray
                 : null
             }
             setValue={value =>
@@ -96,7 +96,6 @@ const AddForm = ({
             subCategory={subCategory}
           />
         </Left>
-
         <Center>
           <FormInput
             //Sets the state in the local state.
@@ -111,44 +110,31 @@ const AddForm = ({
             setValue={setValue}
           />
         </Center>
-
         <Right>
           <MiniRangeBarWrapper>
             {//Single range bar for housing, transportation and lifestyle
-              subCategory === "fixedHousingCosts" ||
-                subCategory === "variableHousingCosts" ||
-                subCategory === "fixedTransportationCosts" ||
-                subCategory === "variableTransportationCosts" ||
-                subCategory === "fixedLifestyleCosts" ||
-                subCategory === "variableLifestyleCosts" ? (
-
-                  <MiniRangeBar
-                    rangeBarProps={state.age1}
-                    setValue={setValue}
-                  />
-
-                ) : subCategory === "fixedLargeEventsCosts" || subCategory === "variableLargeEventsCosts" ? (
-                  //Two range bars for large events.
-                  <>
-                    <MiniRangeBar
-                      rangeBarProps={state.age1}
-                      setValue={setValue}
-                    />
-                    <MiniRangeBar
-                      rangeBarProps={state.age2}
-                      setValue={setValue}
-                    />
-                  </>
-                ) : null}
+            subCategory === "fixedHousingCosts" ||
+            subCategory === "variableHousingCosts" ||
+            subCategory === "fixedTransportationCosts" ||
+            subCategory === "variableTransportationCosts" ||
+            subCategory === "fixedLifestyleCosts" ||
+            subCategory === "variableLifestyleCosts" ? (
+              <MiniRangeBar rangeBarProps={state.age1} setValue={setValue} />
+            ) : subCategory === "fixedLargeEventsCosts" ||
+              subCategory === "variableLargeEventsCosts" ? (
+              //Two range bars for large events.
+              <>
+                <MiniRangeBar rangeBarProps={state.age1} setValue={setValue} />
+                <MiniRangeBar rangeBarProps={state.age2} setValue={setValue} />
+              </>
+            ) : null}
           </MiniRangeBarWrapper>
 
           <ButtonWrapper>
             <ButtonLight text={"Add"} onClick={() => addItem()} />
           </ButtonWrapper>
         </Right>
-
       </Container>
-
     </>
   );
 };

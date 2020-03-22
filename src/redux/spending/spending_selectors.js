@@ -2,108 +2,93 @@ import { createSelector } from "reselect"
 
 const spending_reducer = state => state.spending_reducer
 const thisYear = new Date()
-const thisMonth = year.getMonth()
-const UserAge = state => thisYear.getFullYear() - state.user_reducer.birthYear
+const thisMonth = thisYear.getMonth()
+const userAge = state => thisYear.getFullYear() - state.user_reducer.birthYear
 
 //Array to make the charts
 //Built 2 ways depending on way that data will be structured
 
-//Implemented in NetWorth section
-const subCategoryArray = (category, subCategory) => {
-   return Object.values(category).length > 0 ?
-           Object.values(category).filter(d => d.subCategory === subCategory)
-    : null
-}
-
 //Selector implemented in Income section
-const convertReducerToArray = (spending_reducer) => {
+const convertReducerToArray = (spending_reducer, userAge) => {
 
-  const spendingArray = Object.values(spending_reducer)
-
-  const returnSpending = (spendingArray, category, age){
+  const spendingArray1 = Object.values(spending_reducer.variable)
+  const spendingArray2 = Object.values(spending_reducer.fixed)
+  const spendingArray = spendingArray1.concat(spendingArray2)
+console.log(spendingArray)
+  const returnSpending = (spendingArray, section, age) =>{
 
   if(spendingArray.length > 0){
-    const categorySpending = spendingArray.map(d => d.category === category
-                      && age >= d.ageLabel1
-                      && age <= d.ageLabel2 ?
-                      d.spending.financialValue : 0
+    const sectionSpending = spendingArray.map(d => d.section === section
+                      && age >= d.dual.fromAge
+                      && age <= d.dual.toAge ?
+                      d.currentValue.financialValue : 0
                     )
-                    return Math.max(...categorySpending)
+                    return sectionSpending.reduce((acc, num)=> acc + num)
   }
   return 0
 }
 
-let arrayOfLabels = [...new Set(spendingArray.map(d => d.category))]
-
+let arrayOfLabels = [...new Set(spendingArray.map(d => d.section))]
+  console.log(arrayOfLabels)
     const array = []
-    for (let age = UserAge; age < 95; age++) {
+    for (let age = userAge; age < 95; age++) {
         const itemObject = {age: age}
-        const details = Object.assign(itemObject,  ...arrayOfLabels.map(category => (
-                            {[category]: returnSpending(spendingArray, category, age)}
+        const details = Object.assign(itemObject,  ...arrayOfLabels.map(section => (
+                            {[section]: returnSpending(spendingArray, section, age)}
                             )))
         array.push(details)
     }
+    console.log(array)
     return array
+
 
 }
 
 
 //Spending SELECTORS
 
-export const housing_selector = createSelector(
-  [spending_reducer],
-  spending_reducer =>
-    Object.values(spending_reducer.fixed).filter(
-      d => d.subCategory === "housingCosts"
-    ) //creates a an array of each of the income subCategory names, which is used in the stacked Income chart
+//Updating Spending selectors to be used
+
+export const spending_selector = createSelector(
+    spending_reducer,
+    (spending_reducer) => ({...spending_reducer})
 )
 
-export const v_housing_selector = createSelector(
-  [spending_reducer],
-  spending_reducer =>
-    Object.values(spending_reducer.variable).filter(
-      d => d.subCategory === "vHousingCosts"
-    ) //creates a an array of each of the income subCategory names, which is used in the stacked Income chart
-);
+//Selectors to be used
+export const fixedHousing_selector = createSelector(
+    spending_reducer,
+    (spending_reducer) => Object.values(spending_reducer.fixed).filter(d => d.subCategory === "fixedHousingCosts"))
 
-export const transportation_selector = createSelector(
-  [spending_reducer],
-  spending_reducer =>
-    Object.values(spending_reducer.fixed).filter(
-      d => d.subCategory === "transportationCosts"
-    ) //creates a an array of each of the income subCategory names, which is used in the stacked Income chart
-)
+export const variableHousing_selector = createSelector(
+    spending_reducer,
+    (spending_reducer) => Object.values(spending_reducer.variable).filter(d => d.subCategory === "variableHousingCosts"))
 
-export const lifestyle_selector = createSelector(
-  [spending_reducer],
-  spending_reducer =>
-    Object.values(spending_reducer.fixed).filter(
-      d => d.subCategory === "lifestyleCosts"
-    ) //creates a an array of each of the income subCategory names, which is used in the stacked Income chart
-)
+export const fixedTransportation_selector = createSelector(
+    spending_reducer,
+    (spending_reducer) => Object.values(spending_reducer.fixed).filter(d => d.subCategory === "fixedTransportationCosts"))
 
-export const largeEvents_selector = createSelector(
-  [spending_reducer],
-  spending_reducer =>
-    Object.values(spending_reducer.fixed).filter(
-      d => d.subCategory === "largeEventsCosts"
-    ) //creates a an array of each of the income subCategory names, which is used in the stacked Income chart
-)
+export const variableTransportation_selector = createSelector(
+    spending_reducer,
+    (spending_reducer) => Object.values(spending_reducer.variable).filter(d => d.subCategory === "variableTransportationCosts"))
 
-//Total Variable Spending
-export const totalVariableSpending_selector = createSelector(
-    [spending_reducer],
-    spending_reducer =>  {
-      const array =  Object.values(spending_reducer.variable)
-        return array.length > 0 ? Math.round(array.map(d => d.currentValue.financialValue).reduce((acc, num) => acc + num)/1000)*1000 : 0
-    }
-)
+export const fixedLifestyle_selector = createSelector(
+    spending_reducer,
+    (spending_reducer) => Object.values(spending_reducer.fixed).filter(d => d.subCategory === "fixedLifestyleCosts"))
 
-//Total Fixed Spending
-export const totalFixedSpending_selector = createSelector(
-    [spending_reducer],
-    spending_reducer =>  {
-      const array =  Object.values(spending_reducer.fixed)
-        return array.length > 0 ? Math.round(array.map(d => d.currentValue.financialValue).reduce((acc, num) => acc + num)/1000)*1000 : 0
-    }
+export const variableLifestyle_selector = createSelector(
+    spending_reducer,
+    (spending_reducer) => Object.values(spending_reducer.variable).filter(d => d.subCategory === "variableLifestyleCosts"))
+
+export const fixedLargeEvents_selector = createSelector(
+    spending_reducer,
+    (spending_reducer) => Object.values(spending_reducer.fixed).filter(d => d.subCategory === "fixedLargeEventsCosts"))
+
+export const variableLargeEvents_selector = createSelector(
+    spending_reducer,
+    (spending_reducer) => Object.values(spending_reducer.variable).filter(d => d.subCategory === "variableLargeEventsCosts"))
+
+export const spendingData_selector = createSelector(
+   spending_reducer,
+   userAge,
+   (spending_reducer, userAge) => convertReducerToArray(spending_reducer, userAge)
 )

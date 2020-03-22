@@ -8,10 +8,18 @@ import { connect } from "react-redux";
 import _ from "lodash";
 import { Close } from "style/Icons";
 import { removeSpending_action } from "redux/spending/spending_actions";
-
+import {
+  fixedHousing_selector,
+  variableHousing_selector,
+  fixedTransportation_selector,
+  variableTransportation_selector,
+  fixedLifestyle_selector,
+  variableLifestyle_selector,
+  fixedLargeEvents_selector,
+  variableLargeEvents_selector
+} from "redux/spending/spending_selectors";
 
 const ItemDisplay = ({ value, removeSpending_action, item, setItemId }) => {
-
   //Individual item that is added
   const { label, subCategory, id } = item;
   const removeItem = () => {
@@ -37,7 +45,15 @@ const ItemDisplayBox = ({
   subCategory,
   spending_reducer,
   removeSpending_action,
-  setItemId
+  setItemId,
+  fixedHousing_selector,
+  variableHousing_selector,
+  fixedTransportation_selector,
+  variableTransportation_selector,
+  fixedLifestyle_selector,
+  variableLifestyle_selector,
+  fixedLargeEvents_selector,
+  variableLargeEvents_selector
 }) => {
   //Box wrapping the items being added
 
@@ -80,57 +96,57 @@ const ItemDisplayBox = ({
   const totalValueFixedHousing =
     arrayOfitemsFixedHousing.length > 0
       ? arrayOfitemsFixedHousing
-        .map(d => d.currentValue.financialValue)
-        .reduce((acc, num) => acc + num)
+          .map(d => d.currentValue.financialValue)
+          .reduce((acc, num) => acc + num)
       : 0; //Sums the value of the category
 
   const totalValueVariableHousing =
     arrayOfitemsVariableHousing.length > 0
       ? arrayOfitemsVariableHousing
-        .map(d => d.currentValue.financialValue)
-        .reduce((acc, num) => acc + num)
+          .map(d => d.currentValue.financialValue)
+          .reduce((acc, num) => acc + num)
       : 0; //Sums the value of the category
 
   const totalValueFixedTransportation =
     arrayOfitemsFixedTransportation.length > 0
       ? arrayOfitemsFixedTransportation
-        .map(d => d.currentValue.financialValue)
-        .reduce((acc, num) => acc + num)
+          .map(d => d.currentValue.financialValue)
+          .reduce((acc, num) => acc + num)
       : 0; //Sums the value of the category
 
   const totalValueVariableTransportation =
     arrayOfitemsVariableTransportation.length > 0
       ? arrayOfitemsVariableTransportation
-        .map(d => d.currentValue.financialValue)
-        .reduce((acc, num) => acc + num)
+          .map(d => d.currentValue.financialValue)
+          .reduce((acc, num) => acc + num)
       : 0; //Sums the value of the category
 
   const totalValueFixedLifestyle =
     arrayOfitemsFixedLifestyle.length > 0
       ? arrayOfitemsFixedLifestyle
-        .map(d => d.currentValue.financialValue)
-        .reduce((acc, num) => acc + num)
+          .map(d => d.currentValue.financialValue)
+          .reduce((acc, num) => acc + num)
       : 0; //Sums the value of the category
 
   const totalValueVariableLifestyle =
     arrayOfitemsVariableLifestyle.length > 0
       ? arrayOfitemsVariableLifestyle
-        .map(d => d.currentValue.financialValue)
-        .reduce((acc, num) => acc + num)
+          .map(d => d.currentValue.financialValue)
+          .reduce((acc, num) => acc + num)
       : 0; //Sums the value of the category
 
   const totalValueFixedLargeEvents =
     arrayOfitemsFixedLargeEvents.length > 0
       ? arrayOfitemsFixedLargeEvents
-        .map(d => d.currentValue.financialValue)
-        .reduce((acc, num) => acc + num)
+          .map(d => d.currentValue.financialValue)
+          .reduce((acc, num) => acc + num)
       : 0; //Sums the value of the category
 
   const totalValueVariableLargeEvents =
     arrayOfitemsVariableLargeEvents.length > 0
       ? arrayOfitemsVariableLargeEvents
-        .map(d => d.currentValue.financialValue)
-        .reduce((acc, num) => acc + num)
+          .map(d => d.currentValue.financialValue)
+          .reduce((acc, num) => acc + num)
       : 0; //Sums the value of the category
 
   return (
@@ -144,88 +160,74 @@ const ItemDisplayBox = ({
           <h2>{"Variable: " + totalValueVariableHousing / 1000}</h2>
           {/*Shows the total value for that subCategory */}
         </Header>
-      ) :
-
-        subCategory === "variableHousingCosts" ? (
-          <Header subCategory={subCategory}>
-            {" "}
-            {/*The header passes subCategory to Styled-components so the color can change*/}
-            <h2>{_.startCase(subCategory)}</h2>
-            <h2>{"Fixed: " + totalValueFixedHousing / 1000}k</h2>
-            <h2>{"Variable: " + totalValueVariableHousing / 1000}</h2>
-            {/*Shows the total value for that subCategory */}
-          </Header>
-        ) :
-
-          subCategory === "fixedTransportationCosts" ? (
-            <Header subCategory={subCategory}>
-              {" "}
-              {/*The header passes subCategory to Styled-components so the color can change*/}
-              <h2>{_.startCase(subCategory)}</h2>
-              <h2>{"Fixed: " + totalValueFixedTransportation / 1000}k</h2>
-              <h2>{"Variable: " + totalValueVariableTransportation / 1000}</h2>
-              {/*Shows the total value for that subCategory */}
-            </Header>
-          ) :
-
-            subCategory === "variableTransportationCosts" ? (
-              <Header subCategory={subCategory}>
-                {" "}
-                {/*The header passes subCategory to Styled-components so the color can change*/}
-                <h2>{_.startCase(subCategory)}</h2>
-                <h2>{"Fixed: " + totalValueFixedTransportation / 1000}k</h2>
-                <h2>{"Variable: " + totalValueVariableTransportation / 1000}</h2>
-                {/*Shows the total value for that subCategory */}
-              </Header>
-            ) :
-
-              subCategory === "fixedLifestyleCosts" ? (
-                <Header subCategory={subCategory}>
-                  {" "}
-                  {/*The header passes subCategory to Styled-components so the color can change*/}
-                  <h2>{_.startCase(subCategory)}</h2>
-                  <h2>{"Fixed: " + totalValueFixedLifestyle / 1000}k</h2>
-                  <h2>{"Variable: " + totalValueVariableLifestyle / 1000}</h2>
-                  {/*Shows the total value for that subCategory */}
-                </Header>
-              ) :
-
-                subCategory === "variableLifestyleCosts" ? (
-                  <Header subCategory={subCategory}>
-                    {" "}
-                    {/*The header passes subCategory to Styled-components so the color can change*/}
-                    <h2>{_.startCase(subCategory)}</h2>
-                    <h2>{"Fixed: " + totalValueFixedLifestyle / 1000}k</h2>
-                    <h2>{"Variable: " + totalValueVariableLifestyle / 1000}</h2>
-                    {/*Shows the total value for that subCategory */}
-                  </Header>
-                ) :
-
-                  subCategory === "fixedLargeEventsCosts" ? (
-                    <Header subCategory={subCategory}>
-                      {" "}
-                      {/*The header passes subCategory to Styled-components so the color can change*/}
-                      <h2>{_.startCase(subCategory)}</h2>
-                      <h2>{"Fixed: " + totalValueFixedLargeEvents / 1000}k</h2>
-                      <h2>{"Variable: " + totalValueVariableLargeEvents / 1000}</h2>
-                      {/*Shows the total value for that subCategory */}
-                    </Header>
-                  ) :
-
-                    subCategory === "variableLargeEventsCosts" ? (
-                      <Header subCategory={subCategory}>
-                        {" "}
-                        {/*The header passes subCategory to Styled-components so the color can change*/}
-                        <h2>{_.startCase(subCategory)}</h2>
-                        <h2>{"Fixed: " + totalValueFixedLargeEvents / 1000}k</h2>
-                        <h2>{"Variable: " + totalValueVariableLargeEvents / 1000}</h2>
-                        {/*Shows the total value for that subCategory */}
-                      </Header>
-                    ) : null}
+      ) : subCategory === "variableHousingCosts" ? (
+        <Header subCategory={subCategory}>
+          {" "}
+          {/*The header passes subCategory to Styled-components so the color can change*/}
+          <h2>{_.startCase(subCategory)}</h2>
+          <h2>{"Fixed: " + totalValueFixedHousing / 1000}k</h2>
+          <h2>{"Variable: " + totalValueVariableHousing / 1000}</h2>
+          {/*Shows the total value for that subCategory */}
+        </Header>
+      ) : subCategory === "fixedTransportationCosts" ? (
+        <Header subCategory={subCategory}>
+          {" "}
+          {/*The header passes subCategory to Styled-components so the color can change*/}
+          <h2>{_.startCase(subCategory)}</h2>
+          <h2>{"Fixed: " + totalValueFixedTransportation / 1000}k</h2>
+          <h2>{"Variable: " + totalValueVariableTransportation / 1000}</h2>
+          {/*Shows the total value for that subCategory */}
+        </Header>
+      ) : subCategory === "variableTransportationCosts" ? (
+        <Header subCategory={subCategory}>
+          {" "}
+          {/*The header passes subCategory to Styled-components so the color can change*/}
+          <h2>{_.startCase(subCategory)}</h2>
+          <h2>{"Fixed: " + totalValueFixedTransportation / 1000}k</h2>
+          <h2>{"Variable: " + totalValueVariableTransportation / 1000}</h2>
+          {/*Shows the total value for that subCategory */}
+        </Header>
+      ) : subCategory === "fixedLifestyleCosts" ? (
+        <Header subCategory={subCategory}>
+          {" "}
+          {/*The header passes subCategory to Styled-components so the color can change*/}
+          <h2>{_.startCase(subCategory)}</h2>
+          <h2>{"Fixed: " + totalValueFixedLifestyle / 1000}k</h2>
+          <h2>{"Variable: " + totalValueVariableLifestyle / 1000}</h2>
+          {/*Shows the total value for that subCategory */}
+        </Header>
+      ) : subCategory === "variableLifestyleCosts" ? (
+        <Header subCategory={subCategory}>
+          {" "}
+          {/*The header passes subCategory to Styled-components so the color can change*/}
+          <h2>{_.startCase(subCategory)}</h2>
+          <h2>{"Fixed: " + totalValueFixedLifestyle / 1000}k</h2>
+          <h2>{"Variable: " + totalValueVariableLifestyle / 1000}</h2>
+          {/*Shows the total value for that subCategory */}
+        </Header>
+      ) : subCategory === "fixedLargeEventsCosts" ? (
+        <Header subCategory={subCategory}>
+          {" "}
+          {/*The header passes subCategory to Styled-components so the color can change*/}
+          <h2>{_.startCase(subCategory)}</h2>
+          <h2>{"Fixed: " + totalValueFixedLargeEvents / 1000}k</h2>
+          <h2>{"Variable: " + totalValueVariableLargeEvents / 1000}</h2>
+          {/*Shows the total value for that subCategory */}
+        </Header>
+      ) : subCategory === "variableLargeEventsCosts" ? (
+        <Header subCategory={subCategory}>
+          {" "}
+          {/*The header passes subCategory to Styled-components so the color can change*/}
+          <h2>{_.startCase(subCategory)}</h2>
+          <h2>{"Fixed: " + totalValueFixedLargeEvents / 1000}k</h2>
+          <h2>{"Variable: " + totalValueVariableLargeEvents / 1000}</h2>
+          {/*Shows the total value for that subCategory */}
+        </Header>
+      ) : null}
 
       {subCategory === "fixedHousingCosts" ? (
         <Container>
-          {arrayOfitemsFixedHousing.map(item => {
+          {fixedHousing_selector.map(item => {
             return (
               <Left>
                 <ItemDisplay //Maps through the items showing each one
@@ -239,9 +241,7 @@ const ItemDisplayBox = ({
             );
           })}
 
-
-
-          {arrayOfitemsVariableHousing.map(item => {
+          {variableHousing_selector.map(item => {
             return (
               <Right>
                 <ItemDisplay //Maps through the items showing each one
@@ -255,225 +255,233 @@ const ItemDisplayBox = ({
             );
           })}
         </Container>
-      ) :
+      ) : null}
 
-        subCategory === "variableHousingCosts" ? (
-          <Container>
-            {arrayOfitemsFixedHousing.map(item => {
-              return (
-                <Left>
-                  <ItemDisplay //Maps through the items showing each one
-                    item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
-                    key={item.id}
-                    removeSpending_action={removeSpending_action}
-                    value={item.currentValue.financialValue}
-                    setItemId={setItemId}
-                  />
-                </Left>
-              );
-            })}
+      {subCategory === "variableHousingCosts" ? (
+        <Container>
+          {fixedHousing_selector.map(item => {
+            return (
+              <Left>
+                <ItemDisplay //Maps through the items showing each one
+                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                  key={item.id}
+                  removeSpending_action={removeSpending_action}
+                  value={item.currentValue.financialValue}
+                  setItemId={setItemId}
+                />
+              </Left>
+            );
+          })}
 
-            {arrayOfitemsVariableHousing.map(item => {
-              return (
-                <Right>
-                  <ItemDisplay //Maps through the items showing each one
-                    item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
-                    key={item.id}
-                    removeSpending_action={removeSpending_action}
-                    value={item.currentValue.financialValue}
-                    setItemId={setItemId}
-                  />
-                </Right>
-              );
-            })}
-          </Container>
-        ) : subCategory === "fixedTransportationCosts" ? (
-          <Container>
-            {arrayOfitemsFixedTransportation.map(item => {
-              return (
-                <Left>
-                  <ItemDisplay //Maps through the items showing each one
-                    item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
-                    key={item.id}
-                    removeSpending_action={removeSpending_action}
-                    value={item.currentValue.financialValue}
-                    setItemId={setItemId}
-                  />
-                </Left>
-              );
-            })}
+          {variableHousing_selector.map(item => {
+            return (
+              <Right>
+                <ItemDisplay //Maps through the items showing each one
+                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                  key={item.id}
+                  removeSpending_action={removeSpending_action}
+                  value={item.currentValue.financialValue}
+                  setItemId={setItemId}
+                />
+              </Right>
+            );
+          })}
+        </Container>
+      ) : subCategory === "fixedTransportationCosts" ? (
+        <Container>
+          {fixedTransportation_selector.map(item => {
+            return (
+              <Left>
+                <ItemDisplay //Maps through the items showing each one
+                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                  key={item.id}
+                  removeSpending_action={removeSpending_action}
+                  value={item.currentValue.financialValue}
+                  setItemId={setItemId}
+                />
+              </Left>
+            );
+          })}
 
-            {arrayOfitemsVariableTransportation.map(item => {
-              return (
-                <Right>
-                  <ItemDisplay //Maps through the items showing each one
-                    item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
-                    key={item.id}
-                    removeSpending_action={removeSpending_action}
-                    value={item.currentValue.financialValue}
-                    setItemId={setItemId}
-                  />
-                </Right>
-              );
-            })}
-          </Container>
-        ) : subCategory === "variableTransportationCosts" ? (
-          <Container>
-            {arrayOfitemsFixedTransportation.map(item => {
-              return (
-                <Left>
-                  <ItemDisplay //Maps through the items showing each one
-                    item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
-                    key={item.id}
-                    removeSpending_action={removeSpending_action}
-                    value={item.currentValue.financialValue}
-                    setItemId={setItemId}
-                  />
-                </Left>
-              );
-            })}
+          {variableTransportation_selector.map(item => {
+            return (
+              <Right>
+                <ItemDisplay //Maps through the items showing each one
+                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                  key={item.id}
+                  removeSpending_action={removeSpending_action}
+                  value={item.currentValue.financialValue}
+                  setItemId={setItemId}
+                />
+              </Right>
+            );
+          })}
+        </Container>
+      ) : subCategory === "variableTransportationCosts" ? (
+        <Container>
+          {fixedTransportation_selector.map(item => {
+            return (
+              <Left>
+                <ItemDisplay //Maps through the items showing each one
+                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                  key={item.id}
+                  removeSpending_action={removeSpending_action}
+                  value={item.currentValue.financialValue}
+                  setItemId={setItemId}
+                />
+              </Left>
+            );
+          })}
 
-            {arrayOfitemsVariableTransportation.map(item => {
-              return (
-                <Right>
-                  <ItemDisplay //Maps through the items showing each one
-                    item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
-                    key={item.id}
-                    removeSpending_action={removeSpending_action}
-                    value={item.currentValue.financialValue}
-                    setItemId={setItemId}
-                  />
-                </Right>
-              );
-            })}
-          </Container>
-        ) : subCategory === "fixedLifestyleCosts" ? (
-          <Container>
-            {arrayOfitemsFixedLifestyle.map(item => {
-              return (
-                <Left>
-                  <ItemDisplay //Maps through the items showing each one
-                    item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
-                    key={item.id}
-                    removeSpending_action={removeSpending_action}
-                    value={item.currentValue.financialValue}
-                    setItemId={setItemId}
-                  />
-                </Left>
-              );
-            })}
+          {variableTransportation_selector.map(item => {
+            return (
+              <Right>
+                <ItemDisplay //Maps through the items showing each one
+                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                  key={item.id}
+                  removeSpending_action={removeSpending_action}
+                  value={item.currentValue.financialValue}
+                  setItemId={setItemId}
+                />
+              </Right>
+            );
+          })}
+        </Container>
+      ) : subCategory === "fixedLifestyleCosts" ? (
+        <Container>
+          {fixedLifestyle_selector.map(item => {
+            return (
+              <Left>
+                <ItemDisplay //Maps through the items showing each one
+                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                  key={item.id}
+                  removeSpending_action={removeSpending_action}
+                  value={item.currentValue.financialValue}
+                  setItemId={setItemId}
+                />
+              </Left>
+            );
+          })}
 
-            {arrayOfitemsVariableLifestyle.map(item => {
-              return (
-                <Right>
-                  <ItemDisplay //Maps through the items showing each one
-                    item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
-                    key={item.id}
-                    removeSpending_action={removeSpending_action}
-                    value={item.currentValue.financialValue}
-                    setItemId={setItemId}
-                  />
-                </Right>
-              );
-            })}
-          </Container>
-        ) : subCategory === "variableLifestyleCosts" ? (
-          <Container>
-            {arrayOfitemsFixedLifestyle.map(item => {
-              return (
-                <Left>
-                  <ItemDisplay //Maps through the items showing each one
-                    item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
-                    key={item.id}
-                    removeSpending_action={removeSpending_action}
-                    value={item.currentValue.financialValue}
-                    setItemId={setItemId}
-                  />
-                </Left>
-              );
-            })}
+          {variableLifestyle_selector.map(item => {
+            return (
+              <Right>
+                <ItemDisplay //Maps through the items showing each one
+                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                  key={item.id}
+                  removeSpending_action={removeSpending_action}
+                  value={item.currentValue.financialValue}
+                  setItemId={setItemId}
+                />
+              </Right>
+            );
+          })}
+        </Container>
+      ) : subCategory === "variableLifestyleCosts" ? (
+        <Container>
+          {fixedLifestyle_selector.map(item => {
+            return (
+              <Left>
+                <ItemDisplay //Maps through the items showing each one
+                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                  key={item.id}
+                  removeSpending_action={removeSpending_action}
+                  value={item.currentValue.financialValue}
+                  setItemId={setItemId}
+                />
+              </Left>
+            );
+          })}
 
-            {arrayOfitemsVariableLifestyle.map(item => {
-              return (
-                <Right>
-                  <ItemDisplay //Maps through the items showing each one
-                    item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
-                    key={item.id}
-                    removeSpending_action={removeSpending_action}
-                    value={item.currentValue.financialValue}
-                    setItemId={setItemId}
-                  />
-                </Right>
-              );
-            })}
-          </Container>
-        ) : subCategory === "fixedLargeEventsCosts" ? (
-          <Container>
-            {arrayOfitemsFixedLargeEvents.map(item => {
-              return (
-                <Left>
-                  <ItemDisplay //Maps through the items showing each one
-                    item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
-                    key={item.id}
-                    removeSpending_action={removeSpending_action}
-                    value={item.currentValue.financialValue}
-                    setItemId={setItemId}
-                  />
-                </Left>
-              );
-            })}
+          {variableLifestyle_selector.map(item => {
+            return (
+              <Right>
+                <ItemDisplay //Maps through the items showing each one
+                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                  key={item.id}
+                  removeSpending_action={removeSpending_action}
+                  value={item.currentValue.financialValue}
+                  setItemId={setItemId}
+                />
+              </Right>
+            );
+          })}
+        </Container>
+      ) : subCategory === "fixedLargeEventsCosts" ? (
+        <Container>
+          {fixedLargeEvents_selector.map(item => {
+            return (
+              <Left>
+                <ItemDisplay //Maps through the items showing each one
+                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                  key={item.id}
+                  removeSpending_action={removeSpending_action}
+                  value={item.currentValue.financialValue}
+                  setItemId={setItemId}
+                />
+              </Left>
+            );
+          })}
 
-            {arrayOfitemsVariableLargeEvents.map(item => {
-              return (
-                <Right>
-                  <ItemDisplay //Maps through the items showing each one
-                    item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
-                    key={item.id}
-                    removeSpending_action={removeSpending_action}
-                    value={item.currentValue.financialValue}
-                    setItemId={setItemId}
-                  />
-                </Right>
-              );
-            })}
-          </Container>
-        ) : subCategory === "variableLargeEventsCosts" ? (
-          <Container>
-            {arrayOfitemsFixedLargeEvents.map(item => {
-              return (
-                <Left>
-                  <ItemDisplay //Maps through the items showing each one
-                    item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
-                    key={item.id}
-                    removeSpending_action={removeSpending_action}
-                    value={item.currentValue.financialValue}
-                    setItemId={setItemId}
-                  />
-                </Left>
-              );
-            })}
+          {variableLargeEvents_selector.map(item => {
+            return (
+              <Right>
+                <ItemDisplay //Maps through the items showing each one
+                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                  key={item.id}
+                  removeSpending_action={removeSpending_action}
+                  value={item.currentValue.financialValue}
+                  setItemId={setItemId}
+                />
+              </Right>
+            );
+          })}
+        </Container>
+      ) : subCategory === "variableLargeEventsCosts" ? (
+        <Container>
+          {fixedLargeEvents_selector.map(item => {
+            return (
+              <Left>
+                <ItemDisplay //Maps through the items showing each one
+                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                  key={item.id}
+                  removeSpending_action={removeSpending_action}
+                  value={item.currentValue.financialValue}
+                  setItemId={setItemId}
+                />
+              </Left>
+            );
+          })}
 
-            {arrayOfitemsVariableLargeEvents.map(item => {
-              return (
-                <Right>
-                  <ItemDisplay //Maps through the items showing each one
-                    item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
-                    key={item.id}
-                    removeSpending_action={removeSpending_action}
-                    value={item.currentValue.financialValue}
-                    setItemId={setItemId}
-                  />
-                </Right>
-              );
-            })}
-          </Container>
-        ) : null}
+          {variableLargeEvents_selector.map(item => {
+            return (
+              <Right>
+                <ItemDisplay //Maps through the items showing each one
+                  item={item} //Passes all props it has recived as "item" which is used to remove it or set the id when clicked
+                  key={item.id}
+                  removeSpending_action={removeSpending_action}
+                  value={item.currentValue.financialValue}
+                  setItemId={setItemId}
+                />
+              </Right>
+            );
+          })}
+        </Container>
+      ) : null}
     </Wrapper>
   );
 };
 
 const mapStateToProps = state => ({
-  spending_reducer: state.spending_reducer
+  spending_reducer: state.spending_reducer,
+  fixedHousing_selector: fixedHousing_selector(state),
+  variableHousing_selector: variableHousing_selector(state),
+  fixedTransportation_selector: fixedTransportation_selector(state),
+  variableTransportation_selector: variableTransportation_selector(state),
+  fixedLifestyle_selector: fixedLifestyle_selector(state),
+  variableLifestyle_selector: variableLifestyle_selector(state),
+  fixedLargeEvents_selector: fixedLargeEvents_selector(state),
+  variableLargeEvents_selector: variableLargeEvents_selector(state)
 });
 
 export default connect(mapStateToProps, { removeSpending_action })(
@@ -485,18 +493,22 @@ export default connect(mapStateToProps, { removeSpending_action })(
 const Header = styled.div`
   width: 100%;
   background: ${props =>
-    props.subCategory === "fixedHousingCosts" || props.subCategory === "variableHousingCosts"
+    props.subCategory === "fixedHousingCosts" ||
+    props.subCategory === "variableHousingCosts"
       ? props.theme.color.steelBlue
       : props =>
-        props.subCategory === "fixedTransportationCosts" || props.subCategory === "variableTransportationCosts"
-          ? props.theme.color.green
-          : props =>
-            props.subCategory === "fixedLifestyleCosts" || props.subCategory === "variableLifestyleCosts"
-              ? props.theme.color.blue
-              : props =>
-                props.subCategory === "fixedLargeEventsCosts" || props.subCategory === "variableLargeEventsCosts"
-                  ? props.theme.color.lightGrey
-                  : props.theme.color.blue};
+          props.subCategory === "fixedTransportationCosts" ||
+          props.subCategory === "variableTransportationCosts"
+            ? props.theme.color.green
+            : props =>
+                props.subCategory === "fixedLifestyleCosts" ||
+                props.subCategory === "variableLifestyleCosts"
+                  ? props.theme.color.blue
+                  : props =>
+                      props.subCategory === "fixedLargeEventsCosts" ||
+                      props.subCategory === "variableLargeEventsCosts"
+                        ? props.theme.color.lightGrey
+                        : props.theme.color.blue};
   height: 6rem;
   color: ${props => props.theme.color.ice};
   border-bottom: ${props => props.theme.border.primary};
@@ -513,18 +525,22 @@ const Item = styled.div`
   position: relative;
   height: ${props => (props.label.length > 20 ? "7rem" : "4rem")};
   background: ${props =>
-    props.subCategory === "fixedHousingCosts" || props.subCategory === "variableHousingCosts"
+    props.subCategory === "fixedHousingCosts" ||
+    props.subCategory === "variableHousingCosts"
       ? props.theme.color.steelBlue
       : props =>
-        props.subCategory === "fixedTransportationCosts" || props.subCategory === "variableTransportationCosts"
-          ? props.theme.color.green
-          : props =>
-            props.subCategory === "fixedLifestyleCosts" || props.subCategory === "variableLifestyleCosts"
-              ? props.theme.color.blue
-              : props =>
-                props.subCategory === "fixedLargeEventsCosts" || props.subCategory === "variableLargeEventsCosts"
-                  ? props.theme.color.lightGrey
-                  : props.theme.color.blue};
+          props.subCategory === "fixedTransportationCosts" ||
+          props.subCategory === "variableTransportationCosts"
+            ? props.theme.color.green
+            : props =>
+                props.subCategory === "fixedLifestyleCosts" ||
+                props.subCategory === "variableLifestyleCosts"
+                  ? props.theme.color.blue
+                  : props =>
+                      props.subCategory === "fixedLargeEventsCosts" ||
+                      props.subCategory === "variableLargeEventsCosts"
+                        ? props.theme.color.lightGrey
+                        : props.theme.color.blue};
   border-radius: 5px;
   color: white;
   border: ${props => props.theme.border.primary};
@@ -552,8 +568,8 @@ const Container = styled.div`
 `;
 
 const H2 = styled.h2`
-font-size: 1.4rem;
-font-weight: 700;
+  font-size: 1.4rem;
+  font-weight: 700;
 `;
 
 const Text = styled.div`
