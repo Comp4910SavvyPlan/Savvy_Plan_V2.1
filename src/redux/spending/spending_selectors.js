@@ -8,17 +8,12 @@ const userAge = state => thisYear.getFullYear() - state.user_reducer.birthYear
 //Array to make the charts
 //Built 2 ways depending on way that data will be structured
 
-//Implemented in NetWorth section
-const subCategoryArray = (category, subCategory) => {
-   return Object.values(category).length > 0 ?
-           Object.values(category).filter(d => d.subCategory === subCategory)
-    : null
-}
-
 //Selector implemented in Income section
 const convertReducerToArray = (spending_reducer, userAge) => {
 
-  const spendingArray = Object.values(spending_reducer.fixed)
+  const spendingArray1 = Object.values(spending_reducer.variable)
+  const spendingArray2 = Object.values(spending_reducer.fixed)
+  const spendingArray = spendingArray1.concat(spendingArray2)
 console.log(spendingArray)
   const returnSpending = (spendingArray, section, age) =>{
 
@@ -28,7 +23,7 @@ console.log(spendingArray)
                       && age <= d.dual.toAge ?
                       d.currentValue.financialValue : 0
                     )
-                    return Math.max(...sectionSpending)
+                    return sectionSpending.reduce((acc, num)=> acc + num)
   }
   return 0
 }
@@ -43,7 +38,9 @@ let arrayOfLabels = [...new Set(spendingArray.map(d => d.section))]
                             )))
         array.push(details)
     }
+    console.log(array)
     return array
+
 
 }
 
@@ -52,7 +49,7 @@ let arrayOfLabels = [...new Set(spendingArray.map(d => d.section))]
 
 //Updating Spending selectors to be used
 
-export const spending_selector = createSelector(                                                             
+export const spending_selector = createSelector(
     spending_reducer,
     (spending_reducer) => ({...spending_reducer})
 )
