@@ -1,3 +1,13 @@
+/**
+ * Displays Spending component pages.
+ * 0 = Welcome Page
+ * 1 = Fixed Housing,         2 = Variable Housing
+ * 3 = Fixed Transportation,  4 = Variable Transportation
+ * 5 = Fixed Lifestyle,       6 = Variable Lifestyle
+ * 7 = Fixed Large Events,    8 = Variable Large Events
+ * 9 = "Main" page
+ */
+
 import React, { useState } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
@@ -9,6 +19,8 @@ import AddForm from "pages/spending/components/AddForm";
 import ItemDisplayBox from "pages/spending/components/ItemDisplayBox";
 
 const Spending = () => {
+
+  //Component begins at page 0
   const [count, setCount] = useState(0);
 
   const renderAddForm = data => {
@@ -19,6 +31,7 @@ const Spending = () => {
             {" "}
             {}
             <ItemDisplayBox
+              //ItemDisplayBox is shown based on count number
               category={d.category}
               reference={d.reference}
               subCategory={d.subCategory}
@@ -30,6 +43,7 @@ const Spending = () => {
             {" "}
             {}
             <AddForm
+              //AddForm is shown based on count number
               category={d.category}
               reference={d.reference}
               subCategory={d.subCategory}
@@ -47,11 +61,14 @@ const Spending = () => {
     );
   };
 
+  //Page range
+  let spendingStart = 0;
+  let spendingEnd = 9;
   return (
     <Page>
-      {count === 0 ? (
+      {count === spendingStart ? (
         <WelcomePage />
-      ) : count < 9 ? (
+      ) : count < spendingEnd ? (
         <>
           {renderAddForm(spendingWizard_data)} {}
         </>
@@ -60,14 +77,14 @@ const Spending = () => {
           )}
       <Buttons>
         {" "}
-        {/* Fixed plan buttons enabling the toggling back and forth*/}
+        {}
         <ButtonLight
           backward
-          onClick={() => setCount(count > 0 ? count - 1 : 0)}
+          onClick={() => setCount(count > spendingStart ? count - 1 : 0)}
         />
         <ButtonLight
           forward
-          onClick={() => setCount(count < 9 ? count + 1 : 9)}
+          onClick={() => setCount(count < spendingEnd ? count + 1 : spendingEnd)}
         />
       </Buttons>
     </Page>
@@ -78,7 +95,7 @@ const mapStateToProps = state => ({});
 
 export default connect(mapStateToProps, {})(Spending);
 
-//-----------------------------------------------STYLES-----------------------------------------------//
+//-----------------------------------------------STYLE-----------------------------------------------//
 
 const Page = styled.div`
   ${props => props.theme.pageBaseStyles}

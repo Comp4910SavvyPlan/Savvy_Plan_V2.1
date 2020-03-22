@@ -1,9 +1,8 @@
-
 import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import _ from "lodash";
-import { Close, PlusIcon } from "style/Icons";
+import { Close } from "style/Icons";
 import { removeSpending_action } from "redux/spending/spending_actions";
 
 //displays the items the users have added, such as "car" or "checking account"
@@ -141,70 +140,84 @@ const ItemDisplayBox = ({
           <h2>{"Variable: " + totalValueVariableHousing / 1000}</h2>
           {/*Shows the total value for that subCategory */}
         </Header>
-      ) : subCategory === "variableHousingCosts" ? (
-        <Header subCategory={subCategory}>
-          {" "}
-          {/*The header passes subCategory to Styled-components so the color can change*/}
-          <h2>{_.startCase(subCategory)}</h2>
-          <h2>{"Fixed: " + totalValueFixedHousing / 1000}k</h2>
-          <h2>{"Variable: " + totalValueVariableHousing / 1000}</h2>
-          {/*Shows the total value for that subCategory */}
-        </Header>
-      ) : subCategory === "fixedTransportationCosts" ? (
-        <Header subCategory={subCategory}>
-          {" "}
-          {/*The header passes subCategory to Styled-components so the color can change*/}
-          <h2>{_.startCase(subCategory)}</h2>
-          <h2>{"Fixed: " + totalValueFixedTransportation / 1000}k</h2>
-          <h2>{"Variable: " + totalValueVariableTransportation / 1000}</h2>
-          {/*Shows the total value for that subCategory */}
-        </Header>
-      ) : subCategory === "variableTransportationCosts" ? (
-        <Header subCategory={subCategory}>
-          {" "}
-          {/*The header passes subCategory to Styled-components so the color can change*/}
-          <h2>{_.startCase(subCategory)}</h2>
-          <h2>{"Fixed: " + totalValueFixedTransportation / 1000}k</h2>
-          <h2>{"Variable: " + totalValueVariableTransportation / 1000}</h2>
-          {/*Shows the total value for that subCategory */}
-        </Header>
-      ) : subCategory === "fixedLifestyleCosts" ? (
-        <Header subCategory={subCategory}>
-          {" "}
-          {/*The header passes subCategory to Styled-components so the color can change*/}
-          <h2>{_.startCase(subCategory)}</h2>
-          <h2>{"Fixed: " + totalValueFixedLifestyle / 1000}k</h2>
-          <h2>{"Variable: " + totalValueVariableLifestyle / 1000}</h2>
-          {/*Shows the total value for that subCategory */}
-        </Header>
-      ) : subCategory === "variableLifestyleCosts" ? (
-        <Header subCategory={subCategory}>
-          {" "}
-          {/*The header passes subCategory to Styled-components so the color can change*/}
-          <h2>{_.startCase(subCategory)}</h2>
-          <h2>{"Fixed: " + totalValueFixedLifestyle / 1000}k</h2>
-          <h2>{"Variable: " + totalValueVariableLifestyle / 1000}</h2>
-          {/*Shows the total value for that subCategory */}
-        </Header>
-      ) : subCategory === "fixedLargeEventsCosts" ? (
-        <Header subCategory={subCategory}>
-          {" "}
-          {/*The header passes subCategory to Styled-components so the color can change*/}
-          <h2>{_.startCase(subCategory)}</h2>
-          <h2>{"Fixed: " + totalValueFixedLargeEvents / 1000}k</h2>
-          <h2>{"Variable: " + totalValueVariableLargeEvents / 1000}</h2>
-          {/*Shows the total value for that subCategory */}
-        </Header>
-      ) : subCategory === "variableLargeEventsCosts" ? (
-        <Header subCategory={subCategory}>
-          {" "}
-          {/*The header passes subCategory to Styled-components so the color can change*/}
-          <h2>{_.startCase(subCategory)}</h2>
-          <h2>{"Fixed: " + totalValueFixedLargeEvents / 1000}k</h2>
-          <h2>{"Variable: " + totalValueVariableLargeEvents / 1000}</h2>
-          {/*Shows the total value for that subCategory */}
-        </Header>
-      ) : null}
+      ) :
+
+        subCategory === "variableHousingCosts" ? (
+          <Header subCategory={subCategory}>
+            {" "}
+            {/*The header passes subCategory to Styled-components so the color can change*/}
+            <h2>{_.startCase(subCategory)}</h2>
+            <h2>{"Fixed: " + totalValueFixedHousing / 1000}k</h2>
+            <h2>{"Variable: " + totalValueVariableHousing / 1000}</h2>
+            {/*Shows the total value for that subCategory */}
+          </Header>
+        ) :
+
+          subCategory === "fixedTransportationCosts" ? (
+            <Header subCategory={subCategory}>
+              {" "}
+              {/*The header passes subCategory to Styled-components so the color can change*/}
+              <h2>{_.startCase(subCategory)}</h2>
+              <h2>{"Fixed: " + totalValueFixedTransportation / 1000}k</h2>
+              <h2>{"Variable: " + totalValueVariableTransportation / 1000}</h2>
+              {/*Shows the total value for that subCategory */}
+            </Header>
+          ) :
+
+            subCategory === "variableTransportationCosts" ? (
+              <Header subCategory={subCategory}>
+                {" "}
+                {/*The header passes subCategory to Styled-components so the color can change*/}
+                <h2>{_.startCase(subCategory)}</h2>
+                <h2>{"Fixed: " + totalValueFixedTransportation / 1000}k</h2>
+                <h2>{"Variable: " + totalValueVariableTransportation / 1000}</h2>
+                {/*Shows the total value for that subCategory */}
+              </Header>
+            ) :
+
+              subCategory === "fixedLifestyleCosts" ? (
+                <Header subCategory={subCategory}>
+                  {" "}
+                  {/*The header passes subCategory to Styled-components so the color can change*/}
+                  <h2>{_.startCase(subCategory)}</h2>
+                  <h2>{"Fixed: " + totalValueFixedLifestyle / 1000}k</h2>
+                  <h2>{"Variable: " + totalValueVariableLifestyle / 1000}</h2>
+                  {/*Shows the total value for that subCategory */}
+                </Header>
+              ) :
+
+                subCategory === "variableLifestyleCosts" ? (
+                  <Header subCategory={subCategory}>
+                    {" "}
+                    {/*The header passes subCategory to Styled-components so the color can change*/}
+                    <h2>{_.startCase(subCategory)}</h2>
+                    <h2>{"Fixed: " + totalValueFixedLifestyle / 1000}k</h2>
+                    <h2>{"Variable: " + totalValueVariableLifestyle / 1000}</h2>
+                    {/*Shows the total value for that subCategory */}
+                  </Header>
+                ) :
+
+                  subCategory === "fixedLargeEventsCosts" ? (
+                    <Header subCategory={subCategory}>
+                      {" "}
+                      {/*The header passes subCategory to Styled-components so the color can change*/}
+                      <h2>{_.startCase(subCategory)}</h2>
+                      <h2>{"Fixed: " + totalValueFixedLargeEvents / 1000}k</h2>
+                      <h2>{"Variable: " + totalValueVariableLargeEvents / 1000}</h2>
+                      {/*Shows the total value for that subCategory */}
+                    </Header>
+                  ) :
+
+                    subCategory === "variableLargeEventsCosts" ? (
+                      <Header subCategory={subCategory}>
+                        {" "}
+                        {/*The header passes subCategory to Styled-components so the color can change*/}
+                        <h2>{_.startCase(subCategory)}</h2>
+                        <h2>{"Fixed: " + totalValueFixedLargeEvents / 1000}k</h2>
+                        <h2>{"Variable: " + totalValueVariableLargeEvents / 1000}</h2>
+                        {/*Shows the total value for that subCategory */}
+                      </Header>
+                    ) : null}
 
       {subCategory === "fixedHousingCosts" ? (
         <Container>
@@ -463,7 +476,7 @@ export default connect(mapStateToProps, { removeSpending_action })(
   ItemDisplayBox
 );
 
-//-----------------------------------------------STYLES-----------------------------------------------//
+//-----------------------------------------------STYLE-----------------------------------------------//
 
 const Header = styled.div`
   width: 100%;
@@ -488,15 +501,6 @@ const Header = styled.div`
   padding: 0.5rem 2rem 0.5rem 2rem;
 `;
 
-const Wrapper = styled.div`
-  width: 100%;
-  min-height: 30rem;
-  border-radius: 5px;
-  border: ${props => props.theme.border.primary};
-  overflow: hidden;
-  margin-bottom: 1rem;
-  background: ${props => props.theme.color.ice};
-`;
 const Item = styled.div`
   margin: 0.5rem 0rem 0.5rem 1rem;
   padding: 0.8rem 4.5rem 0.8rem 4rem;
@@ -521,6 +525,16 @@ const Item = styled.div`
   color: white;
   border: ${props => props.theme.border.primary};
   cursor: pointer;
+`;
+
+const Wrapper = styled.div`
+  width: 100%;
+  min-height: 30rem;
+  border-radius: 5px;
+  border: ${props => props.theme.border.primary};
+  overflow: hidden;
+  margin-bottom: 1rem;
+  background: ${props => props.theme.color.ice};
 `;
 
 const Container = styled.div`
@@ -556,23 +570,15 @@ const Exit = styled(Close)`
   right: 0.2rem;
   z-index: 500;
 `;
-const Add = styled(PlusIcon)`
-  width: 4rem;
-  color: grey;
-  display: flex;
-  position: absolute;
-  top: 0.8rem;
-  left: 0rem;
-`;
 
-const Right = styled.div`
+const Left = styled.div`
   margin: 0.5rem 0rem 0.5rem 1rem;
   width: 28rem;
   height: 100%;
   padding: 0rem;
 `;
 
-const Left = styled.div`
+const Right = styled.div`
   margin: 0.5rem 0rem 0.5rem 1rem;
   width: 28rem;
   height: 100%;

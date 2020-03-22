@@ -1,3 +1,8 @@
+/**
+ * Used to add items to the Spending subcategory.
+ * Appears on pages 1 - 8.
+ */
+
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
@@ -9,7 +14,6 @@ import ButtonLight from "UI/buttons/ButtonLight";
 import { addItem_action } from "redux/spending/spending_actions";
 import { individualItem_data } from "pages/spending/data/spending_data";
 
-//THe add form is used to add individual items to the users net worth.
 
 const AddForm = ({
   category,
@@ -23,6 +27,7 @@ const AddForm = ({
   ageLabel2,
   addItem_action
 }) => {
+  //Initial State taken from spending_data.js
   const initialState = individualItem_data(
     category,
     reference,
@@ -31,17 +36,17 @@ const AddForm = ({
     currentValueLabel,
     ageLabel1,
     ageLabel2
-  ); //initial State is found in data
+  );
 
   const [state, setState] = useState({ ...initialState });
 
+  //Updates state on page change
   useEffect(() => {
-    //ensures state is updated on every page change
     setState({ ...initialState, subCategory: subCategory });
   }, [subCategory]);
 
+  //Sets range bar value in state
   const setValue = (logValue, rangeBarValue, rangeBarProps) => {
-    //receives numbers from range bar and sets them in state
     setState({
       ...state,
       [rangeBarProps.name]: {
@@ -52,8 +57,8 @@ const AddForm = ({
     });
   };
 
+  //Adds item to the reducer
   const addItem = () => {
-    //Adds the item to the reducer
     setAddFormSubCategory(false);
     const id = (Math.random() * 10000000000).toFixed(); // Creates a unique id
     addItem_action(id, state); // Sets item in reducer
@@ -64,24 +69,26 @@ const AddForm = ({
     <>
       <Container subCategory={subCategory}>
         {" "}
-        {/* passing in subCategory is used to change the header color */}
+        {}
+
         <Left>
           {" "}
-          {/* ExpenseType is used to select the account type */}
+          {}
           <Duration
+            //Specifies duration options based on subCategory
             array={
               subCategory === "fixedHousingCosts" ||
-                "variableHousingCosts" ||
-                "fixedTransportationCosts" ||
-                "variableTransportationCosts" ||
-                "fixedLifestyleCosts" ||
-                "variableLifestyleCosts" ||
-                "fixedLargeEventsCosts" ||
-                "variableLargeEventsCosts"
-                ? //? propertyNames_selector.concat("None of These")
+                subCategory === "variableHousingCosts" ||
+                subCategory === "fixedTransportationCosts" ||
+                subCategory === "variableTransportationCosts" ||
+                subCategory === "fixedLifestyleCosts" ||
+                subCategory === "variableLifestyleCosts" ||
+                subCategory === "fixedLargeEventsCosts" ||
+                subCategory === "variableLargeEventsCosts"
+                ?
                 durationTypeArray
                 : null
-            } //if it is secored (a mortgage) it has to be linked to the property its secured against
+            }
             setValue={value =>
               setState({ ...state, registration: value.toLowerCase() })
             }
@@ -89,52 +96,59 @@ const AddForm = ({
             subCategory={subCategory}
           />
         </Left>
+
         <Center>
           <FormInput
+            //Sets the state in the local state.
             label="item name"
             value={state.label}
             type={"text"}
-            handleChange={e => setState({ ...state, label: e.target.value })} //sets the state in the local state
+            handleChange={e => setState({ ...state, label: e.target.value })}
           />
-
           <RangeBar
-            rangeBarProps={state.currentValue} //Every Add item has a range bar to set its value
+            //Item value is set via this range bar.
+            rangeBarProps={state.currentValue}
             setValue={setValue}
           />
         </Center>
+
         <Right>
           <MiniRangeBarWrapper>
-            {subCategory ===
-              "fixedHousingCosts" ||
-              subCategory === "variableHousingCosts" ||
-              subCategory === "fixedTransportationCosts" ||
-              subCategory === "variableTransportationCosts" ||
-              subCategory === "fixedLifestyleCosts" ||
-              subCategory === "variableLifestyleCosts" ? ( //If its a liability we want to know its amortization
+            {//Single range bar for housing, transportation and lifestyle
+              subCategory === "fixedHousingCosts" ||
+                subCategory === "variableHousingCosts" ||
+                subCategory === "fixedTransportationCosts" ||
+                subCategory === "variableTransportationCosts" ||
+                subCategory === "fixedLifestyleCosts" ||
+                subCategory === "variableLifestyleCosts" ? (
 
-                <MiniRangeBar
-                  rangeBarProps={state.age1}
-                  setValue={setValue}
-                />
-
-              ) : subCategory === "fixedLargeEventsCosts" || subCategory === "variableLargeEventsCosts" ? (
-                <>
                   <MiniRangeBar
                     rangeBarProps={state.age1}
                     setValue={setValue}
                   />
-                  <MiniRangeBar
-                    rangeBarProps={state.age2}
-                    setValue={setValue}
-                  />
-                </>
-              ) : null}
+
+                ) : subCategory === "fixedLargeEventsCosts" || subCategory === "variableLargeEventsCosts" ? (
+                  //Two range bars for large events.
+                  <>
+                    <MiniRangeBar
+                      rangeBarProps={state.age1}
+                      setValue={setValue}
+                    />
+                    <MiniRangeBar
+                      rangeBarProps={state.age2}
+                      setValue={setValue}
+                    />
+                  </>
+                ) : null}
           </MiniRangeBarWrapper>
+
           <ButtonWrapper>
             <ButtonLight text={"Add"} onClick={() => addItem()} />
           </ButtonWrapper>
         </Right>
+
       </Container>
+
     </>
   );
 };
@@ -148,33 +162,24 @@ export default connect(mapStateToProps, {
   addItem_action
 })(AddForm);
 
-//-----------------------------------------------STYLES-----------------------------------------------//
+//-----------------------------------------------STYLE-----------------------------------------------//
 
+//Duration
 const Left = styled.div`
   width: 30rem;
   height: 100%;
   padding: 2rem;
 `;
 
-const ButtonWrapper = styled.div`
-  position: absolute;
-  bottom: 0rem;
-  right: 2rem;
-`;
-
-const MiniRangeBarWrapper = styled.div`
-  position: absolute;
-  right: 3rem;
-  top: 1rem;
-`;
-
-const Right = styled.div`
-  width: 30rem;
+//Item name, cost range bar
+const Center = styled.div`
+  width: 45rem;
   padding: 2rem;
 `;
 
-const Center = styled.div`
-  width: 45rem;
+//Duration range bars
+const Right = styled.div`
+  width: 30rem;
   padding: 2rem;
 `;
 
@@ -189,3 +194,14 @@ const Container = styled.div`
   background: ${props => props.theme.color.ice};
 `;
 
+const ButtonWrapper = styled.div`
+  position: absolute;
+  bottom: 0rem;
+  right: 2rem;
+`;
+
+const MiniRangeBarWrapper = styled.div`
+  position: absolute;
+  right: 3rem;
+  top: 1rem;
+`;

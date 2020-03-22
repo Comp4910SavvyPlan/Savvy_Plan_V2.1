@@ -1,6 +1,12 @@
+/**
+ * The introductory page explaining the purpose of the User Wizard.
+ * Page count 0.
+ */
+
 import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
+
 
 const Welcome = () => {
   return (
@@ -19,7 +25,7 @@ const mapStateToProps = state => ({});
 
 export default connect(mapStateToProps, {})(Welcome);
 
-//-----------------------------------------------STYLES-----------------------------------------------//
+//-----------------------------------------------STYLE-----------------------------------------------//
 
 const Page = styled.div`
   width: 120rem;

@@ -30,7 +30,7 @@ const ExpenseType = ({ value, setValue, array, subCategory }) => {
 
 export default ExpenseType;
 
-//-----------------------------------------------style-----------------------------------------------//
+//-----------------------------------------------STYLE-----------------------------------------------//
 
 const Container = styled.div`
   overflow-y: none;
@@ -77,17 +77,17 @@ const SelectValue = styled.div`
     background: ${props =>
     props.selected
       ? props =>
-        props.subCategory === "investmentAssets"
+        props.subCategory === "fixedHousingCosts" || props.subCategory === "variableHousingCosts"
           ? props.theme.color.steelBlue
           : props =>
-            props.subCategory === "propertyAssets"
+            props.subCategory === "fixedTransportationCosts" || props.subCategory === "variableTransportationCosts"
               ? props.theme.color.green
               : props =>
-                props.subCategory === "unsecuredDebt"
-                  ? props.theme.color.salmon
+                props.subCategory === "fixedLifestyleCosts" || props.subCategory === "variableLifestyleCosts"
+                  ? props.theme.color.blue
                   : props =>
-                    props.subCategory === "securedDebt"
-                      ? props.theme.color.darkSalmon
+                    props.subCategory === "fixedLargeEventsCosts" || props.subCategory === "variableLargeEventsCosts"
+                      ? props.theme.color.lightGrey
                       : props.theme.color.blue
       : "white"};
     text-align: center;
@@ -95,17 +95,17 @@ const SelectValue = styled.div`
         background: ${props =>
     props.selected
       ? props =>
-        props.subCategory === "investmentAssets"
+        props.subCategory === "fixedHousingCosts" || props.subCategory === "variableHousingCosts"
           ? props.theme.color.steelBlue
           : props =>
-            props.subCategory === "propertyAssets"
+            props.subCategory === "fixedTransportationCosts" || props.subCategory === "variableTransportationCosts"
               ? props.theme.color.green
               : props =>
-                props.subCategory === "unsecuredDebt"
-                  ? props.theme.color.salmon
+                props.subCategory === "fixedLifestyleCosts" || props.subCategory === "variableLifestyleCosts"
+                  ? props.theme.color.blue
                   : props =>
-                    props.subCategory === "securedDebt"
-                      ? props.theme.color.darkSalmon
+                    props.subCategory === "fixedLargeEventsCosts" || props.subCategory === "variableLargeEventsCosts"
+                      ? props.theme.color.lightGrey
                       : props.theme.color.blue
       : props.theme.color.ice};
         color: ${props => (props.selected ? "white" : props.theme.color.slate)};

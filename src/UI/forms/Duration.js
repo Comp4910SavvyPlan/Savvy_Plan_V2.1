@@ -1,3 +1,8 @@
+/**
+ * Used to select duration of spending item.
+ * Limited, Forever, One-Time, Duration Period.
+ */
+
 import React, { useState } from "react";
 import styled from "styled-components";
 import _ from "lodash";
@@ -20,7 +25,7 @@ const Duration = ({ value, setValue, array, subCategory }) => {
             subCategory={subCategory}
             onClick={() => handleSelect(d)}
           >
-            {d === "tfsa" || d === "rrsp" ? d.toUpperCase() : _.startCase(d)}
+            {_.startCase(d)}
           </SelectValue>
         ))}
       </SelectWrapper>
@@ -30,7 +35,7 @@ const Duration = ({ value, setValue, array, subCategory }) => {
 
 export default Duration;
 
-//-----------------------------------------------style-----------------------------------------------//
+//-----------------------------------------------STYLE-----------------------------------------------//
 
 const Container = styled.div`
   padding: 1rem 0rem 0rem 0rem;
@@ -65,6 +70,7 @@ const Label = styled.label`
   text-align: left;
 `;
 
+//Colour of selected item
 const SelectValue = styled.div`
     padding: 2rem;
     height: 5rem;
