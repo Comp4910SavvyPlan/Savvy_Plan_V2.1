@@ -21,7 +21,6 @@ const AddForm = ({
   section,
   user_reducer,
   setAddFormSubCategory,
-  section,
   durationTypeArray,
   currentValueLabel,
   ageLabel1,
