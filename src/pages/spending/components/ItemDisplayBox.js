@@ -1,3 +1,7 @@
+/**
+ * Displays header and spending items.
+ */
+
 import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
@@ -5,7 +9,6 @@ import _ from "lodash";
 import { Close } from "style/Icons";
 import { removeSpending_action } from "redux/spending/spending_actions";
 
-//displays the items the users have added, such as "car" or "checking account"
 
 const ItemDisplay = ({ value, removeSpending_action, item, setItemId }) => {
 
@@ -20,6 +23,7 @@ const ItemDisplay = ({ value, removeSpending_action, item, setItemId }) => {
       <Text onClick={() => setItemId(id)}>
         {" "}
         {/*When the item is clicked the id is set which fills out the edit form with the items details */}
+        <h2>{id}</h2>
         <H2>{label}</H2>
         <H2>{value / 1000}K</H2>
       </Text>
