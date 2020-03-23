@@ -72,49 +72,57 @@ const Label = styled.label`
 
 //Colour of selected item
 const SelectValue = styled.div`
-    padding: 2rem;
-    height: 5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    color: ${props => (props.selected ? "white" : props.theme.color.slate)};
-    font-size: 1.6rem;
-    background: ${props =>
+  padding: 2rem;
+  height: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  color: ${props => (props.selected ? "white" : props.theme.color.slate)};
+  font-size: 1.6rem;
+  background: ${props =>
     props.selected
       ? props =>
-        props.subCategory === "fixedHousingCosts" || props.subCategory === "variableHousingCosts"
-          ? props.theme.color.steelBlue
-          : props =>
-            props.subCategory === "fixedTransportationCosts" || props.subCategory === "variableTransportationCosts"
-              ? props.theme.color.green
-              : props =>
-                props.subCategory === "fixedLifestyleCosts" || props.subCategory === "variableLifestyleCosts"
-                  ? props.theme.color.blue
+          props.subCategory === "fixedHousingCosts" ||
+          props.subCategory === "variableHousingCosts"
+            ? props.theme.color.steelBlue
+            : props =>
+                props.subCategory === "fixedTransportationCosts" ||
+                props.subCategory === "variableTransportationCosts"
+                  ? props.theme.color.green
                   : props =>
-                    props.subCategory === "fixedLargeEventsCosts" || props.subCategory === "variableLargeEventsCosts"
-                      ? props.theme.color.lightGrey
-                      : props.theme.color.blue
+                      props.subCategory === "fixedLifestyleCosts" ||
+                      props.subCategory === "variableLifestyleCosts"
+                        ? props.theme.color.blue
+                        : props =>
+                            props.subCategory === "fixedLargeEventsCosts" ||
+                            props.subCategory === "variableLargeEventsCosts"
+                              ? props.theme.color.salmon
+                              : props.theme.color.blue
       : "white"};
-    text-align: center;
-    &:hover {
-        background: ${props =>
-    props.selected
-      ? props =>
-        props.subCategory === "fixedHousingCosts" || props.subCategory === "variableHousingCosts"
-          ? props.theme.color.steelBlue
-          : props =>
-            props.subCategory === "fixedTransportationCosts" || props.subCategory === "variableTransportationCosts"
-              ? props.theme.color.green
+  text-align: center;
+  &:hover {
+    background: ${props =>
+      props.selected
+        ? props =>
+            props.subCategory === "fixedHousingCosts" ||
+            props.subCategory === "variableHousingCosts"
+              ? props.theme.color.steelBlue
               : props =>
-                props.subCategory === "fixedLifestyleCosts" || props.subCategory === "variableLifestyleCosts"
-                  ? props.theme.color.blue
-                  : props =>
-                    props.subCategory === "fixedLargeEventsCosts" || props.subCategory === "variableLargeEventsCosts"
-                      ? props.theme.color.lightGrey
-                      : props.theme.color.blue
-      : props.theme.color.ice};
-        color: ${props => (props.selected ? "white" : props.theme.color.slate)};
-        cursor: pointer;
-    }
+                  props.subCategory === "fixedTransportationCosts" ||
+                  props.subCategory === "variableTransportationCosts"
+                    ? props.theme.color.green
+                    : props =>
+                        props.subCategory === "fixedLifestyleCosts" ||
+                        props.subCategory === "variableLifestyleCosts"
+                          ? props.theme.color.blue
+                          : props =>
+                              props.subCategory === "fixedLargeEventsCosts" ||
+                              props.subCategory === "variableLargeEventsCosts"
+                                ? props.theme.color.salmon
+                                : props.theme.color.blue
+        : props.theme.color.ice};
+    color: ${props => (props.selected ? "white" : props.theme.color.slate)};
+    cursor: pointer;
+  }
 `;
