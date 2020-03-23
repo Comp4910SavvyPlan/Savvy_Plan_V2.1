@@ -18,6 +18,7 @@ import {
   fixedLargeEvents_selector,
   variableLargeEvents_selector
 } from "redux/spending/spending_selectors";
+import { PlusIcon } from "style/Icons";
 
 const ItemDisplay = ({ value, removeSpending_action, item, setItemId }) => {
   //Individual item that is added
@@ -41,6 +42,7 @@ const ItemDisplay = ({ value, removeSpending_action, item, setItemId }) => {
 
 const MainItemDisplayBox = ({
   subCategory,
+  setAddFormSubCategory,
   removeSpending_action,
   setItemId,
   fixedHousing_selector,
@@ -200,6 +202,7 @@ const MainItemDisplayBox = ({
               </Right>
             );
           })}
+          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
         </Container>
       ) : null}
 
@@ -232,6 +235,7 @@ const MainItemDisplayBox = ({
               </Right>
             );
           })}
+          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
         </Container>
       ) : subCategory === "fixedTransportationCosts" ? (
         <Container>
@@ -262,6 +266,7 @@ const MainItemDisplayBox = ({
               </Right>
             );
           })}
+          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
         </Container>
       ) : subCategory === "variableTransportationCosts" ? (
         <Container>
@@ -292,6 +297,7 @@ const MainItemDisplayBox = ({
               </Right>
             );
           })}
+          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
         </Container>
       ) : subCategory === "fixedLifestyleCosts" ? (
         <Container>
@@ -322,6 +328,7 @@ const MainItemDisplayBox = ({
               </Right>
             );
           })}
+          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
         </Container>
       ) : subCategory === "variableLifestyleCosts" ? (
         <Container>
@@ -352,6 +359,7 @@ const MainItemDisplayBox = ({
               </Right>
             );
           })}
+          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
         </Container>
       ) : subCategory === "fixedLargeEventsCosts" ? (
         <Container>
@@ -382,6 +390,7 @@ const MainItemDisplayBox = ({
               </Right>
             );
           })}
+          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
         </Container>
       ) : subCategory === "variableLargeEventsCosts" ? (
         <Container>
@@ -412,6 +421,7 @@ const MainItemDisplayBox = ({
               </Right>
             );
           })}
+          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
         </Container>
       ) : null}
     </Wrapper>
@@ -548,4 +558,22 @@ const Right = styled.div`
   width: 28rem;
   height: 100%;
   padding: 0rem;
+`;
+
+const Add = styled(PlusIcon)`
+  width: 4rem;
+  color: grey;
+  display: flex;
+  position: absolute;
+  top: 0.8rem;
+  left: 0rem;
+`;
+
+const DarkAdd = styled(Add)`
+  width: 4rem;
+  color: white;
+  display: flex;
+  position: relative;
+  color: grey;
+  cursor: pointer;
 `;
