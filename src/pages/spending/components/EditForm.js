@@ -10,7 +10,14 @@ import {setSpendingValue_action, changeLabel_action} from "redux/spending/spendi
 import _ from "lodash"
 
 
-const EditForm = ({category, subCategory, setItemId, itemId, spending_reducer, setSpendingValue_action, changeLabel_action }) => {
+const EditForm = ({
+    category,
+    subCategory,
+    setItemId,
+    itemId,
+    spending_reducer,
+    setSpendingValue_action,
+    changeLabel_action }) => {
 
     const item = spending_reducer[category][itemId]                                             //uses the item id provided to go into the reducer and gather all the users details
 
@@ -33,65 +40,40 @@ const EditForm = ({category, subCategory, setItemId, itemId, spending_reducer, s
                 <Left>                                                                            {/*This div is empty and is used to push out the other divs to the same locations as the add form */}
                 </Left>
 
-                <Center>                                                                          {/*Very Similar to the add form */}
-                    <FormInput
-                        label="spending name"
-                        value={item.label}
-                        type={"text"}
-                        handleChange={changeLabel}
-                    />
+                <Center>
+                  <FormInput
+                    label="item name"
+                    value={item.label}
+                    type={"text"}
+                    handleChange={changeLabel}
+                  />
 
-                    {
-                      //If the subcategory is one of these
-                        subCategory === "housingCosts" || subCategory === "transportationCosts" || subCategory === "lifestyleCosts" || subCategory === "largeEventsCosts" ?
-
-                        <RangeBar
-                            rangeBarProps={item.currentValue}
-                            setValue={50}
-                        /> : null
-                    }
-
-                <RangeBar
-                        rangeBarProps={item.currentValue}
-                        setValue={60}
-                    />
-
+                  <RangeBar
+                    rangeBarProps={item.currentValue}
+                    setValue={setValue}
+                  />
                 </Center>
 
                 <Right>
-                    <MiniRangeBarWrapper>
-                        {
-                          //if category is variable
-                            category === "variable" ?
-                            <MiniRangeBar
-                            rangeBarProps={item.currentValue}
-                            setValue={10}
-                        />
-                        :
-
-                        //if category is fixed
-                        subCategory === "housingCosts"  ?
-                            <MiniRangeBar
-                            rangeBarProps={item.currentValue}
-                            setValue={20}
-                         />
-                         :
-                         subCategory === "transportationCosts"  ?
-                            <MiniRangeBar
-                            rangeBarProps={item.currentValue}
-                            setValue={30}
-                         />
-
-
-                       : null
-                        }
-                    </MiniRangeBarWrapper>
-                    <ButtonWrapper>
-                            <ButtonLight
-                                text={"back"}
-                                onClick={() => setItemId(false)}
-                            />
-                    </ButtonWrapper>
+                  <MiniRangeBarWrapper>
+                    {subCategory === "fixedTransportationCosts" ||
+                    "variableTransportationCosts" ||
+                    "fixedLifestyleCosts" ||
+                    "variableLifestyleCosts" ? ( //If its a liability we want to know its amortization
+                      <MiniRangeBar rangeBarProps={item.age1} setValue={setValue} />
+                    ) : subCategory === "largeEventsCosts" ? (
+                      <>
+                        <MiniRangeBar rangeBarProps={item.age1} setValue={setValue} />
+                        <MiniRangeBar rangeBarProps={item.age2} setValue={setValue} />
+                      </>
+                    ) : null}
+                  </MiniRangeBarWrapper>
+                  <ButtonWrapper>
+                          <ButtonLight
+                              text={"back"}
+                              onClick={() => setItemId(false)}
+                          />
+                  </ButtonWrapper>
                 </Right>
             </Container>
 
@@ -120,10 +102,14 @@ const Wrapper = styled.div`
 `
 const Header = styled.div`
     width: 100%;
-    background: ${props => props.subCategory === "housingCosts" ? props.theme.color.blue :
-                  props => props.subCategory === "transportationCosts" ? props.theme.color.steelBlue :
-                  props => props.subCategory === "lifestyleCosts" ? props.theme.color.green :
-                  props => props.subCategory === "largeEventsCosts" ? props.theme.color.salmon :
+    background: ${props => props.subCategory === "fixedHousingCosts" ? props.theme.color.blue :
+                  props => props.subCategory === "fixedTransportationCosts" ? props.theme.color.steelBlue :
+                  props => props.subCategory === "fixedLifestyleCosts" ? props.theme.color.green :
+                  props => props.subCategory === "fixedLargeEventsCosts" ? props.theme.color.salmon :
+                  props => props.subCategory === "variableHousingCosts" ? props.theme.color.blue :
+                  props => props.subCategory === "variableTransportationCosts" ? props.theme.color.steelBlue :
+                  props => props.subCategory === "variableLifestyleCosts" ? props.theme.color.green :
+                  props => props.subCategory === "variableLargeEventsCosts" ? props.theme.color.salmon :
     null};
     height: 4rem;
     color: ${props => props.theme.color.ice};
