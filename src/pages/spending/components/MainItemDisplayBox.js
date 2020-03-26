@@ -18,6 +18,7 @@ import {
   fixedLargeEvents_selector,
   variableLargeEvents_selector
 } from "redux/spending/spending_selectors";
+import { PlusIcon } from "style/Icons";
 
 const ItemDisplay = ({ value, removeSpending_action, item, setItemId }) => {
   //Individual item that is added
@@ -41,6 +42,7 @@ const ItemDisplay = ({ value, removeSpending_action, item, setItemId }) => {
 
 const MainItemDisplayBox = ({
   subCategory,
+  setAddFormSubCategory,
   removeSpending_action,
   setItemId,
   fixedHousing_selector,
@@ -116,7 +118,7 @@ const MainItemDisplayBox = ({
         <Header subCategory={subCategory}>
           {" "}
           {}
-          <h2>{_.startCase(subCategory)}</h2>
+          <h2>{"Housing Costs"}</h2>
           {}
         </Header>
       ) : subCategory === "variableHousingCosts" ? (
@@ -130,7 +132,7 @@ const MainItemDisplayBox = ({
         <Header subCategory={subCategory}>
           {" "}
           {}
-          <h2>{_.startCase(subCategory)}</h2>
+          <h2>{"Transportation Costs"}</h2>
           {}
         </Header>
       ) : subCategory === "variableTransportationCosts" ? (
@@ -144,7 +146,7 @@ const MainItemDisplayBox = ({
         <Header subCategory={subCategory}>
           {" "}
           {}
-          <h2>{_.startCase(subCategory)}</h2>
+          <h2>{"Lifestyle Costs"}</h2>
           {}
         </Header>
       ) : subCategory === "variableLifestyleCosts" ? (
@@ -158,7 +160,7 @@ const MainItemDisplayBox = ({
         <Header subCategory={subCategory}>
           {" "}
           {}
-          <h2>{_.startCase(subCategory)}</h2>
+          <h2>{"Large Events Costs"}</h2>
           {}
         </Header>
       ) : subCategory === "variableLargeEventsCosts" ? (
@@ -173,6 +175,7 @@ const MainItemDisplayBox = ({
       {//Item display for each spending subCategory, includes item info.
       subCategory === "fixedHousingCosts" ? (
         <Container>
+        <h2>{"Fixed"}</h2>
           {fixedHousing_selector.map(item => {
             return (
               <Left>
@@ -186,7 +189,8 @@ const MainItemDisplayBox = ({
               </Left>
             );
           })}
-
+          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
+          <h2>{"Variable"}</h2>
           {variableHousing_selector.map(item => {
             return (
               <Right>
@@ -200,6 +204,7 @@ const MainItemDisplayBox = ({
               </Right>
             );
           })}
+          <DarkAdd onClick={() => setAddFormSubCategory("variableHousingCosts")} />
         </Container>
       ) : null}
 
@@ -232,9 +237,11 @@ const MainItemDisplayBox = ({
               </Right>
             );
           })}
+          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
         </Container>
       ) : subCategory === "fixedTransportationCosts" ? (
         <Container>
+        <h2>{"Fixed"}</h2>
           {fixedTransportation_selector.map(item => {
             return (
               <Left>
@@ -248,7 +255,8 @@ const MainItemDisplayBox = ({
               </Left>
             );
           })}
-
+          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
+          <h2>{"Variable"}</h2>
           {variableTransportation_selector.map(item => {
             return (
               <Right>
@@ -262,6 +270,7 @@ const MainItemDisplayBox = ({
               </Right>
             );
           })}
+          <DarkAdd onClick={() => setAddFormSubCategory("variableTransportationCosts")} />
         </Container>
       ) : subCategory === "variableTransportationCosts" ? (
         <Container>
@@ -292,9 +301,11 @@ const MainItemDisplayBox = ({
               </Right>
             );
           })}
+          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
         </Container>
       ) : subCategory === "fixedLifestyleCosts" ? (
         <Container>
+          <h2>{"Fixed"}</h2>
           {fixedLifestyle_selector.map(item => {
             return (
               <Left>
@@ -308,7 +319,8 @@ const MainItemDisplayBox = ({
               </Left>
             );
           })}
-
+          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
+          <h2>{"Variable"}</h2>
           {variableLifestyle_selector.map(item => {
             return (
               <Right>
@@ -322,6 +334,7 @@ const MainItemDisplayBox = ({
               </Right>
             );
           })}
+          <DarkAdd onClick={() => setAddFormSubCategory("variableLifestyleCosts")} />
         </Container>
       ) : subCategory === "variableLifestyleCosts" ? (
         <Container>
@@ -352,9 +365,11 @@ const MainItemDisplayBox = ({
               </Right>
             );
           })}
+          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
         </Container>
       ) : subCategory === "fixedLargeEventsCosts" ? (
         <Container>
+        <h2>{"Fixed"}</h2>
           {fixedLargeEvents_selector.map(item => {
             return (
               <Left>
@@ -368,7 +383,8 @@ const MainItemDisplayBox = ({
               </Left>
             );
           })}
-
+          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
+          <h2>{"Variable"}</h2>
           {variableLargeEvents_selector.map(item => {
             return (
               <Right>
@@ -382,6 +398,7 @@ const MainItemDisplayBox = ({
               </Right>
             );
           })}
+          <DarkAdd onClick={() => setAddFormSubCategory("variableLargeEventsCosts")} />
         </Container>
       ) : subCategory === "variableLargeEventsCosts" ? (
         <Container>
@@ -412,6 +429,7 @@ const MainItemDisplayBox = ({
               </Right>
             );
           })}
+          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
         </Container>
       ) : null}
     </Wrapper>
@@ -510,6 +528,7 @@ const Container = styled.div`
   padding: 0.5rem;
   justify-content: flex-start;
   overflow: scroll;
+  display: block;
 `;
 
 const H2 = styled.h2`
@@ -548,4 +567,22 @@ const Right = styled.div`
   width: 28rem;
   height: 100%;
   padding: 0rem;
+`;
+
+const Add = styled(PlusIcon)`
+  width: 4rem;
+  color: grey;
+  display: flex;
+  position: absolute;
+  top: 0.8rem;
+  left: 0rem;
+`;
+
+const DarkAdd = styled(Add)`
+  width: 4rem;
+  color: white;
+  display: flex;
+  position: relative;
+  color: grey;
+  cursor: pointer;
 `;
