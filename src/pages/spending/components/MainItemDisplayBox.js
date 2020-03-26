@@ -118,7 +118,7 @@ const MainItemDisplayBox = ({
         <Header subCategory={subCategory}>
           {" "}
           {}
-          <h2>{_.startCase(subCategory)}</h2>
+          <h2>{"Housing Costs"}</h2>
           {}
         </Header>
       ) : subCategory === "variableHousingCosts" ? (
@@ -132,7 +132,7 @@ const MainItemDisplayBox = ({
         <Header subCategory={subCategory}>
           {" "}
           {}
-          <h2>{_.startCase(subCategory)}</h2>
+          <h2>{"Transportation Costs"}</h2>
           {}
         </Header>
       ) : subCategory === "variableTransportationCosts" ? (
@@ -146,7 +146,7 @@ const MainItemDisplayBox = ({
         <Header subCategory={subCategory}>
           {" "}
           {}
-          <h2>{_.startCase(subCategory)}</h2>
+          <h2>{"Lifestyle Costs"}</h2>
           {}
         </Header>
       ) : subCategory === "variableLifestyleCosts" ? (
@@ -160,7 +160,7 @@ const MainItemDisplayBox = ({
         <Header subCategory={subCategory}>
           {" "}
           {}
-          <h2>{_.startCase(subCategory)}</h2>
+          <h2>{"Large Events Costs"}</h2>
           {}
         </Header>
       ) : subCategory === "variableLargeEventsCosts" ? (
@@ -175,6 +175,7 @@ const MainItemDisplayBox = ({
       {//Item display for each spending subCategory, includes item info.
       subCategory === "fixedHousingCosts" ? (
         <Container>
+        <h2>{"Fixed"}</h2>
           {fixedHousing_selector.map(item => {
             return (
               <Left>
@@ -188,7 +189,8 @@ const MainItemDisplayBox = ({
               </Left>
             );
           })}
-
+          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
+          <h2>{"Variable"}</h2>
           {variableHousing_selector.map(item => {
             return (
               <Right>
@@ -202,7 +204,7 @@ const MainItemDisplayBox = ({
               </Right>
             );
           })}
-          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
+          <DarkAdd onClick={() => setAddFormSubCategory("variableHousingCosts")} />
         </Container>
       ) : null}
 
@@ -239,6 +241,7 @@ const MainItemDisplayBox = ({
         </Container>
       ) : subCategory === "fixedTransportationCosts" ? (
         <Container>
+        <h2>{"Fixed"}</h2>
           {fixedTransportation_selector.map(item => {
             return (
               <Left>
@@ -252,7 +255,8 @@ const MainItemDisplayBox = ({
               </Left>
             );
           })}
-
+          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
+          <h2>{"Variable"}</h2>
           {variableTransportation_selector.map(item => {
             return (
               <Right>
@@ -266,7 +270,7 @@ const MainItemDisplayBox = ({
               </Right>
             );
           })}
-          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
+          <DarkAdd onClick={() => setAddFormSubCategory("variableTransportationCosts")} />
         </Container>
       ) : subCategory === "variableTransportationCosts" ? (
         <Container>
@@ -301,6 +305,7 @@ const MainItemDisplayBox = ({
         </Container>
       ) : subCategory === "fixedLifestyleCosts" ? (
         <Container>
+          <h2>{"Fixed"}</h2>
           {fixedLifestyle_selector.map(item => {
             return (
               <Left>
@@ -314,7 +319,8 @@ const MainItemDisplayBox = ({
               </Left>
             );
           })}
-
+          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
+          <h2>{"Variable"}</h2>
           {variableLifestyle_selector.map(item => {
             return (
               <Right>
@@ -328,7 +334,7 @@ const MainItemDisplayBox = ({
               </Right>
             );
           })}
-          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
+          <DarkAdd onClick={() => setAddFormSubCategory("variableLifestyleCosts")} />
         </Container>
       ) : subCategory === "variableLifestyleCosts" ? (
         <Container>
@@ -363,6 +369,7 @@ const MainItemDisplayBox = ({
         </Container>
       ) : subCategory === "fixedLargeEventsCosts" ? (
         <Container>
+        <h2>{"Fixed"}</h2>
           {fixedLargeEvents_selector.map(item => {
             return (
               <Left>
@@ -376,7 +383,8 @@ const MainItemDisplayBox = ({
               </Left>
             );
           })}
-
+          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
+          <h2>{"Variable"}</h2>
           {variableLargeEvents_selector.map(item => {
             return (
               <Right>
@@ -390,7 +398,7 @@ const MainItemDisplayBox = ({
               </Right>
             );
           })}
-          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
+          <DarkAdd onClick={() => setAddFormSubCategory("variableLargeEventsCosts")} />
         </Container>
       ) : subCategory === "variableLargeEventsCosts" ? (
         <Container>
@@ -520,6 +528,7 @@ const Container = styled.div`
   padding: 0.5rem;
   justify-content: flex-start;
   overflow: scroll;
+  display: block;
 `;
 
 const H2 = styled.h2`
