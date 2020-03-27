@@ -117,11 +117,9 @@ const AddForm = ({
             subCategory === "fixedTransportationCosts" ||
             subCategory === "variableTransportationCosts" ||
             subCategory === "fixedLifestyleCosts" ||
-            subCategory === "variableLifestyleCosts" ? (
-              <MiniRangeBar rangeBarProps={state.age1} setValue={setValue} />
-            ) : subCategory === "fixedLargeEventsCosts" ||
-              subCategory === "variableLargeEventsCosts" ? (
-              //Two range bars for large events.
+            subCategory === "variableLifestyleCosts" ||
+            subCategory === "fixedLargeEventsCosts" ||
+            subCategory === "variableLargeEventsCosts" ? (
               <>
                 <MiniRangeBar rangeBarProps={state.age1} setValue={setValue} />
                 <MiniRangeBar rangeBarProps={state.age2} setValue={setValue} />

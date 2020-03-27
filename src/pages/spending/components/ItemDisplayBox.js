@@ -21,17 +21,18 @@ import {
 
 const ItemDisplay = ({ value, removeSpending_action, item, setItemId }) => {
   //Individual item that is added
-  const { label, subCategory, id } = item;
+  const { label, subCategory, id, category } = item;
   const removeItem = () => {
     removeSpending_action(item);
   };
   //Displays item name, value and "X" in box.
   return (
-    <Item label={label} subCategory={subCategory}>
+    <Item label={label} subCategory={subCategory} category={category}>
       <Text onClick={() => setItemId(id)}>
         {" "}
         {}
         <H2>{label}</H2>
+        <H2>({category})</H2>
         <H2>{value / 1000}K</H2>
       </Text>
       <Exit onClick={() => removeItem()} /> {};
@@ -202,7 +203,6 @@ const ItemDisplayBox = ({
               </Left>
             );
           })}
-
           {variableHousing_selector.map(item => {
             return (
               <Right>
@@ -480,7 +480,7 @@ const Header = styled.div`
 
 const Item = styled.div`
   margin: 0.5rem 0rem 0.5rem 1rem;
-  padding: 0.8rem 4.5rem 0.8rem 4rem;
+  padding: 0.8rem 1.5rem 0.8rem 1.5rem;
   width: 28rem;
   display: flex;
   position: relative;
