@@ -27,12 +27,11 @@ const ItemDisplay = ({ value, removeSpending_action, item, setItemId }) => {
   };
   //Displays item name, value and "X" in box.
   return (
-    <Item label={label} subCategory={subCategory} category={category}>
+    <Item label={label} subCategory={subCategory}>
       <Text onClick={() => setItemId(id)}>
         {" "}
         {}
         <H2>{label}</H2>
-        <H2>({category})</H2>
         <H2>{value / 1000}K</H2>
       </Text>
       <Exit onClick={() => removeItem()} /> {};
@@ -193,6 +192,7 @@ const ItemDisplayBox = ({
           {fixedHousing_selector.map(item => {
             return (
               <Left>
+                <h4>{"Fixed"}</h4>
                 <ItemDisplay
                   item={item}
                   key={item.id}
@@ -206,6 +206,7 @@ const ItemDisplayBox = ({
           {variableHousing_selector.map(item => {
             return (
               <Right>
+                <h4>{"Variable"}</h4>
                 <ItemDisplay
                   item={item}
                   key={item.id}
@@ -224,6 +225,7 @@ const ItemDisplayBox = ({
           {fixedHousing_selector.map(item => {
             return (
               <Left>
+                <h4>{"Fixed"}</h4>
                 <ItemDisplay
                   item={item}
                   key={item.id}
@@ -238,6 +240,7 @@ const ItemDisplayBox = ({
           {variableHousing_selector.map(item => {
             return (
               <Right>
+                <h4>{"Variable"}</h4>
                 <ItemDisplay
                   item={item}
                   key={item.id}
@@ -254,6 +257,7 @@ const ItemDisplayBox = ({
           {fixedTransportation_selector.map(item => {
             return (
               <Left>
+                <h4>{"Fixed"}</h4>
                 <ItemDisplay
                   item={item}
                   key={item.id}
@@ -268,6 +272,7 @@ const ItemDisplayBox = ({
           {variableTransportation_selector.map(item => {
             return (
               <Right>
+                <h4>{"Variable"}</h4>
                 <ItemDisplay
                   item={item}
                   key={item.id}
@@ -284,6 +289,7 @@ const ItemDisplayBox = ({
           {fixedTransportation_selector.map(item => {
             return (
               <Left>
+                <h4>{"Fixed"}</h4>
                 <ItemDisplay
                   item={item}
                   key={item.id}
@@ -298,6 +304,7 @@ const ItemDisplayBox = ({
           {variableTransportation_selector.map(item => {
             return (
               <Right>
+                <h4>{"Variable"}</h4>
                 <ItemDisplay
                   item={item}
                   key={item.id}
@@ -314,6 +321,7 @@ const ItemDisplayBox = ({
           {fixedLifestyle_selector.map(item => {
             return (
               <Left>
+                <h4>{"Fixed"}</h4>
                 <ItemDisplay
                   item={item}
                   key={item.id}
@@ -328,6 +336,7 @@ const ItemDisplayBox = ({
           {variableLifestyle_selector.map(item => {
             return (
               <Right>
+                <h4>{"Variable"}</h4>
                 <ItemDisplay
                   item={item}
                   key={item.id}
@@ -344,6 +353,7 @@ const ItemDisplayBox = ({
           {fixedLifestyle_selector.map(item => {
             return (
               <Left>
+                <h4>{"Fixed"}</h4>
                 <ItemDisplay
                   item={item}
                   key={item.id}
@@ -358,6 +368,7 @@ const ItemDisplayBox = ({
           {variableLifestyle_selector.map(item => {
             return (
               <Right>
+                <h4>{"Variable"}</h4>
                 <ItemDisplay
                   item={item}
                   key={item.id}
@@ -374,6 +385,7 @@ const ItemDisplayBox = ({
           {fixedLargeEvents_selector.map(item => {
             return (
               <Left>
+                <h4>{"Fixed"}</h4>
                 <ItemDisplay
                   item={item}
                   key={item.id}
@@ -388,6 +400,7 @@ const ItemDisplayBox = ({
           {variableLargeEvents_selector.map(item => {
             return (
               <Right>
+                <h4>{"Variable"}</h4>
                 <ItemDisplay
                   item={item}
                   key={item.id}
@@ -404,6 +417,7 @@ const ItemDisplayBox = ({
           {fixedLargeEvents_selector.map(item => {
             return (
               <Left>
+                <h4>{"Fixed"}</h4>
                 <ItemDisplay
                   item={item}
                   key={item.id}
@@ -418,6 +432,7 @@ const ItemDisplayBox = ({
           {variableLargeEvents_selector.map(item => {
             return (
               <Right>
+                <h4>{"Variable"}</h4>
                 <ItemDisplay
                   item={item}
                   key={item.id}
@@ -479,7 +494,7 @@ const Header = styled.div`
 `;
 
 const Item = styled.div`
-  margin: 0.5rem 0rem 0.5rem 1rem;
+  margin: 0.5rem 0rem 0.5rem 0.25rem;
   padding: 0.8rem 1.5rem 0.8rem 1.5rem;
   width: 28rem;
   display: flex;
