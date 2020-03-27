@@ -535,7 +535,7 @@ const Wrapper = styled.div`
 
 const Container = styled.div`
   min-height: 10rem;
-  max-height: 50rem;
+  max-height: 25rem;
   display: flex;
   flex-wrap: wrap;
   padding: 0.5rem;
