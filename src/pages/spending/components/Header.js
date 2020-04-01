@@ -2,9 +2,14 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import SelectorButtonVertical from "UI/buttons/SelectorButtonVertical";
 import {connect} from "react-redux"
+import {totalFixed_selector, totalVariable_selector} from "redux/spending/spending_selectors"
+import {createStructuredSelector} from "reselect"
 
-const Header = ({display, setDisplay}) => {
-  
+const Header = ({display, setDisplay, totalFixed_selector, totalVariable_selector}) => {
+
+  const totalFixed = totalFixed_selector
+  const totalVariable = totalVariable_selector
+
   return (
     <HeaderWrapper>
       <Title>
@@ -12,19 +17,19 @@ const Header = ({display, setDisplay}) => {
       </Title>
       <CatagorySelection>
           <SelectorWrapper>
-               <SelectorButtonVertical visible={display === "fixed"} onClick={() => setDisplay("variable")}/>
+               <SelectorButtonVertical visible={display === "fixed"} />
           </SelectorWrapper>
           <Catagories>
-              <Catagory display={"fixed"} onClick={() => setDisplay("fixed")}>
+              <Catagory display={"fixed"} >
                   <h2>Fixed</h2>
                   <span>
-                  22k
+                  {totalFixed > 1000000 ? `${totalFixed/1000000} M` :  `${totalFixed/1000} K`}
                   </span>
               </Catagory>
-              <Catagory display={"variable"} onClick={() => setDisplay("variable")} style={{color: "#F29278"}}>
+              <Catagory display={"variable"} style={{color: "#F29278"}}>
                   <h2>Variable</h2>
                   <span>
-                  18k - 27k
+                  {totalVariable > 1000000 ? `${totalVariable/1000000} M` :  `${totalVariable/1000} K`}
                   </span>
               </Catagory>
           </Catagories>
@@ -33,7 +38,12 @@ const Header = ({display, setDisplay}) => {
   );
 };
 
-export default Header;
+const mapStateToProps = createStructuredSelector({
+    totalFixed_selector,
+    totalVariable_selector
+
+})
+export default connect(mapStateToProps)(Header)
 
 //-----------------------------------------------style-----------------------------------------------//
 

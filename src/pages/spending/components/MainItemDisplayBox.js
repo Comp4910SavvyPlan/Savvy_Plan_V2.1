@@ -18,10 +18,11 @@ import {
   fixedLargeEvents_selector,
   variableLargeEvents_selector
 } from "redux/spending/spending_selectors";
+import { PlusIcon } from "style/Icons";
 
 const ItemDisplay = ({ value, removeSpending_action, item, setItemId }) => {
   //Individual item that is added
-  const { label, subCategory, id, category } = item;
+  const { label, subCategory, id } = item;
   const removeItem = () => {
     removeSpending_action(item);
   };
@@ -39,8 +40,9 @@ const ItemDisplay = ({ value, removeSpending_action, item, setItemId }) => {
   );
 };
 
-const ItemDisplayBox = ({
+const MainItemDisplayBox = ({
   subCategory,
+  setAddFormSubCategory,
   removeSpending_action,
   setItemId,
   fixedHousing_selector,
@@ -116,9 +118,7 @@ const ItemDisplayBox = ({
         <Header subCategory={subCategory}>
           {" "}
           {}
-          <h2>{_.startCase(subCategory)}</h2>
-          <h2>{"Fixed: " + totalValueFixedHousing / 1000}k</h2>
-          <h2>{"Variable: " + totalValueVariableHousing / 1000}</h2>
+          <h2>{"Housing Costs"}</h2>
           {}
         </Header>
       ) : subCategory === "variableHousingCosts" ? (
@@ -126,17 +126,13 @@ const ItemDisplayBox = ({
           {" "}
           {}
           <h2>{_.startCase(subCategory)}</h2>
-          <h2>{"Fixed: " + totalValueFixedHousing / 1000}k</h2>
-          <h2>{"Variable: " + totalValueVariableHousing / 1000}</h2>
           {}
         </Header>
       ) : subCategory === "fixedTransportationCosts" ? (
         <Header subCategory={subCategory}>
           {" "}
           {}
-          <h2>{_.startCase(subCategory)}</h2>
-          <h2>{"Fixed: " + totalValueFixedTransportation / 1000}k</h2>
-          <h2>{"Variable: " + totalValueVariableTransportation / 1000}</h2>
+          <h2>{"Transportation Costs"}</h2>
           {}
         </Header>
       ) : subCategory === "variableTransportationCosts" ? (
@@ -144,17 +140,13 @@ const ItemDisplayBox = ({
           {" "}
           {}
           <h2>{_.startCase(subCategory)}</h2>
-          <h2>{"Fixed: " + totalValueFixedTransportation / 1000}k</h2>
-          <h2>{"Variable: " + totalValueVariableTransportation / 1000}</h2>
           {}
         </Header>
       ) : subCategory === "fixedLifestyleCosts" ? (
         <Header subCategory={subCategory}>
           {" "}
           {}
-          <h2>{_.startCase(subCategory)}</h2>
-          <h2>{"Fixed: " + totalValueFixedLifestyle / 1000}k</h2>
-          <h2>{"Variable: " + totalValueVariableLifestyle / 1000}</h2>
+          <h2>{"Lifestyle Costs"}</h2>
           {}
         </Header>
       ) : subCategory === "variableLifestyleCosts" ? (
@@ -162,17 +154,13 @@ const ItemDisplayBox = ({
           {" "}
           {}
           <h2>{_.startCase(subCategory)}</h2>
-          <h2>{"Fixed: " + totalValueFixedLifestyle / 1000}k</h2>
-          <h2>{"Variable: " + totalValueVariableLifestyle / 1000}</h2>
           {}
         </Header>
       ) : subCategory === "fixedLargeEventsCosts" ? (
         <Header subCategory={subCategory}>
           {" "}
           {}
-          <h2>{_.startCase(subCategory)}</h2>
-          <h2>{"Fixed: " + totalValueFixedLargeEvents / 1000}k</h2>
-          <h2>{"Variable: " + totalValueVariableLargeEvents / 1000}</h2>
+          <h2>{"Large Events Costs"}</h2>
           {}
         </Header>
       ) : subCategory === "variableLargeEventsCosts" ? (
@@ -180,8 +168,6 @@ const ItemDisplayBox = ({
           {" "}
           {}
           <h2>{_.startCase(subCategory)}</h2>
-          <h2>{"Fixed: " + totalValueFixedLargeEvents / 1000}k</h2>
-          <h2>{"Variable: " + totalValueVariableLargeEvents / 1000}</h2>
           {}
         </Header>
       ) : null}
@@ -189,10 +175,10 @@ const ItemDisplayBox = ({
       {//Item display for each spending subCategory, includes item info.
       subCategory === "fixedHousingCosts" ? (
         <Container>
+        <h2>{"Fixed"}</h2>
           {fixedHousing_selector.map(item => {
             return (
               <Left>
-                <h4>{"Fixed"}</h4>
                 <ItemDisplay
                   item={item}
                   key={item.id}
@@ -203,10 +189,11 @@ const ItemDisplayBox = ({
               </Left>
             );
           })}
+          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
+          <h2>{"Variable"}</h2>
           {variableHousing_selector.map(item => {
             return (
               <Right>
-                <h4>{"Variable"}</h4>
                 <ItemDisplay
                   item={item}
                   key={item.id}
@@ -217,6 +204,7 @@ const ItemDisplayBox = ({
               </Right>
             );
           })}
+          <DarkAdd onClick={() => setAddFormSubCategory("variableHousingCosts")} />
         </Container>
       ) : null}
 
@@ -225,7 +213,6 @@ const ItemDisplayBox = ({
           {fixedHousing_selector.map(item => {
             return (
               <Left>
-                <h4>{"Fixed"}</h4>
                 <ItemDisplay
                   item={item}
                   key={item.id}
@@ -240,7 +227,6 @@ const ItemDisplayBox = ({
           {variableHousing_selector.map(item => {
             return (
               <Right>
-                <h4>{"Variable"}</h4>
                 <ItemDisplay
                   item={item}
                   key={item.id}
@@ -251,13 +237,14 @@ const ItemDisplayBox = ({
               </Right>
             );
           })}
+          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
         </Container>
       ) : subCategory === "fixedTransportationCosts" ? (
         <Container>
+        <h2>{"Fixed"}</h2>
           {fixedTransportation_selector.map(item => {
             return (
               <Left>
-                <h4>{"Fixed"}</h4>
                 <ItemDisplay
                   item={item}
                   key={item.id}
@@ -268,11 +255,11 @@ const ItemDisplayBox = ({
               </Left>
             );
           })}
-
+          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
+          <h2>{"Variable"}</h2>
           {variableTransportation_selector.map(item => {
             return (
               <Right>
-                <h4>{"Variable"}</h4>
                 <ItemDisplay
                   item={item}
                   key={item.id}
@@ -283,13 +270,13 @@ const ItemDisplayBox = ({
               </Right>
             );
           })}
+          <DarkAdd onClick={() => setAddFormSubCategory("variableTransportationCosts")} />
         </Container>
       ) : subCategory === "variableTransportationCosts" ? (
         <Container>
           {fixedTransportation_selector.map(item => {
             return (
               <Left>
-                <h4>{"Fixed"}</h4>
                 <ItemDisplay
                   item={item}
                   key={item.id}
@@ -304,7 +291,6 @@ const ItemDisplayBox = ({
           {variableTransportation_selector.map(item => {
             return (
               <Right>
-                <h4>{"Variable"}</h4>
                 <ItemDisplay
                   item={item}
                   key={item.id}
@@ -315,13 +301,14 @@ const ItemDisplayBox = ({
               </Right>
             );
           })}
+          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
         </Container>
       ) : subCategory === "fixedLifestyleCosts" ? (
         <Container>
+          <h2>{"Fixed"}</h2>
           {fixedLifestyle_selector.map(item => {
             return (
               <Left>
-                <h4>{"Fixed"}</h4>
                 <ItemDisplay
                   item={item}
                   key={item.id}
@@ -332,11 +319,11 @@ const ItemDisplayBox = ({
               </Left>
             );
           })}
-
+          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
+          <h2>{"Variable"}</h2>
           {variableLifestyle_selector.map(item => {
             return (
               <Right>
-                <h4>{"Variable"}</h4>
                 <ItemDisplay
                   item={item}
                   key={item.id}
@@ -347,13 +334,13 @@ const ItemDisplayBox = ({
               </Right>
             );
           })}
+          <DarkAdd onClick={() => setAddFormSubCategory("variableLifestyleCosts")} />
         </Container>
       ) : subCategory === "variableLifestyleCosts" ? (
         <Container>
           {fixedLifestyle_selector.map(item => {
             return (
               <Left>
-                <h4>{"Fixed"}</h4>
                 <ItemDisplay
                   item={item}
                   key={item.id}
@@ -368,7 +355,6 @@ const ItemDisplayBox = ({
           {variableLifestyle_selector.map(item => {
             return (
               <Right>
-                <h4>{"Variable"}</h4>
                 <ItemDisplay
                   item={item}
                   key={item.id}
@@ -379,13 +365,14 @@ const ItemDisplayBox = ({
               </Right>
             );
           })}
+          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
         </Container>
       ) : subCategory === "fixedLargeEventsCosts" ? (
         <Container>
+        <h2>{"Fixed"}</h2>
           {fixedLargeEvents_selector.map(item => {
             return (
               <Left>
-                <h4>{"Fixed"}</h4>
                 <ItemDisplay
                   item={item}
                   key={item.id}
@@ -396,11 +383,11 @@ const ItemDisplayBox = ({
               </Left>
             );
           })}
-
+          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
+          <h2>{"Variable"}</h2>
           {variableLargeEvents_selector.map(item => {
             return (
               <Right>
-                <h4>{"Variable"}</h4>
                 <ItemDisplay
                   item={item}
                   key={item.id}
@@ -411,13 +398,13 @@ const ItemDisplayBox = ({
               </Right>
             );
           })}
+          <DarkAdd onClick={() => setAddFormSubCategory("variableLargeEventsCosts")} />
         </Container>
       ) : subCategory === "variableLargeEventsCosts" ? (
         <Container>
           {fixedLargeEvents_selector.map(item => {
             return (
               <Left>
-                <h4>{"Fixed"}</h4>
                 <ItemDisplay
                   item={item}
                   key={item.id}
@@ -432,7 +419,6 @@ const ItemDisplayBox = ({
           {variableLargeEvents_selector.map(item => {
             return (
               <Right>
-                <h4>{"Variable"}</h4>
                 <ItemDisplay
                   item={item}
                   key={item.id}
@@ -443,6 +429,7 @@ const ItemDisplayBox = ({
               </Right>
             );
           })}
+          <DarkAdd onClick={() => setAddFormSubCategory(subCategory)} />
         </Container>
       ) : null}
     </Wrapper>
@@ -461,7 +448,7 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, { removeSpending_action })(
-  ItemDisplayBox
+  MainItemDisplayBox
 );
 
 //-----------------------------------------------STYLE-----------------------------------------------//
@@ -485,7 +472,7 @@ const Header = styled.div`
                       props.subCategory === "variableLargeEventsCosts"
                         ? props.theme.color.salmon
                         : props.theme.color.blue};
-  height: 6rem;
+  height: 4rem;
   color: ${props => props.theme.color.ice};
   border-bottom: ${props => props.theme.border.primary};
   display: flex;
@@ -494,8 +481,8 @@ const Header = styled.div`
 `;
 
 const Item = styled.div`
-  margin: 0.5rem 0rem 0.5rem 0.25rem;
-  padding: 0.8rem 1.5rem 0.8rem 1.5rem;
+  margin: 0.5rem 0rem 0.5rem 1rem;
+  padding: 0.8rem 4.5rem 0.8rem 4rem;
   width: 28rem;
   display: flex;
   position: relative;
@@ -535,12 +522,13 @@ const Wrapper = styled.div`
 
 const Container = styled.div`
   min-height: 10rem;
-  max-height: 25rem;
+  max-height: 50rem;
   display: flex;
   flex-wrap: wrap;
   padding: 0.5rem;
   justify-content: flex-start;
   overflow: scroll;
+  display: block;
 `;
 
 const H2 = styled.h2`
@@ -579,4 +567,22 @@ const Right = styled.div`
   width: 28rem;
   height: 100%;
   padding: 0rem;
+`;
+
+const Add = styled(PlusIcon)`
+  width: 4rem;
+  color: grey;
+  display: flex;
+  position: absolute;
+  top: 0.8rem;
+  left: 0rem;
+`;
+
+const DarkAdd = styled(Add)`
+  width: 4rem;
+  color: white;
+  display: flex;
+  position: relative;
+  color: grey;
+  cursor: pointer;
 `;

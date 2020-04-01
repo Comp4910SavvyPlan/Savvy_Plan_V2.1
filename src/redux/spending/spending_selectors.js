@@ -125,3 +125,31 @@ export const spendingData_selector = createSelector(
   (spending_reducer, userAge) =>
     convertReducerToArray(spending_reducer, userAge)
 );
+
+export const totalFixed_selector = createSelector(
+  [spending_reducer],
+  spending_reducer => {
+    const array = Object.values(spending_reducer.fixed);
+    return array.length > 0
+      ? Math.round(
+          array
+            .map(d => d.currentValue.financialValue)
+            .reduce((acc, num) => acc + num) / 1000
+        ) * 1000
+      : 0;
+  }
+);
+
+export const totalVariable_selector = createSelector(
+  [spending_reducer],
+  spending_reducer => {
+    const array = Object.values(spending_reducer.variable);
+    return array.length > 0
+      ? Math.round(
+          array
+            .map(d => d.currentValue.financialValue)
+            .reduce((acc, num) => acc + num) / 1000
+        ) * 1000
+      : 0;
+  }
+);
