@@ -18,8 +18,8 @@ const convertReducerToArray = (spending_reducer, userAge) => {
     if (spendingArray.length > 0) {
       const sectionSpending = spendingArray.map(d =>
         d.section === section &&
-        age >= d.age1.rangeBarValue &&
-        age <= d.age2.rangeBarValue
+        age >= d.age1.rangeBarValue 
+        //age <= d.age2.rangeBarValue
           ? d.currentValue.financialValue
           : 0
       );

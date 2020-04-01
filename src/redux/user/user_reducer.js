@@ -6,7 +6,7 @@ const initialState = {
     firstName: "",
     province: "",
     spouse: false,
-    birthYear: 1978,
+    birthYear: 1999,
     rrifWithdrawalAge: 65,
     retirementPensionIncome: 0,
     hasChildren: false,
@@ -14,7 +14,7 @@ const initialState = {
     retirementAge: {
         name: "retirementAge",
         label: "Target Retirement Age",
-        rangeBarValue: 65, 
+        rangeBarValue: 65,
         min: 30,
         max: 80,
         step: 1,
@@ -23,7 +23,7 @@ const initialState = {
     lifeSpan: {
         name: "lifeSpan",
         label: "Estimated Life Span",
-        rangeBarValue: 95, 
+        rangeBarValue: 95,
         min: 75,
         max: 110,
         step: 1,
@@ -38,36 +38,36 @@ const initialState = {
         managingSpending: false,
     },
     retirementIncome: {
-        financialValue: 0, 
+        financialValue: 0,
         label: "Desired Retirement Income",
         name: "retirementIncome",
-        rangeBarValue: 0, 
+        rangeBarValue: 0,
     },
-        
+
 }
 
 const user_reducer = (state = initialState, action) => {
     switch(action.type) {
-        case "SET_KEY_VARIABLE": 
-        return {...state, [action.name]: action.value}        
-        case "user_reducer/SET_RETIREMENT_INCOME": 
+        case "SET_KEY_VARIABLE":
+        return {...state, [action.name]: action.value}
+        case "user_reducer/SET_RETIREMENT_INCOME":
         return {...state, retirementIncome: {
-            ...state.retirementIncome, 
-                                        financialValue: action.financialValue, 
+            ...state.retirementIncome,
+                                        financialValue: action.financialValue,
                                         rangeBarValue: action.rangeBarValue
 
         }  }
-        case "user_reducer/SET_USER_DETAILS": 
-        return {...state, 
+        case "user_reducer/SET_USER_DETAILS":
+        return {...state,
                                        id: action.userId,
                                        email: action.useremail,
                                        displayName: action.displayName,
          }
-        case "user_reducer/SET_USER_DETAIL": 
-        return {...state, 
+        case "user_reducer/SET_USER_DETAIL":
+        return {...state,
                                     [action.name]: action.value
          }
-        case "user_reducer/SET_NESTED_USER_DETAIL": 
+        case "user_reducer/SET_NESTED_USER_DETAIL":
         return {...state, [action.identifier]: {
             ...state[action.identifier], [action.name]: action.value
         }
@@ -78,4 +78,3 @@ const user_reducer = (state = initialState, action) => {
 }
 
 export default user_reducer
-
