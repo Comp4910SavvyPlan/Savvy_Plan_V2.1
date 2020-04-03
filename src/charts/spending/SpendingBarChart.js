@@ -10,7 +10,7 @@ const drawChart = (data, width, height,props) => {
     const margin = {top: 20, right: 100, bottom: 20, left: 100}
     const graphHeight = height - margin.top - margin.bottom
     const graphWidth = width - margin.left - margin.right
-    const color =  ["age", "#63bbcf", "#3B7B8E", '#8CB8B7', '#F29278', "#7898a1",  '#7898a1']
+    const color =  ["age", "#3B7B8E", "#8CB8B7", '#63bbcf', '#F29278', "#7898a1",  '#7898a1']
 
 
 
