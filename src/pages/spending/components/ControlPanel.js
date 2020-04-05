@@ -38,10 +38,14 @@ const ControlPanel = ({ setCount, display, spending_reducer }) => {
           />
         ) : addFormSubCategory ? (
           <AddForm
+            //AddForm is shown based on count number
             category={addFormDetails.category}
+            reference={addFormDetails.reference}
             subCategory={addFormDetails.subCategory}
+            section={addFormDetails.section}
             currentValueLabel={addFormDetails.currentValueLabel}
-            ageLabel={addFormDetails.ageLabel}
+            ageLabel1={addFormDetails.ageLabel1}
+            ageLabel2={addFormDetails.ageLabel2}
             expenseTypeArray={addFormDetails.expenseTypeArray}
             durationTypeArray={addFormDetails.durationTypeArray}
             setAddFormSubCategory={setAddFormSubCategory}

@@ -130,6 +130,12 @@ const AddForm = ({
           <ButtonWrapper>
             <ButtonLight text={"Add"} onClick={() => addItem()} />
           </ButtonWrapper>
+          <ButtonLeftWrapper>
+            <ButtonLight
+              text={"Back"}
+              onClick={() => setAddFormSubCategory(false)}
+            />
+          </ButtonLeftWrapper>
         </Right>
       </Container>
     </>
@@ -181,6 +187,12 @@ const ButtonWrapper = styled.div`
   position: absolute;
   bottom: 0rem;
   right: 2rem;
+`;
+
+const ButtonLeftWrapper = styled.div`
+  position: absolute;
+  bottom: 0rem;
+  left: 2rem;
 `;
 
 const MiniRangeBarWrapper = styled.div`
