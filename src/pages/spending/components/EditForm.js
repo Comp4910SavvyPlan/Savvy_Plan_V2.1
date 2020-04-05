@@ -8,6 +8,14 @@ import MiniRangeBar  from "UI/miniRangeBar/MiniRangeBar"
 import ButtonLight from "UI/buttons/ButtonLight"
 import {setSpendingValue_action, changeLabel_action} from "redux/spending/spending_actions"
 import _ from "lodash"
+import {fixedHousing_selector} from "redux/spending/spending_selectors"
+import {variableHousing_selector} from "redux/spending/spending_selectors"
+import {fixedTransportation_selector} from "redux/spending/spending_selectors"
+import {variableTransportation_selector} from "redux/spending/spending_selectors"
+import {fixedLifestyle_selector} from "redux/spending/spending_selectors"
+import {variableLifestyle_selector} from "redux/spending/spending_selectors"
+import {fixedLargeEvents_selector} from "redux/spending/spending_selectors"
+import {variableLargeEvents_selector} from "redux/spending/spending_selectors"
 
 
 const EditForm = ({
@@ -56,18 +64,21 @@ const EditForm = ({
 
                 <Right>
                   <MiniRangeBarWrapper>
-                    {subCategory === "fixedTransportationCosts" ||
-                    "variableTransportationCosts" ||
-                    "fixedLifestyleCosts" ||
-                    "variableLifestyleCosts" ? ( //If its a liability we want to know its amortization
-                      <MiniRangeBar rangeBarProps={item.age1} setValue={setValue} />
-                    ) : subCategory === "largeEventsCosts" ? (
+                    {//Single range bar for housing, transportation and lifestyle
+                      subCategory === "fixedHousingCosts" ||
+                      subCategory === "variableHousingCosts" ||
+                      subCategory === "fixedTransportationCosts" ||
+                      subCategory === "variableTransportationCosts" ||
+                      subCategory === "fixedLifestyleCosts" ||
+                      subCategory === "variableLifestyleCosts" ||
+                      subCategory === "fixedLargeEventsCosts" ||
+                      subCategory === "variableLargeEventsCosts" ? (
                       <>
-                        <MiniRangeBar rangeBarProps={item.age1} setValue={setValue} />
-                        <MiniRangeBar rangeBarProps={item.age2} setValue={setValue} />
-                      </>
-                    ) : null}
-                  </MiniRangeBarWrapper>
+                      <MiniRangeBar rangeBarProps={item.age1} setValue={setValue} />
+                      <MiniRangeBar rangeBarProps={item.age2} setValue={setValue} />
+                    </>
+                  ) : null}
+                </MiniRangeBarWrapper>
                   <ButtonWrapper>
                           <ButtonLight
                               text={"back"}
@@ -85,7 +96,15 @@ const EditForm = ({
 }
 
 const mapStateToProps = (state) => ({
-    spending_reducer: state.spending_reducer
+    spending_reducer: state.spending_reducer,
+    fixedHousing_selector: fixedHousing_selector(state),
+    variableHousing_selector: variableHousing_selector(state),
+    fixedTransportation_selector: fixedTransportation_selector(state),
+    variableTransportation_selector: variableTransportation_selector(state),
+    fixedLifestyle_selector: fixedLifestyle_selector(state),
+    variableLifestyle_selector: variableLifestyle_selector(state),
+    fixedLargeEvents_selector: fixedLargeEvents_selector(state),
+    variableLargeEvents_selector: variableLargeEvents_selector(state)
 })
 
 export default connect(mapStateToProps, {setSpendingValue_action, changeLabel_action})(EditForm )
