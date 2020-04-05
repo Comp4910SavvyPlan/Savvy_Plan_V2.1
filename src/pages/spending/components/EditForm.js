@@ -8,14 +8,6 @@ import MiniRangeBar  from "UI/miniRangeBar/MiniRangeBar"
 import ButtonLight from "UI/buttons/ButtonLight"
 import {setSpendingValue_action, changeLabel_action} from "redux/spending/spending_actions"
 import _ from "lodash"
-import {fixedHousing_selector} from "redux/spending/spending_selectors"
-import {variableHousing_selector} from "redux/spending/spending_selectors"
-import {fixedTransportation_selector} from "redux/spending/spending_selectors"
-import {variableTransportation_selector} from "redux/spending/spending_selectors"
-import {fixedLifestyle_selector} from "redux/spending/spending_selectors"
-import {variableLifestyle_selector} from "redux/spending/spending_selectors"
-import {fixedLargeEvents_selector} from "redux/spending/spending_selectors"
-import {variableLargeEvents_selector} from "redux/spending/spending_selectors"
 
 
 const EditForm = ({
@@ -29,7 +21,9 @@ const EditForm = ({
 
     const item = spending_reducer[category][itemId]                                             //uses the item id provided to go into the reducer and gather all the users details
 
+
     const setValue = (logValue, rangeBarValue, rangeBarProps) => {                              //sets the value in the reducer
+      console.log(logValue);
         setSpendingValue_action(logValue, rangeBarValue, category, rangeBarProps, itemId)
     }
 
@@ -96,18 +90,10 @@ const EditForm = ({
 }
 
 const mapStateToProps = (state) => ({
-    spending_reducer: state.spending_reducer,
-    fixedHousing_selector: fixedHousing_selector(state),
-    variableHousing_selector: variableHousing_selector(state),
-    fixedTransportation_selector: fixedTransportation_selector(state),
-    variableTransportation_selector: variableTransportation_selector(state),
-    fixedLifestyle_selector: fixedLifestyle_selector(state),
-    variableLifestyle_selector: variableLifestyle_selector(state),
-    fixedLargeEvents_selector: fixedLargeEvents_selector(state),
-    variableLargeEvents_selector: variableLargeEvents_selector(state)
+    spending_reducer: state.spending_reducer
 })
 
-export default connect(mapStateToProps, {setSpendingValue_action, changeLabel_action})(EditForm )
+export default connect(mapStateToProps, {setSpendingValue_action, changeLabel_action})(EditForm)
 
 
 //-----------------------------------------------STYLES-----------------------------------------------//
