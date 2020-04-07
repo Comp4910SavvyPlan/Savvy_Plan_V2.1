@@ -8,7 +8,6 @@ import SpendingBarChart from "charts/spending/SpendingBarChart"
 
 const Main = () => {
   const [display, setDisplay] = useState("fixed")
-  console.log(display);
 
   return (
     <>
@@ -21,6 +20,7 @@ const Main = () => {
       </ChartWrapper>
       <ControlPanel
         display={display}
+        setDisplay={setDisplay}
       />
     </>
   );

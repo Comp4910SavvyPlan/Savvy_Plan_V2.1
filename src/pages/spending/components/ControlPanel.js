@@ -9,7 +9,7 @@ import ItemDisplayBox from "pages/spending/components/MainItemDisplayBox";
 import AddForm from "pages/spending/components/AddForm";
 import { spendingWizard_data } from "pages/spending/data/spending_data";
 
-const ControlPanel = ({ setCount, display, spending_reducer }) => {
+const ControlPanel = ({ setCount, display, spending_reducer, setDisplay }) => {
 
   const [itemId, setItemId] = useState();                                         //If the user wants to change something this sets the id of the item they want to change
 
@@ -22,10 +22,7 @@ const ControlPanel = ({ setCount, display, spending_reducer }) => {
   const category = display;                                                       //Display is either fixed or variable and is used to show either of those
   const subCategory = itemId
     ? spending_reducer[category][itemId].subCategory
-    : "fixedHousingCosts";
-
-    console.log(category);
-    console.log(itemId);                                                      //if we have an id we get the subCategory from the reducer, otherwise we set it to housingCosts
+    : "fixedHousingCosts";                                                        //if we have an id we get the subCategory from the reducer, otherwise we set it to housingCosts
 
   const [subCount, setSubCount] = useState(0);
 
@@ -38,6 +35,7 @@ const ControlPanel = ({ setCount, display, spending_reducer }) => {
             category={category}
             subCategory={subCategory}
             setItemId={setItemId}
+            setDisplay={setDisplay}
           />
         ) : addFormSubCategory ? (
           <AddForm
@@ -74,6 +72,7 @@ const ControlPanel = ({ setCount, display, spending_reducer }) => {
                       setCount={setCount}
                       setItemId={setItemId}
                       setAddFormSubCategory={setAddFormSubCategory}
+                      setDisplay={setDisplay}
                       />
                   </Section>
                 :
@@ -87,6 +86,7 @@ const ControlPanel = ({ setCount, display, spending_reducer }) => {
                       setCount={setCount}
                       setItemId={setItemId}
                       setAddFormSubCategory={setAddFormSubCategory}
+                      setDisplay={setDisplay}
                       />
                   </Section>
 
@@ -136,7 +136,6 @@ const ControlPanel = ({ setCount, display, spending_reducer }) => {
         {" "}
         <ButtonLight backward onClick={() => setSubCount(subCount === 1 ? subCount - 1 : 0)} />
         <ButtonLight forward onClick={() => setSubCount(subCount === 0 ? subCount + 1 : 1)} />
-        {console.log(subCount)}
       </Buttons>
     </Wrapper>
   );

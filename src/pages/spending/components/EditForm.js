@@ -17,15 +17,13 @@ const EditForm = ({
     itemId,
     spending_reducer,
     setSpendingValue_action,
-    changeLabel_action }) => {
+    changeLabel_action,
+    setDisplay }) => {
 
     const item = spending_reducer[category][itemId]                                             //uses the item id provided to go into the reducer and gather all the users details
 
 
     const setValue = (logValue, rangeBarValue, rangeBarProps) => {                              //sets the value in the reducer
-      console.log(logValue);
-      console.log(rangeBarValue);
-      console.log(rangeBarProps);
         setSpendingValue_action(logValue, rangeBarValue, category, rangeBarProps, itemId)
     }
 
@@ -78,7 +76,11 @@ const EditForm = ({
                   <ButtonWrapper>
                           <ButtonLight
                               text={"back"}
-                              onClick={() => setItemId(false)}
+                              onClick={() => {
+                                setItemId(false)
+                                setDisplay('fixed')
+                              }
+                              }
                           />
                   </ButtonWrapper>
                 </Right>
