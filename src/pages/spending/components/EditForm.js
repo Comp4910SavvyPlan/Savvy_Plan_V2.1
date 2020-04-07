@@ -9,6 +9,7 @@ import ButtonLight from "UI/buttons/ButtonLight"
 import {setSpendingValue_action, changeLabel_action} from "redux/spending/spending_actions"
 import _ from "lodash"
 
+//test
 
 const EditForm = ({
     category,
