@@ -10,7 +10,7 @@ const drawChart = (data, width, height,props) => {
     const margin = {top: 20, right: 100, bottom: 20, left: 100}
     const graphHeight = height - margin.top - margin.bottom
     const graphWidth = width - margin.left - margin.right
-    const color =  ["age", "#3B7B8E", "#8CB8B7", '#63bbcf', '#F29278', "#7898a1",  '#7898a1']
+    const color =  ["age", "#3B7B8E", "#8CB8B7", '#63BBCF', '#F29278', "#7898a1",  '#7898a1']
 
 
 
@@ -147,7 +147,7 @@ console.log(data);
 
 
            var ticks = [20,40, 60, 80, 95];
-           var tickLabels = ['Age 20','Age 40','Age 60','Age 80','Age 95']
+           var tickLabels = ['Age 20','Age 40','Age 60','Age 80']
 
             const xAxis = d3.axisBottom(xScale)
                             .tickValues(ticks)
