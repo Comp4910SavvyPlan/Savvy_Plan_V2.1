@@ -22,7 +22,10 @@ const ControlPanel = ({ setCount, display, spending_reducer }) => {
   const category = display;                                                       //Display is either fixed or variable and is used to show either of those
   const subCategory = itemId
     ? spending_reducer[category][itemId].subCategory
-    : "housingCosts";                                                             //if we have an id we get the subCategory from the reducer, otherwise we set it to housingCosts
+    : "fixedHousingCosts";
+
+    console.log(category);
+    console.log(itemId);                                                      //if we have an id we get the subCategory from the reducer, otherwise we set it to housingCosts
 
   const [subCount, setSubCount] = useState(0);
 

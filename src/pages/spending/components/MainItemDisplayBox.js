@@ -26,6 +26,8 @@ const ItemDisplay = ({ value, removeSpending_action, item, setItemId }) => {
   const removeItem = () => {
     removeSpending_action(item);
   };
+  console.log(id);
+  console.log(item);
   //Displays item name, value and "X" in box.
   return (
     <Item label={label} subCategory={subCategory}>

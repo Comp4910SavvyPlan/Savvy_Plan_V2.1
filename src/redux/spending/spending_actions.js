@@ -12,6 +12,7 @@ export const setSpendingValue_action = (
     id: spendingId,
     category: category,
     financialValue: logValue,
+    name: rangeBarProps.name,
     rangeBarValue,
     rangeBarProps
   };

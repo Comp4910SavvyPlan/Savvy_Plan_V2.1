@@ -24,6 +24,8 @@ const EditForm = ({
 
     const setValue = (logValue, rangeBarValue, rangeBarProps) => {                              //sets the value in the reducer
       console.log(logValue);
+      console.log(rangeBarValue);
+      console.log(rangeBarProps);
         setSpendingValue_action(logValue, rangeBarValue, category, rangeBarProps, itemId)
     }
 
