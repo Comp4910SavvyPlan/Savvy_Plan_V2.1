@@ -111,13 +111,13 @@ const Wrapper = styled.div`
 `
 const Header = styled.div`
     width: 100%;
-    background: ${props => props.subCategory === "fixedHousingCosts" ? props.theme.color.blue :
-                  props => props.subCategory === "fixedTransportationCosts" ? props.theme.color.steelBlue :
-                  props => props.subCategory === "fixedLifestyleCosts" ? props.theme.color.green :
+    background: ${props => props.subCategory === "fixedHousingCosts" ? props.theme.color.steelBlue :
+                  props => props.subCategory === "fixedTransportationCosts" ? props.theme.color.green :
+                  props => props.subCategory === "fixedLifestyleCosts" ? props.theme.color.blue :
                   props => props.subCategory === "fixedLargeEventsCosts" ? props.theme.color.salmon :
-                  props => props.subCategory === "variableHousingCosts" ? props.theme.color.blue :
-                  props => props.subCategory === "variableTransportationCosts" ? props.theme.color.steelBlue :
-                  props => props.subCategory === "variableLifestyleCosts" ? props.theme.color.green :
+                  props => props.subCategory === "variableHousingCosts" ? props.theme.color.steelBlue :
+                  props => props.subCategory === "variableTransportationCosts" ? props.theme.color.green :
+                  props => props.subCategory === "variableLifestyleCosts" ? props.theme.color.blue :
                   props => props.subCategory === "variableLargeEventsCosts" ? props.theme.color.salmon :
     null};
     height: 4rem;
