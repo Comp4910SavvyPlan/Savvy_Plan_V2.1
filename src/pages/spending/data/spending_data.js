@@ -11,11 +11,11 @@ export const spendingWizard_data = [
     subCategory: "fixedHousingCosts",
     reference: "variableHousingCosts",
     section: "housingCosts",
-    currentValueLabel: "Monthly Cost",
+    currentValueLabel: "Housing Cost",
     ageLabel1: "Age At Start",
     ageLabel2: "Age At End",
     expenseTypeArray: ["Fixed", "Variable"],
-    durationTypeArray: ["Limited", "Forever"]
+    durationTypeArray: ["Limited", "Forever"],
   },
   {
     //Variable Housing Cost Structure
@@ -24,11 +24,11 @@ export const spendingWizard_data = [
     subCategory: "variableHousingCosts",
     reference: "fixedHousingCosts",
     section: "housingCosts",
-    currentValueLabel: "Monthly Cost",
+    currentValueLabel: "Housing Cost",
     ageLabel1: "Age At Start",
     ageLabel2: "Age At End",
     expenseTypeArray: ["Fixed", "Variable"],
-    durationTypeArray: ["Limited", "Forever"]
+    durationTypeArray: ["Limited", "Forever"],
   },
   {
     //Fixed Transportation Cost Structure
@@ -37,11 +37,11 @@ export const spendingWizard_data = [
     subCategory: "fixedTransportationCosts",
     reference: "variableTransportationCosts",
     section: "transportationCosts",
-    currentValueLabel: "Monthly Cost",
+    currentValueLabel: "Transportation Cost",
     ageLabel1: "Age At Start",
     ageLabel2: "Age At End",
     expenseTypeArray: ["Fixed", "Variable"],
-    durationTypeArray: ["Limited", "Forever"]
+    durationTypeArray: ["Limited", "Forever"],
   },
   {
     //Variable Transportation Cost Structure
@@ -50,11 +50,11 @@ export const spendingWizard_data = [
     subCategory: "variableTransportationCosts",
     reference: "fixedTransportationCosts",
     section: "transportationCosts",
-    currentValueLabel: "Monthly Cost",
+    currentValueLabel: "Transportation Cost",
     ageLabel1: "Age At Start",
     ageLabel2: "Age At End",
     expenseTypeArray: ["Fixed", "Variable"],
-    durationTypeArray: ["Limited", "Forever"]
+    durationTypeArray: ["Limited", "Forever"],
   },
   {
     //Fixed Lifestyle Cost Structure
@@ -63,11 +63,11 @@ export const spendingWizard_data = [
     subCategory: "fixedLifestyleCosts",
     reference: "variableLifestyleCosts",
     section: "lifestyleCosts",
-    currentValueLabel: "Monthly Cost",
+    currentValueLabel: "Lifestyle Cost",
     ageLabel1: "Age At Start",
     ageLabel2: "Age At End",
     expenseTypeArray: ["Fixed", "Variable"],
-    durationTypeArray: ["Limited", "Forever"]
+    durationTypeArray: ["Limited", "Forever"],
   },
   {
     //Variable Lifestyle Cost Structure
@@ -76,11 +76,11 @@ export const spendingWizard_data = [
     subCategory: "variableLifestyleCosts",
     reference: "fixedLifestyleCosts",
     section: "lifestyleCosts",
-    currentValueLabel: "Monthly Cost",
+    currentValueLabel: "Lifestyle Cost",
     ageLabel1: "Age At Start",
     ageLabel2: "Age At End",
     expenseTypeArray: ["Fixed", "Variable"],
-    durationTypeArray: ["Limited", "Forever"]
+    durationTypeArray: ["Limited", "Forever"],
   },
   {
     //Fixed Large Event Cost Structure
@@ -93,7 +93,7 @@ export const spendingWizard_data = [
     ageLabel1: "Age At Event Start",
     ageLabel2: "Age At Event End",
     expenseTypeArray: ["Fixed", "Variable"],
-    durationTypeArray: ["One-Time", "Duration Period"]
+    durationTypeArray: ["One-Time", "Duration Period"],
   },
   {
     //Variable Large Event Cost Structure
@@ -106,8 +106,8 @@ export const spendingWizard_data = [
     ageLabel1: "Age At Event Start",
     ageLabel2: "Age At Event End",
     expenseTypeArray: ["Fixed", "Variable"],
-    durationTypeArray: ["One-Time", "Duration Period"]
-  }
+    durationTypeArray: ["One-Time", "Duration Period"],
+  },
 ];
 
 //Used in AddForm.js
@@ -132,7 +132,7 @@ export const individualItem_data = (
     rangeBarValue: 0,
     name: "currentValue",
     financialValue: 0,
-    label: currentValueLabel
+    label: currentValueLabel,
   },
   //Top duration range bar value
   age1: {
@@ -141,7 +141,7 @@ export const individualItem_data = (
     max: 100,
     min: 0,
     step: 1,
-    label: ageLabel1
+    label: ageLabel1,
   },
   //Bottom duration range bar value if applicable
   age2: {
@@ -150,6 +150,6 @@ export const individualItem_data = (
     max: 100,
     min: 0,
     step: 1,
-    label: ageLabel2
-  }
+    label: ageLabel2,
+  },
 });
