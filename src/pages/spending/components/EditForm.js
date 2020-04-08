@@ -17,9 +17,11 @@ const EditForm = ({
     itemId,
     spending_reducer,
     setSpendingValue_action,
-    changeLabel_action }) => {
+    changeLabel_action,
+    setDisplay }) => {
 
     const item = spending_reducer[category][itemId]                                             //uses the item id provided to go into the reducer and gather all the users details
+
 
     const setValue = (logValue, rangeBarValue, rangeBarProps) => {                              //sets the value in the reducer
         setSpendingValue_action(logValue, rangeBarValue, category, rangeBarProps, itemId)
@@ -56,22 +58,29 @@ const EditForm = ({
 
                 <Right>
                   <MiniRangeBarWrapper>
-                    {subCategory === "fixedTransportationCosts" ||
-                    "variableTransportationCosts" ||
-                    "fixedLifestyleCosts" ||
-                    "variableLifestyleCosts" ? ( //If its a liability we want to know its amortization
-                      <MiniRangeBar rangeBarProps={item.age1} setValue={setValue} />
-                    ) : subCategory === "largeEventsCosts" ? (
+                    {//Single range bar for housing, transportation and lifestyle
+                      subCategory === "fixedHousingCosts" ||
+                      subCategory === "variableHousingCosts" ||
+                      subCategory === "fixedTransportationCosts" ||
+                      subCategory === "variableTransportationCosts" ||
+                      subCategory === "fixedLifestyleCosts" ||
+                      subCategory === "variableLifestyleCosts" ||
+                      subCategory === "fixedLargeEventsCosts" ||
+                      subCategory === "variableLargeEventsCosts" ? (
                       <>
-                        <MiniRangeBar rangeBarProps={item.age1} setValue={setValue} />
-                        <MiniRangeBar rangeBarProps={item.age2} setValue={setValue} />
-                      </>
-                    ) : null}
-                  </MiniRangeBarWrapper>
+                      <MiniRangeBar rangeBarProps={item.age1} setValue={setValue} />
+                      <MiniRangeBar rangeBarProps={item.age2} setValue={setValue} />
+                    </>
+                  ) : null}
+                </MiniRangeBarWrapper>
                   <ButtonWrapper>
                           <ButtonLight
                               text={"back"}
-                              onClick={() => setItemId(false)}
+                              onClick={() => {
+                                setItemId(false)
+                                setDisplay('fixed')
+                              }
+                              }
                           />
                   </ButtonWrapper>
                 </Right>
@@ -88,7 +97,7 @@ const mapStateToProps = (state) => ({
     spending_reducer: state.spending_reducer
 })
 
-export default connect(mapStateToProps, {setSpendingValue_action, changeLabel_action})(EditForm )
+export default connect(mapStateToProps, {setSpendingValue_action, changeLabel_action})(EditForm)
 
 
 //-----------------------------------------------STYLES-----------------------------------------------//

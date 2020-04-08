@@ -8,6 +8,9 @@ const initialState = {
 const spending_reducer = (state = initialState, action) => {
   switch (action.type) {
     case "spending_reducer/SET_VALUE":
+    console.log(action.financialValue);
+    console.log(action.rangeBarValue);
+    console.log(action.id);
       return {
         ...state,
         [action.category]: {
