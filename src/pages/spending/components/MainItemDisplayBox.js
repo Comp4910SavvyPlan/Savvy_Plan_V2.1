@@ -20,20 +20,16 @@ import {
 } from "redux/spending/spending_selectors";
 import { PlusIcon } from "style/Icons";
 
-const ItemDisplay = ({ value, removeSpending_action, item, setItemId, setDisplay }) => {
+const ItemDisplay = ({ value, removeSpending_action, item, setItemId }) => {
   //Individual item that is added
-  const { label, subCategory, id, category } = item;
+  const { label, subCategory, id } = item;
   const removeItem = () => {
     removeSpending_action(item);
   };
   //Displays item name, value and "X" in box.
   return (
     <Item label={label} subCategory={subCategory}>
-      <Text onClick={() => {
-        setItemId(id)
-        setDisplay(category)
-      }
-    }>
+      <Text onClick={() => setItemId(id)}>
         {" "}
         {}
         <H2>{label}</H2>
@@ -56,8 +52,7 @@ const MainItemDisplayBox = ({
   fixedLifestyle_selector,
   variableLifestyle_selector,
   fixedLargeEvents_selector,
-  variableLargeEvents_selector,
-  setDisplay
+  variableLargeEvents_selector
 }) => {
   //Total of each fixed or variable spending subCategory.
   const totalValueFixedHousing =
@@ -190,7 +185,6 @@ const MainItemDisplayBox = ({
                   removeSpending_action={removeSpending_action}
                   value={item.currentValue.financialValue}
                   setItemId={setItemId}
-                  setDisplay={setDisplay}
                 />
               </Left>
             );
@@ -206,7 +200,6 @@ const MainItemDisplayBox = ({
                   removeSpending_action={removeSpending_action}
                   value={item.currentValue.financialValue}
                   setItemId={setItemId}
-                  setDisplay={setDisplay}
                 />
               </Right>
             );
@@ -226,7 +219,6 @@ const MainItemDisplayBox = ({
                   removeSpending_action={removeSpending_action}
                   value={item.currentValue.financialValue}
                   setItemId={setItemId}
-                  setDisplay={setDisplay}
                 />
               </Left>
             );
@@ -241,7 +233,6 @@ const MainItemDisplayBox = ({
                   removeSpending_action={removeSpending_action}
                   value={item.currentValue.financialValue}
                   setItemId={setItemId}
-                  setDisplay={setDisplay}
                 />
               </Right>
             );
@@ -260,7 +251,6 @@ const MainItemDisplayBox = ({
                   removeSpending_action={removeSpending_action}
                   value={item.currentValue.financialValue}
                   setItemId={setItemId}
-                  setDisplay={setDisplay}
                 />
               </Left>
             );
@@ -276,7 +266,6 @@ const MainItemDisplayBox = ({
                   removeSpending_action={removeSpending_action}
                   value={item.currentValue.financialValue}
                   setItemId={setItemId}
-                  setDisplay={setDisplay}
                 />
               </Right>
             );
@@ -294,7 +283,6 @@ const MainItemDisplayBox = ({
                   removeSpending_action={removeSpending_action}
                   value={item.currentValue.financialValue}
                   setItemId={setItemId}
-                  setDisplay={setDisplay}
                 />
               </Left>
             );
@@ -309,7 +297,6 @@ const MainItemDisplayBox = ({
                   removeSpending_action={removeSpending_action}
                   value={item.currentValue.financialValue}
                   setItemId={setItemId}
-                  setDisplay={setDisplay}
                 />
               </Right>
             );
@@ -328,7 +315,6 @@ const MainItemDisplayBox = ({
                   removeSpending_action={removeSpending_action}
                   value={item.currentValue.financialValue}
                   setItemId={setItemId}
-                  setDisplay={setDisplay}
                 />
               </Left>
             );
@@ -344,7 +330,6 @@ const MainItemDisplayBox = ({
                   removeSpending_action={removeSpending_action}
                   value={item.currentValue.financialValue}
                   setItemId={setItemId}
-                  setDisplay={setDisplay}
                 />
               </Right>
             );
@@ -362,7 +347,6 @@ const MainItemDisplayBox = ({
                   removeSpending_action={removeSpending_action}
                   value={item.currentValue.financialValue}
                   setItemId={setItemId}
-                  setDisplay={setDisplay}
                 />
               </Left>
             );
@@ -377,7 +361,6 @@ const MainItemDisplayBox = ({
                   removeSpending_action={removeSpending_action}
                   value={item.currentValue.financialValue}
                   setItemId={setItemId}
-                  setDisplay={setDisplay}
                 />
               </Right>
             );
@@ -396,7 +379,6 @@ const MainItemDisplayBox = ({
                   removeSpending_action={removeSpending_action}
                   value={item.currentValue.financialValue}
                   setItemId={setItemId}
-                  setDisplay={setDisplay}
                 />
               </Left>
             );
@@ -412,7 +394,6 @@ const MainItemDisplayBox = ({
                   removeSpending_action={removeSpending_action}
                   value={item.currentValue.financialValue}
                   setItemId={setItemId}
-                  setDisplay={setDisplay}
                 />
               </Right>
             );
@@ -430,7 +411,6 @@ const MainItemDisplayBox = ({
                   removeSpending_action={removeSpending_action}
                   value={item.currentValue.financialValue}
                   setItemId={setItemId}
-                  setDisplay={setDisplay}
                 />
               </Left>
             );
@@ -445,7 +425,6 @@ const MainItemDisplayBox = ({
                   removeSpending_action={removeSpending_action}
                   value={item.currentValue.financialValue}
                   setItemId={setItemId}
-                  setDisplay={setDisplay}
                 />
               </Right>
             );

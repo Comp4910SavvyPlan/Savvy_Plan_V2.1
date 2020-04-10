@@ -20,7 +20,6 @@ const Main = () => {
       </ChartWrapper>
       <ControlPanel
         display={display}
-        setDisplay={setDisplay}
       />
     </>
   );

@@ -9,7 +9,7 @@ import ItemDisplayBox from "pages/spending/components/MainItemDisplayBox";
 import AddForm from "pages/spending/components/AddForm";
 import { spendingWizard_data } from "pages/spending/data/spending_data";
 
-const ControlPanel = ({ setCount, display, spending_reducer, setDisplay }) => {
+const ControlPanel = ({ setCount, display, spending_reducer }) => {
 
   const [itemId, setItemId] = useState();                                         //If the user wants to change something this sets the id of the item they want to change
 
@@ -22,7 +22,7 @@ const ControlPanel = ({ setCount, display, spending_reducer, setDisplay }) => {
   const category = display;                                                       //Display is either fixed or variable and is used to show either of those
   const subCategory = itemId
     ? spending_reducer[category][itemId].subCategory
-    : "fixedHousingCosts";                                                        //if we have an id we get the subCategory from the reducer, otherwise we set it to housingCosts
+    : "housingCosts";                                                             //if we have an id we get the subCategory from the reducer, otherwise we set it to housingCosts
 
   const [subCount, setSubCount] = useState(0);
 
@@ -35,18 +35,13 @@ const ControlPanel = ({ setCount, display, spending_reducer, setDisplay }) => {
             category={category}
             subCategory={subCategory}
             setItemId={setItemId}
-            setDisplay={setDisplay}
           />
         ) : addFormSubCategory ? (
           <AddForm
-            //AddForm is shown based on count number
             category={addFormDetails.category}
-            reference={addFormDetails.reference}
             subCategory={addFormDetails.subCategory}
-            section={addFormDetails.section}
             currentValueLabel={addFormDetails.currentValueLabel}
-            ageLabel1={addFormDetails.ageLabel1}
-            ageLabel2={addFormDetails.ageLabel2}
+            ageLabel={addFormDetails.ageLabel}
             expenseTypeArray={addFormDetails.expenseTypeArray}
             durationTypeArray={addFormDetails.durationTypeArray}
             setAddFormSubCategory={setAddFormSubCategory}
@@ -72,7 +67,6 @@ const ControlPanel = ({ setCount, display, spending_reducer, setDisplay }) => {
                       setCount={setCount}
                       setItemId={setItemId}
                       setAddFormSubCategory={setAddFormSubCategory}
-                      setDisplay={setDisplay}
                       />
                   </Section>
                 :
@@ -86,7 +80,6 @@ const ControlPanel = ({ setCount, display, spending_reducer, setDisplay }) => {
                       setCount={setCount}
                       setItemId={setItemId}
                       setAddFormSubCategory={setAddFormSubCategory}
-                      setDisplay={setDisplay}
                       />
                   </Section>
 
@@ -136,6 +129,7 @@ const ControlPanel = ({ setCount, display, spending_reducer, setDisplay }) => {
         {" "}
         <ButtonLight backward onClick={() => setSubCount(subCount === 1 ? subCount - 1 : 0)} />
         <ButtonLight forward onClick={() => setSubCount(subCount === 0 ? subCount + 1 : 1)} />
+        {console.log(subCount)}
       </Buttons>
     </Wrapper>
   );
